@@ -1,7 +1,7 @@
 ### Python code to place menubar in the respective html files by reading the menu.html file ###
 
 filename_list=["index.html", "contact.html", "market-overview.html", "market-valuation_Example.html", 
-"market-valuation_IND.html", "market-valuation_US.html", "datascience_QA.html", "publications.html", "research-post.html"]
+"market-valuation_IND.html", "market-valuation_US.html", "datascience_QA.html", "publications.html", "research-home.html", "research-post.html", "diabetes_ML.html"]
 
 for filename in filename_list:
 
