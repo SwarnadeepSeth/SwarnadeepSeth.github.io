@@ -152,41 +152,45 @@ double PME_Real(double **r_pos, double **prop, double **f_rewald, double *L, dou
     double alpha2 = alpha*alpha;
     double qi=0, qj=0, rsq=0.0, sqrt_rsq=0.0, erfc_sqrt_rsq=0.0, dcdr=0.0, e_rewald=0.0;
     double dij[dimen], Dij[dimen];
+
+    // Initiate the force arrays with zero values //
     for (i=0;i&lt;ParticleN;i++){
         for (j=0;j&lt;dimen;j++){
             f_rewald[i][j] = 0.0; 
         }
     }
     
+    // Initiate the distance calculation arrays //
     for (k=0;k&lt;dimen;k++){
         dij[k] = 0.0; 
         Dij[k] = 0.0;
     }
     
     for (i=0;i&lt;ParticleN-1;i++){
-        qi = prop[i][0];
+        qi = prop[i][0]; // charge of the particle with index i //
         for (j=i+1;j&lt;ParticleN;j++){
-            qj = prop[j][0];
+            qj = prop[j][0]; // charge of the particle with index j //
             
             for (k=0;k&lt;dimen;k++){
-                dij[k] = r_pos[i][k]-r_pos[j][k];
+                dij[k] = r_pos[i][k]-r_pos[j][k]; // calculate the distance between particle i and j //
                 //dij[k] = dij[k] - L[k]*round(dij[k]/L[k]); // Minimum Image Convension [0,L]
-                dij[k] = dij[k] - 2*Ext_L[k]*round(0.5*dij[k]/Ext_L[k]); // Minimum Image Convension [-L,L]
+                dij[k] = dij[k] - 2*Ext_L[k]*round(0.5*dij[k]/Ext_L[k]); // Minimum Image Convension [-L,L] (boundary condition)
             }
             
-            rx = dij[0];
-            ry = dij[1];
-            rz = dij[2];
+            rx = dij[0]; // x component of the vector |r_i - r_j| //
+            ry = dij[1]; // y component of the vector |r_i - r_j| //
+            rz = dij[2]; // z component of the vector |r_i - r_j| //
             
+            // Loop over the central and the image cells //
             for(nx = -PME_nmax; nx &lt;= PME_nmax; nx++){
                 for(ny = -PME_nmax; ny &lt;= PME_nmax; ny++){
                     for(nz = -PME_nmax; nz &lt;= PME_nmax; nz++){
                         
                         rsq = rx*rx + ry*ry + rz*rz;
-                        sqrt_rsq = sqrt(rsq);
+                        sqrt_rsq = sqrt(rsq); // absolute distance //
                         
                         if(nx == 0 &amp;&amp; ny == 0 &amp;&amp; nz == 0){
-                            //central cell: ignore i == j
+                            // for the central cell: ignore i == j //
                             if(i != j){
                                 erfc_sqrt_rsq = erfc(alpha*sqrt_rsq)/sqrt_rsq;
                                 dcdr = ONE_PI_EPS0*qi*qj*(alphafac*exp(-alpha2*rsq) + erfc_sqrt_rsq)/rsq;
@@ -198,27 +202,27 @@ double PME_Real(double **r_pos, double **prop, double **f_rewald, double *L, dou
                                 e_rewald += ONE_PI_EPS0*qi*qj*erfc_sqrt_rsq;
                             }
                             else{
-                                //ignore, because of same particle
+                                // ignore, because of same particle //
                             }
                         }
                         
                         else{
-                            //image cells
-                            Dij[0] = rx + 2*nx*Ext_L[0];
-                            Dij[1] = ry + 2*ny*Ext_L[1];
-                            Dij[2] = rz + 2*nz*Ext_L[2];
+                            // image cells (around the main cell) //
+                            Dij[0] = rx + 2*nx*Ext_L[0]; // x component of the distance |r_i - r_j + n.L| //
+                            Dij[1] = ry + 2*ny*Ext_L[1]; // y component of the distance |r_i - r_j + n.L| //
+                            Dij[2] = rz + 2*nz*Ext_L[2]; // z component of the distance |r_i - r_j + n.L| //
                             
                             rsq = Dij[0]*Dij[0] + Dij[1]*Dij[1] + Dij[2]*Dij[2];
-                            sqrt_rsq = sqrt(rsq);
+                            sqrt_rsq = sqrt(rsq); // absolute distance //
                             
                             erfc_sqrt_rsq = erfc(alpha*sqrt_rsq)/sqrt_rsq;
                             dcdr = ONE_PI_EPS0*qi*qj*(alphafac*exp(-alpha2*rsq) + erfc_sqrt_rsq)/rsq;
                             
                             for (k=0;k&lt;dimen;k++){
-                                f_rewald[i][k] = f_rewald[i][k] + dcdr*Dij[k];
-                                f_rewald[j][k] = f_rewald[j][k] - dcdr*Dij[k];
+                                f_rewald[i][k] = f_rewald[i][k] + dcdr*Dij[k]; // add the forces //
+                                f_rewald[j][k] = f_rewald[j][k] - dcdr*Dij[k]; // Newton's Third Law: force are equal and opposite //
                             }
-                            e_rewald += ONE_PI_EPS0*qi*qj*erfc_sqrt_rsq;
+                            e_rewald += ONE_PI_EPS0*qi*qj*erfc_sqrt_rsq; // Ewald real part energy //
                         }
                     }
                 }
