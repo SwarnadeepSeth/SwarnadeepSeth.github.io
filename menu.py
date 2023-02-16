@@ -2,7 +2,7 @@
 
 filename_list=["index.html", "contact.html", "market-overview.html", "market-valuation_Example.html", 
 "market-valuation_IND.html", "market-valuation_US.html", "datascience_QA.html", "publications.html", "research-home.html", "research-post.html", "ml_overview.html",
-"diabetes_ML.html"]
+"diabetes_ML.html", "one_liners.html"]
 
 for filename in filename_list:
 

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>One Line Codes</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!--CSS style for a data table-->
+        <style>
+            table {
+              border-collapse: collapse;
+              margin: 0 auto;
+              border: none;
+            }
+            th, td {
+              border: 1px solid black;
+              padding: 10px;
+              text-align: center;
+            }
+            th {
+              border-bottom: 2px solid black;
+            }
+        </style>
+        <!-- Function to generate table with random data in between 0-99-->
+        <script>
+            function generateTable() {
+              var table = document.getElementById("myTable");
+              for (var i = 0; i < 10; i++) {
+                var row = table.insertRow();
+                for (var j = 0; j < 4; j++) {
+                  var cell = row.insertCell();
+                  cell.innerHTML = Math.floor(Math.random() * 100); // Generate a random number between 0 and 99
+                }
+              }
+            }
+        </script>
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D. Student</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="index.html">Bio</a></li>
+				<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownResearch" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Research</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+					<li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+					<li><a class="dropdown-item" href="research-post.html">Research Post</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Data Science</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDataScience">
+					<li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&A</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Machine Learning</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownML">
+                    <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Stock Market</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMarket">
+					<li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+					<li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5">
+                        <div class="col-lg-3">
+                            <div class="d-flex align-items-center mt-lg-5 mb-4">
+                                <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                                <div class="ms-3">
+                                    <div class="fw-bold">Swarnadeep Seth</div>
+                                    <div class="text-muted">Physics, UCF</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <!-- Post content-->
+                            <article>
+                                <!-- Post header-->
+                                <header class="mb-4">
+                                    <!-- Post title-->
+                                    <h1 class="fw-bolder mb-1">One Liner Codes</h1>
+                                    <!-- Post meta content-->
+                                    <div class="text-muted fst-italic mb-2">Feb 15, 2023</div>
+                                    <!-- Post categories-->
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Shell Script</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Python</a>
+                                </header>
+                                <!-- Preview image figure-->
+                                <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
+
+
+                                <!-- Post content-->
+                                <section class="mb-5">
+                                    <p class="fs-5 mb-4">One Line codes for various statical analysis of data from command line.</p>
+                                </section>
+                                
+                                
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Awk commands for statistical usage:</h1>
+                                    <hr size="10">
+                                    <p class="fs-5 mb-4">
+                                        Awk is a versatile command-line tool used for text processing and data extraction. It is especially useful for processing structured text data such as CSV files, txt files, dat files, or log files. <br><br>
+                                        The basic syntax of an awk command is: <br>
+                                        <b>awk [options] 'pattern { action }' file</b> 
+                                        <br><br>
+                                        Here is a breakdown of the different parts of the syntax: <br>
+                                            &emsp;awk: The name of the command-line tool. <br>
+                                            &emsp;[options]: Optional command-line options that modify the behavior of awk. For example, the -F option can be used to specify a field separator for CSV files. <br>
+                                            &emsp;'pattern { action }': A pattern-action statement that defines what to search for in the file and what to do when a match is found. The pattern is a regular expression that defines the condition to match, and the action is a set of commands to execute when the pattern is matched. <br>
+                                            &emsp;file: The name of the file to process. 
+                                        <br><br>
+                                        Let's have an example data table as follows for doing some analysis: <br>
+                                        <body onload="generateTable()">
+                                            <table id="myTable">
+                                                <thead>
+                                                <tr>
+                                                    <th>Column 1</th>
+                                                    <th>Column 2</th>
+                                                    <th>Column 3</th>
+                                                    <th>Column 4</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        <br><br>
+                                    </p>
+                                    <p class="fs-5 mb-4">
+                                        <b>1. Print the first column of the CSV file:</b><br>
+                                            &emsp;awk -F ',' '{print $1}' file.csv
+                                        <br><br>
+                                        <b>2. Print the number of lines in a file:</b><br>
+                                            &emsp;awk 'END {print NR}' file.csv
+                                        <br><br>
+                                        <b>3. Find all lines containing "null" and print the line number and contents:</b><br>
+                                            &emsp;awk '/null/ {print NR ": " $0}' file.csv
+                                        <br><br>
+                                        <b>4. Print the sum of the second column in a CSV file:</b><br>
+                                            &emsp;awk -F ',' '{sum += $2} END {print sum}' file.csv
+                                        <br><br>
+                                        <b>5. Calculate Mean/Average of a column (Example: column 4):</b> <br>
+                                            &emsp;awk '{ sum += $4; n++ } END { if (n > 0) print (sum/n); }' file.csv
+                                        <br><br>
+                                        <b>6. Calculate Mean/Average of column 4 with negative inverse and log operation:</b> <br>
+                                            &emsp;awk '{ sum += $4; n++ } END { if (n > 0) print -1.0/log(sum/n); }' file.csv
+                                        <br><br>
+                                        <b>7. Calculate Standard Deviation of column 4:</b> <br>
+                                            &emsp;awk '{sum+=$4; array[NR]=$4} END {for(x=1;x<=NR;x++){sumsq+=((array[x]-(sum/NR))**2);}print sqrt(sumsq/NR)}' file.csv
+                                        <br><br>
+                                        <b>Explanation:</b> <br>
+                                            &emsp;awk '{sum+=$4; array[NR]=$4} <br>
+                                        For each line of the file, this command adds the value in the fourth column to a variable called sum, and also saves the value in an array called array using the current line number (NR) as the index.
+                                            &emsp;END { <br>
+                                                &emsp;&emsp;for(x=1;x<=NR;x++){ <br>
+                                                    &emsp;&emsp;&emsp;sumsq+=((array[x]-(sum/NR))**2); <br>
+                                                &emsp;&emsp;} <br>
+                                                &emsp;&emsp;print sqrt(sumsq/NR) <br>
+                                            } <br>
+                                        After processing all the lines in the file, this command loops over the elements in the array and calculates the sum of the squares of the differences between each value and the mean of all the values. This sum of squares is stored in the variable sumsq. Finally, the command prints the square root of the average of the sum of squares, which is the standard deviation.
+                                        <br><br>
+                                        <b>8. Calculate Skewness of column 4:</b> <br>
+                                        &emsp;awk 'BEGIN{sum=0; sumsq=0; sumcu=0; n=0;} {sum+=$4; sumsq+=($4)**2; sumcu+=($4)**3; n++;} END{if(n<3){print "NaN"} else {skewness=(n*sumcu-3*sum*sumsq+2*sum**3)/(sqrt((n-1)*(n-2)*(sumsq/n-(sum/n)**2)**3)); print skewness}}' file.csv
+                                    <br><br>
+                                    Note that this calculation assumes that the data follows a normal distribution. If the data does not follow a normal distribution, the skewness may not be a meaningful measure of the data.
+                                    </p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Find commands for file detection:</h1>
+                                    <hr size="10">
+                                    <p class="fs-5 mb-4">
+                                        <b>1. Delete a file by name pattern (slurm--- in this case) from multiple dir:</b><br>
+                                            &emsp;find . -name \slurm-* -type f -delete
+                                        <br><br>
+                                </p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Tar commands for zipping/Unzipping:</h1>
+                                    <hr size="10">
+                                    <p class="fs-5 mb-4">
+                                        <b>1. Zip a folder named Runs as tar.gz:</b><br>
+                                            &emsp;tar -czvf Runs.tar.gz Runs
+                                        <br><br>
+                                        <b>2. Unzip a tar.gz file:</b><br>
+                                            &emsp;tar -xzf Runs.tar.gz
+
+                                        <br><br>
+                                </p>
+                                </section>
+                            </article>
+
+                            <!-- Comments section-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2023</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
