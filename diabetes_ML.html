@@ -5,13 +5,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Research Blog</title>
+        <title>Diabetes Prediction ML</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <title>Katex</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+        <!-- Table Style -->
+        <style>
+            table, td, th {
+                border-bottom: 1px solid black;
+                padding: 5px;
+                text-align: center;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                display: block;
+                max-width: fit-content;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            table.center {
+                margin-left: auto; 
+                margin-right: auto;
+            }
+            thead th {
+                color: rgb(3, 77, 252);
+                background-color: bisque;
+            }
+            td:first-child, th:first-child {
+                border-right: 1px solid black;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
+            tr:hover {background-color: rgb(232, 190, 175);}
+        </style>
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -64,28 +99,18 @@
 <!-- Page Content-->
             <section class="py-5">
                 <div class="container px-5 my-5">
-                    <div class="row gx-5">
-                        <div class="col-lg-3">
-                            <div class="d-flex align-items-center mt-lg-5 mb-4">
-                                <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
-                                <div class="ms-3">
-                                    <div class="fw-bold">Swarnadeep Seth</div>
-                                    <div class="text-muted">Physics, UCF</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <!-- Post content-->
                             <article>
                                 <!-- Post header-->
                                 <header class="mb-4">
                                     <!-- Post title-->
-                                    <h1 class="fw-bolder mb-1">Polymer Physics with LAMMPS</h1>
+                                    <h1 class="fw-bolder mb-1">Diabetes prediction using Pima Indians dataset</h1>
                                     <!-- Post meta content-->
-                                    <div class="text-muted fst-italic mb-2">July 11, 2022</div>
+                                    <div class="text-muted fst-italic mb-2">Feb 18, 2022</div>
                                     <!-- Post categories-->
-                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Polymer Physics</a>
-                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Molecular Dynamics Simulation</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Machine Learning</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Diabetes Prediction</a>
                                 </header>
                                 <!-- Preview image figure-->
                                 <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
@@ -93,49 +118,613 @@
 
                                 <!-- Post content-->
                                 <section class="mb-5">
-                                    <p class="fs-5 mb-4">LAMMPS is open-source Simulation Package developed at Sandia National Laboratories for material designing.</p>
-                                    <p class="fs-5 mb-4"></p>LAMMPS stands for Large-scale Atomic/Molecular Massively Parallel Simulator.</p>
-                                </section>
-                                
-                                
-                                <section class="mb-5">
-                                    <h1 class="fw-light mb-1">How to install LAMMPS using a pre-built executable</h1>
-                                    <p class="fs-5 mb-4">
-                                        Use the following commands in the terminal. <br>
-                                        1. $ sudo add-apt-repository ppa:gladky-anton/lammps
-                                        <br>
-                                        2. $ sudo add-apt-repository ppa:openkim/latest
-                                        <br>
-                                        3. $ sudo apt-get update
-                                        <br>
-                                        4. $ sudo apt-get install lammps-stable
-                                    </p>
+                                    <p class="fs-5 mb-4">Pima Indians diabetic dataset is taken from the Kaggle website <a href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database" target="_blank"> Link </a>.</p>
+                                    <p class="fs-5 mb-4">Diabetes is a disease in which human body can not produce enough insulin or use it well to remove and absorb glucose from the bloodstream, leading to a cascade of disease like kidney, liver failure, blindness, and much more. More than 37 million US adults have diabetes, and 1 out of 5 do not know that they have it. It is the seventh leading cause of death in US. Source: <a href="https://www.cdc.gov/diabetes/basics/diabetes.html" target="_blank"> CDC </a>.</p>
+                                    <p class="fs-5 mb-4">In this workbook we will use machine learning techniques to see how accurately it can predict the chance of diabetes in Pima Indian population.</p>
                                 </section>
 
                                 <section class="mb-5">
-                                    <h1 class="fw-light mb-1">How to build LAMMPS with extra-packages using cmake</h1>
+                                    <h1 class="fw-light mb-1" style="color: brown;">Exploratory Analysis of the pima-indians diabetes dataset:</h1>
+                                    <hr size="10">
                                     <p class="fs-5 mb-4">
-                                        1. Download the recent stable release from the website as a tarball. The latest release is <a href=https://www.lammps.org/download.html>LAMMPS Stable Release-23rd June.</a>
-                                        <br>
-                                        2. Install Cmake ($ sudo apt install cmake) if you havn't already.
-                                        <br>
-                                        3. Extract the downloaded tar.gz file. ($ tar -xf lammps-stable.tar.gz)
-                                        <br>
-                                        4. create a directory called build. ($ mkdir build)
-                                        <br>
-                                        5. Go inside the build directory. ($ cd build)
-                                        <br>
-                                        6. Type $ cmake -C ../lammps-23Jun2022/cmake/presets/most.cmake -C ../lammps-23Jun2022/cmake
-                                        <br>
-                                        7. Optionally, install additional packages (Example: LATBOLTZ package) using  ($ cmake -D PKG_LATBOLTZ=ON .)
-                                        <br>
-                                        8. Finally, type "$ make install" which will generate an executable file named lmp. 
-                                    </p>
+First let's load the necessary modules:<br>
+<pre>
+<code>
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+</code>
+</pre>
+</p>
+
+<p class="fs-5 mb-4">
+Data Visualization and Statistics <br>
+
+<pre>
+<code>
+all_data = pd.read_csv("diabetes.csv")
+print("Data Shape:", all_data.shape)
+all_data
+</code>
+</pre>
+</p>
+
+<pre>Data Shape: (768, 9)</pre>  
+
+<table class="center">
+    <thead>
+    <tr style="text-align: center;">
+        <th></th>
+        <th>Pregnancies</th>
+        <th>Glucose</th>
+        <th>BloodPressure</th>
+        <th>SkinThickness</th>
+        <th>Insulin</th>
+        <th>BMI</th>
+        <th>DiabetesPedigreeFunction</th>
+        <th>Age</th>
+        <th>Outcome</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th>0</th>
+        <td>6</td>
+        <td>148</td>
+        <td>72</td>
+        <td>35</td>
+        <td>0</td>
+        <td>33.6</td>
+        <td>0.627</td>
+        <td>50</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <th>1</th>
+        <td>1</td>
+        <td>85</td>
+        <td>66</td>
+        <td>29</td>
+        <td>0</td>
+        <td>26.6</td>
+        <td>0.351</td>
+        <td>31</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <th>2</th>
+        <td>8</td>
+        <td>183</td>
+        <td>64</td>
+        <td>0</td>
+        <td>0</td>
+        <td>23.3</td>
+        <td>0.672</td>
+        <td>32</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <th>3</th>
+        <td>1</td>
+        <td>89</td>
+        <td>66</td>
+        <td>23</td>
+        <td>94</td>
+        <td>28.1</td>
+        <td>0.167</td>
+        <td>21</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <th>4</th>
+        <td>0</td>
+        <td>137</td>
+        <td>40</td>
+        <td>35</td>
+        <td>168</td>
+        <td>43.1</td>
+        <td>2.288</td>
+        <td>33</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <th>...</th>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+    </tr>
+    <tr>
+        <th>763</th>
+        <td>10</td>
+        <td>101</td>
+        <td>76</td>
+        <td>48</td>
+        <td>180</td>
+        <td>32.9</td>
+        <td>0.171</td>
+        <td>63</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <th>764</th>
+        <td>2</td>
+        <td>122</td>
+        <td>70</td>
+        <td>27</td>
+        <td>0</td>
+        <td>36.8</td>
+        <td>0.340</td>
+        <td>27</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <th>765</th>
+        <td>5</td>
+        <td>121</td>
+        <td>72</td>
+        <td>23</td>
+        <td>112</td>
+        <td>26.2</td>
+        <td>0.245</td>
+        <td>30</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <th>766</th>
+        <td>1</td>
+        <td>126</td>
+        <td>60</td>
+        <td>0</td>
+        <td>0</td>
+        <td>30.1</td>
+        <td>0.349</td>
+        <td>47</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <th>767</th>
+        <td>1</td>
+        <td>93</td>
+        <td>70</td>
+        <td>31</td>
+        <td>0</td>
+        <td>30.4</td>
+        <td>0.315</td>
+        <td>23</td>
+        <td>0</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<p class="fs-5 mb-4">
+Print the Descriptive Statistics:
+<pre>
+<code>
+all_data.describe()
+</code>
+</pre>
+</p>
+<table class="center">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pregnancies</th>
+      <th>Glucose</th>
+      <th>BloodPressure</th>
+      <th>SkinThickness</th>
+      <th>Insulin</th>
+      <th>BMI</th>
+      <th>DiabetesPedigreeFunction</th>
+      <th>Age</th>
+      <th>Outcome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+      <td>768.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.845052</td>
+      <td>120.894531</td>
+      <td>69.105469</td>
+      <td>20.536458</td>
+      <td>79.799479</td>
+      <td>31.992578</td>
+      <td>0.471876</td>
+      <td>33.240885</td>
+      <td>0.348958</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>3.369578</td>
+      <td>31.972618</td>
+      <td>19.355807</td>
+      <td>15.952218</td>
+      <td>115.244002</td>
+      <td>7.884160</td>
+      <td>0.331329</td>
+      <td>11.760232</td>
+      <td>0.476951</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.078000</td>
+      <td>21.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.000000</td>
+      <td>99.000000</td>
+      <td>62.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>27.300000</td>
+      <td>0.243750</td>
+      <td>24.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.000000</td>
+      <td>117.000000</td>
+      <td>72.000000</td>
+      <td>23.000000</td>
+      <td>30.500000</td>
+      <td>32.000000</td>
+      <td>0.372500</td>
+      <td>29.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.000000</td>
+      <td>140.250000</td>
+      <td>80.000000</td>
+      <td>32.000000</td>
+      <td>127.250000</td>
+      <td>36.600000</td>
+      <td>0.626250</td>
+      <td>41.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>17.000000</td>
+      <td>199.000000</td>
+      <td>122.000000</td>
+      <td>99.000000</td>
+      <td>846.000000</td>
+      <td>67.100000</td>
+      <td>2.420000</td>
+      <td>81.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p class="fs-5 mb-4">
+Data Rescaling:<br>
+<pre>
+<code>
+all_data = (all_data-all_data.min())/(all_data.max()-all_data.min())
+all_data
+</code>
+</pre>
+</p>              
+
+<pre>
+<code>
+### Training and Test set (70% and 30%)
+n_features = all_data.shape[1]-1
+ndata = len(all_data)
+ntrain = int(0.7*ndata)
+ntest = ndata - ntrain
+training_data = all_data[0:ntrain]
+test_data = all_data[ntrain:ndata]
+training_data.shape, test_data.shape
+</code>
+</pre>
+((537, 9), (231, 9)) <br><br>
+<p class="fs-5 mb-4">
+Training and Test Set Splitting: <br>
+</p>
+<pre>
+<code>
+X_train = training_data.to_numpy()[:,0:n_features]
+y_train = training_data.to_numpy()[:,-1]
+
+X_test = test_data.to_numpy()[:,0:n_features]
+y_test = test_data.to_numpy()[:,-1]
+
+print ("Training:", X_train.shape, y_train.shape)
+print ("Test:", X_test.shape, y_test.shape)
+</code>
+</pre>
+Training: (537, 8) (537,) <br>
+Test: (231, 8) (231,) <br><br>
+<p class="fs-3 mb-4"style="color: brown;"> <b>Binary Logistic Regression</b> </p> 
+<hr size="10">
+<p class="fs-5 mb-4">
+There are 8 features: \(\vec{X}=[X_1, X2, ..., X_8]\). <br>
+The weights are \(\vec{w}=[w_1, w_2, ..., w_8]\) and the the bias is b. <br>
+The linear regression function is \(z=\vec{w}.\vec{X} + b\). <br>
+Logistic regression function: \(f_{\vec{w},b}(\vec{X})=g(z) = \frac{1}{1+\exp(-z)} = \frac{1}{1+\exp(-(\vec{w}.\vec{X} + b))}\)
+</p>
+<pre>
+<code>
+# Initial weights and bias
+w = np.ones(n_features)
+b = 0.5
+
+# Learning Rate
+alpha = 0.01
+</code>
+</pre>
+<p class="fs-5 mb-4">
+Defining the Logistic and Cost Function: <br>
+<p class="fs-5 mb-4" style="color: blue;">Logistic Cost Function: </p>
+<p class="fs-5 mb-4">
+\(J(\vec{w},b) = \frac{1}{m}\sum \limits_{i=1}^{m} L(w,b),\) with \(m=8\) <br>
+where, the loss function \(L(\vec{w},b)=\frac{1}{2} \left( f_{\vec{w},b}(\vec{X}^{(i)})-y^{(i)}\right )^2\), \(i \in [1,8]\). <br>
+</p>
+<p class="fs-5 mb-4" style="color: blue;"> Gradient Descent Algorithm (With w regularization):</p>
+<p class="fs-5 mb-4">
+\(\frac{\partial J(\vec{w},b)}{\partial w_j} = \frac{1}{m} \sum \limits_{i=1}^{m} \left( f_{\vec{w},b}(\vec{X}^{(i)})-y^{(i)}\right )\vec{X}^{(i)} + \frac{\lambda}{m}w_j\) <br>
+\(\frac{\partial J(\vec{w},b)}{\partial b} = \frac{1}{m} \sum \limits_{i=1}^{m} \left( f_{\vec{w},b}(\vec{X}^{(i)})-y^{(i)}\right )\)
+</p>
+<pre>
+<code>
+def f_logistic(X,w,b):
+    return 1./(1+np.exp(-np.dot(w,X)-b))
+
+def dJ_dw(X,y,w,b):
+    Loss_Sum = 0
+    for i in range (ntrain):
+        Loss_Sum += (f_logistic(X[i],w,b) - y[i])*X[i]
+    return (1/ntrain)*Loss_Sum
+
+def dJ_dw_L2_regularization(X,y,w,b,lamda):
+    Loss_Sum = 0
+    for i in range (ntrain):
+        Loss_Sum += (f_logistic(X[i],w,b) - y[i])*X[i]
+    return (1/ntrain)*Loss_Sum + (lamda/ntrain)*w
+    
+def dJ_db(X,y,w,b):
+    Loss_Sum = 0
+    for i in range (ntrain):
+        Loss_Sum += (f_logistic(X[i],w,b) - y[i])
+    return (1/ntrain)*Loss_Sum
+</code>
+</pre>
+<p class="fs-5 mb-4"> Update w and b in epoch: </p>
+<pre>
+<code>
+n_epoch = 2000
+for i in range (n_epoch):
+    #tmp_w = w - alpha*dJ_dw(X_train,y_train,w,b)
+    tmp_w = w - alpha*dJ_dw_L2_regularization(X_train,y_train,w,b,lamda=0.1) # With Regularization
+    tmp_b = b - alpha*dJ_db(X_train,y_train,w,b)
+    w = tmp_w
+    b = tmp_b
+    #print (i,w,b)
+</code>
+</pre>
+<p class="fs-5 mb-4"><b><u>Prediction with the trained parameter:</u></b> </p>
+<pre>
+<code>
+print ("Final Weights(w):", w)
+print ("Final Bias(b):", b)
+y_pred = []
+for i in range(ntest):
+    pred_result=0
+    y = f_logistic(X_test[i],w,b)
+    if (y > 0.5):
+        pred_result = 1
+    y_pred.append(pred_result)
+y_pred = np.array(y_pred)
+y_test, y_pred
+</code>
+</pre>
+Final Weights(w): [0.77691792,  0.33937085, -0.13957614,  0.57400966,  0.86465804,  0.33027304, 0.7857026, 0.78044359] <br>
+Final Bias(b): -1.51501363903071 <br><br>
+<b>y_test:</b> [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0,
+        1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1,
+        0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1,
+        0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1,
+        0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0,
+        0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1,
+        0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1,
+        0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0,
+        0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1,
+        0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1,
+        0, 1, 0, 1, 0, 0, 0, 0, 1, 0] <br>
+<b>y_pred:</b> [0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+        0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
+        0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0] <br><br>
+<p class="fs-5 mb-4"><b><u>Accuracy of Binary Regression prediction:</u></b> </p>
+<pre>
+<code>
+accuracy = 100*(1-np.sum(abs(y_test-y_pred))/ntest)
+print("Accuracy: %0.2f%%"%accuracy)
+</code>
+</pre>
+Accuracy: 71.00% <br><br>
+<p class="fs-3 mb-4" style="color: brown"><b>Use Scikit-Learn for Logistic Regression</b> </p>
+<hr size="10">
+<pre>
+<code>
+from sklearn.linear_model import LogisticRegression
+logisticRegr = LogisticRegression(penalty=None, max_iter=200)
+
+logisticRegr.fit(X_train, y_train)
+y_pred_sklearn = logisticRegr.predict(X_test)
+
+accuracy = 100*(1-np.sum(abs(y_test-y_pred_sklearn))/ntest)
+print("Accuracy: %0.2f%%"%accuracy)
+</code>
+</pre>
+Accuracy: 79.22% <br><br>
+<p class="fs-3 mb-4" style="color: brown"><b>Neural Network (3 layers)</b> </p>
+<hr size="10">
+<pre>
+<code>
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.losses import BinaryCrossentropy
+
+model = Sequential([
+    Dense(units=35, activation='relu'),
+    Dense(units=10, activation='relu'),
+    Dense(units=1, activation='linear')
+])
+
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001) ,loss=BinaryCrossentropy(from_logits=True))
+model.fit(X_train, y_train, epochs=200)
+</code>
+</pre>
+<p class="fs-5 mb-4"><b><u>Accuracy of the Neural Network prediction:</u></b> </p>
+<pre>
+<code>
+model.summary()
+#y_pred_continuous = model.predict(X_test)
+
+logit = model(X_test)
+y_pred_continuous = tf.nn.sigmoid(logit)
+
+y_pred_tf = np.where(y_pred_continuous > 0.5 , 1, 0).T[0]
+accuracy = 100*(1-np.sum(abs(y_test-y_pred_tf))/ntest)
+print("Accuracy: %0.2f%%"%accuracy)
+</code>
+</pre>
+<pre>
+Model: "sequential"
+_________________________________________________________________
+    Layer (type)                Output Shape              Param #   
+=================================================================
+    dense (Dense)               (None, 35)                315       
+                                                                    
+    dense_1 (Dense)             (None, 10)                360       
+                                                                    
+    dense_2 (Dense)             (None, 1)                 11        
+                                                                    
+=================================================================
+Total params: 686
+Trainable params: 686
+Non-trainable params: 0
+_________________________________________________________________
+Accuracy: 80.95%
+</pre>
+<p class="fs-3 mb-4" style="color: brown"><b>Feature Selection (chi2):</b> </p>
+<hr size="10">
+<pre>
+<code>
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
+
+bestfeatures = SelectKBest(score_func=chi2, k=4)
+fit = bestfeatures.fit(X_train, y_train)
+
+print("Fit Scores:", fit.scores_)
+top4_features = np.argpartition(fit.scores_, -4)[-4:]
+print("Top 4 features:", top4_features)
+
+X_train_top4 = fit.transform(X_train)
+X_test_top4 = fit.transform(X_test)
+</code>
+</pre>
+Fit Scores: [4.53678678 4.54641459 0.04086338 0.28601954 2.00041986 1.61708541 1.99254061 4.31147926] <br>
+Top 4 features: [4 7 1 0] <br><br>
+<pre>
+<code>
+Logistic Regression
+logisticRegr = LogisticRegression(penalty=None, max_iter=200)
+
+logisticRegr.fit(X_train_top4, y_train)
+y_pred_sklearn = logisticRegr.predict(X_test_top4)
+
+accuracy = 100*(1-np.sum(abs(y_test-y_pred_sklearn))/ntest)
+print("Accuracy: %0.2f%%"%accuracy)
+</code>
+</pre>
+Accuracy: 77.92% <br><br>
+<p class="fs-3 mb-4" style="color: brown"><b>Neural Network (3 layers) with the most important 4 features</b> </p>
+<hr size="10">
+<pre>
+<code>
+model = Sequential([
+    Dense(units=15, activation='relu'),
+    Dense(units=8, activation='relu'),
+    Dense(units=1, activation='linear')
+])
+
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss=BinaryCrossentropy(from_logits=True))
+model.fit(X_train, y_train, epochs=200)
+
+model.summary()
+
+logit = model(X_test)
+y_pred_continuous = tf.nn.sigmoid(logit)
+
+y_pred_tf = np.where(y_pred_continuous > 0.5 , 1, 0).T[0]
+accuracy = 100*(1-np.sum(abs(y_test-y_pred_tf))/ntest)
+print("Accuracy: %0.2f%%"%accuracy)
+</code>
+</pre>
+<pre>
+Model: "sequential_1"
+_________________________________________________________________
+    Layer (type)                Output Shape              Param #   
+=================================================================
+    dense_3 (Dense)             (None, 15)                135       
+                                                                    
+    dense_4 (Dense)             (None, 8)                 128       
+                                                                    
+    dense_5 (Dense)             (None, 1)                 9         
+                                                                    
+=================================================================
+Total params: 272
+Trainable params: 272
+Non-trainable params: 0
+_________________________________________________________________
+Accuracy: 80.52%
+</pre>
                                 </section>
 
-                                <section class="mb-5">
-                                    <h1 class="fw-light mb-1">Replusive Lennard Jones Particle Simulation</h1>
-                                </section>
                             </article>
 
                             <!-- Comments section-->
@@ -148,7 +737,7 @@
         <footer class="bg-dark py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2022</div></div>
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2023</div></div>
                     <div class="col-auto">
                         <a class="link-light small" href="#!">Privacy</a>
                         <span class="text-white mx-1">&middot;</span>
@@ -163,5 +752,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
     </body>
 </html>
