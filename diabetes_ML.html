@@ -668,7 +668,9 @@ X_test_top4 = fit.transform(X_test)
 </code>
 </pre>
 Fit Scores: [4.53678678 4.54641459 0.04086338 0.28601954 2.00041986 1.61708541 1.99254061 4.31147926] <br>
-Top 4 features: [4 7 1 0] <br><br>
+Top 4 features: [4 7 1 0] <br>
+The most important features identified by the KBest analysis are: <b>[Insulin, Age, Glucose, Pregnancies].</b>
+<br><br>
 <pre>
 <code>
 Logistic Regression
@@ -723,6 +725,12 @@ Non-trainable params: 0
 _________________________________________________________________
 Accuracy: 80.52%
 </pre>
+<p class="fs-3 mb-4" style="color: brown"><b>Conclusions of the ML study:</b> </p>
+<hr size="10">
+<p class="fs-5 mb-4">
+(a) Simple logistic regression performs as per as the neural network accuracy. <br>
+(b) Choosing the best 4 features [Insulin, Age, Glucose, Pregnancies] is equivalent in performance in term of accuracy but speed up the computational time, and gives a rational argument on the risk factors of the diabetes.
+</p>
                                 </section>
 
                             </article>
