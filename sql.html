@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>SQL primer</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <title>Katex</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+        <!-- Table Style -->
+        <style>
+            table, td, th {
+                border-bottom: 1px solid black;
+                padding: 5px;
+                text-align: center;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                display: block;
+                max-width: fit-content;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            table.center {
+                margin-left: auto; 
+                margin-right: auto;
+            }
+            thead th {
+                color: rgb(3, 77, 252);
+                background-color: bisque;
+            }
+            td:first-child, th:first-child {
+                border-right: 1px solid black;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
+            tr:hover {background-color: rgb(232, 190, 175);}
+        </style>
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D. Student</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="index.html">Bio</a></li>
+				<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownResearch" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Research</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+					<li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+					<li><a class="dropdown-item" href="research-post.html">Research Post</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Data Science</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDataScience">
+					<li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&A</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Machine Learning</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownML">
+                    <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Stock Market</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMarket">
+					<li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+					<li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                        <div class="col-lg-12">
+                            <!-- Post content-->
+                            <article>
+                                <!-- Post header-->
+                                <header class="mb-4">
+                                    <!-- Post title-->
+                                    <h1 class="fw-bolder mb-1">Primer on SQL using a test customer dataset</h1>
+                                    <!-- Post meta content-->
+                                    <div class="text-muted fst-italic mb-2">Feb 20, 2023</div>
+                                    <!-- Post categories-->
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">SQL</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">MariaDB</a>
+                                </header>
+                                <!-- Preview image figure-->
+                                <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
+
+
+                                <!-- Post content-->
+                                <section class="mb-5">
+                                    <p class="fs-5 mb-4">SQL stands for Structured Query Language. It is a standard programming language used for managing and manipulating relational databases. <br><br>
+                                                        Relational databases are a type of database that organizes data into one or more tables, where each table consists of a set of columns and rows. SQL allows users to perform various operations on these tables, such as querying the data to retrieve information, inserting new data into the tables, updating existing data, and deleting data. <br><br>
+                                                        SQL is used by a wide variety of organizations and applications that rely on databases to store and manage their data. It is an essential tool for data analysts, software developers, and other professionals who work with large sets of structured data. SQL is a powerful language that can handle complex queries and data manipulation tasks, making it a valuable skill for anyone who works with data.</p>
+                                    <p class="fs-5 mb-4">In this workbook we will use MariaDB to explore a test dataset.</p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Installing MariaDB on a Linux machine vai terminal:</h1>
+                                    <hr size="10">
+                                    <p class="fs-5 mb-4">Hit the below command to start installing MariaDB:<br>
+                                    <code>
+                                        $ sudo apt install mariadb-server mariadb-client
+                                    </code>
+                                    <p class="fs-5 mb-4">Testing if the installation is successful:<br>
+                                    <code>
+                                        $ mysqladmin --version <br>
+                                        >> mysqladmin  Ver 9.1 Distrib 10.3.37-MariaDB, for debian-linux-gnu on x86_64
+                                    </code>
+                                    <p class="fs-5 mb-4">For uninstalling MariaDB:<br>
+                                    <code>
+                                        sudo apt-get purge mariadb-* 
+                                    </code>
+                                    <p class="fs-5 mb-4">Start the MariaDB server:<br>
+                                    <code>
+                                        sudo systemctl start mariadb
+                                    </code>
+                                    <p class="fs-5 mb-4">Login as root in the MariaDB server:<br>
+                                    <code>
+                                        sudo mysql -u root
+                                    </code>
+                                    <p class="fs-5 mb-4">Voila! now you can log in to the database:<br>
+                                    <code>
+                                        mariadb
+                                    </code>
+                                    <p class="fs-5 mb-4">Display all the databases:<br>
+                                    <code>
+                                        MariaDB [(none)]> SHOW DATABASE;
+                                    </code>
+
+<pre><code>
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.001 sec)
+</code></pre>
+<h1 class="fw-light mb-1" style="color: brown;">Create and Import a database:</h1>
+<hr size="10">
+<p class="fs-5 mb-4">Create a blank database:<br>
+<code>
+    MariaDB [(none)]> CREATE DATABASE LearningDB; 
+</code> 
+<pre><code>
++--------------------+
+| Database           |
++--------------------+
+| LearningDB         |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.000 sec)
+</code></pre>
+<p class="fs-5 mb-4">Enter into the database LearingDB:<br>
+<code>
+    MariaDB [(none)]> USE LearningDB; 
+</code> 
+<p class="fs-5 mb-4">Use the path of the database file (learning_dB.sql) to load the data into the new database (LearningDB):<br>
+<code>
+    MariaDB [LearningDB]> source /{your_path}/learning_dB.sql
+</code>
+<h1 class="fw-light mb-1" style="color: brown;">Visualize the LearningDB database:</h1>
+<hr size="10">
+<p class="fs-5 mb-4">Show the tables withing the database:<br>
+<code>
+    MariaDB [LearningDB]> SHOW TABLES;
+</code>
+<pre><code>
++----------------------+
+| Tables_in_LearningDB |
++----------------------+
+| customers            |
+| employees            |
+| offices              |
+| orderdetails         |
+| orders               |
+| payments             |
+| productlines         |
+| products             |
++----------------------+
+8 rows in set (0.000 sec)
+</code></pre>
+<p class="fs-5 mb-4">Let's visualize what are inside the customer table:<br>
+<code>
+    MariaDB [LearningDB]> DESCRIBE LearningDB.customers;
+</code>
+<pre><code>
++------------------------+---------------+------+-----+---------+-------+
+| Field                  | Type          | Null | Key | Default | Extra |
++------------------------+---------------+------+-----+---------+-------+
+| customerNumber         | int(11)       | NO   | PRI | NULL    |       |
+| customerName           | varchar(50)   | NO   |     | NULL    |       |
+| contactLastName        | varchar(50)   | NO   |     | NULL    |       |
+| contactFirstName       | varchar(50)   | NO   |     | NULL    |       |
+| phone                  | varchar(50)   | NO   |     | NULL    |       |
+| addressLine1           | varchar(50)   | NO   |     | NULL    |       |
+| addressLine2           | varchar(50)   | YES  |     | NULL    |       |
+| city                   | varchar(50)   | NO   |     | NULL    |       |
+| state                  | varchar(50)   | YES  |     | NULL    |       |
+| postalCode             | varchar(15)   | YES  |     | NULL    |       |
+| country                | varchar(50)   | NO   |     | NULL    |       |
+| salesRepEmployeeNumber | int(11)       | YES  | MUL | NULL    |       |
+| creditLimit            | decimal(10,2) | YES  |     | NULL    |       |
++------------------------+---------------+------+-----+---------+-------+
+13 rows in set (0.001 sec)
+</code></pre>
+
+
+                                </section>
+
+                            </article>
+
+                            <!-- Comments section-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2023</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </body>
+</html>
