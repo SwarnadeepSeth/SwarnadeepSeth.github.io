@@ -153,7 +153,6 @@
             </div>
             <iframe width="1200" height="900" frameborder="0" scrolling="no" src="https://chart-studio.plotly.com/~ss13ms054/93.embed"></iframe>
 
-          <!-- DarQube Chart Widget -->
           <div class="text-center">
             <p style="margin-bottom:2cm;"></p>
               <h2 class="fw-bold">Stock Screener</h2>
@@ -163,14 +162,75 @@
           <div class="row gx-5">
             <div class="col-lg-6">
               <div class="position-relative mb-5">
-                  <iframe name="ScreenerWidget" src="https://darqube.com/external-embedding/5?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWRnZXQiOnsic2NyZWVuZXJfYXNzZXRfY2xhc3NlcyI6WyJTVE9DS1MiLCJJTkRFWEVTIiwiQ1JZUFRPIl19LCJ3X3R5cGUiOiJTY3JlZW5lcldpZGdldCIsImZlX2NmZyI6eyJjbW9kZSI6MCwiZmNsciI6InJnYmEoMjU1LCAyNTUsIDI1NSwgMSkiLCJiZyI6InJnYmEoMjEsIDI1LCAzMCwgMSkiLCJoIjo1MTAsInciOjkwMCwiYXN6Ijp0cnVlLCJoZGljbiI6ZmFsc2UsInd0bSI6ZmFsc2V9LCJleHAiOjE2NjQ3MzY3OTksInN1YiI6ImFjY2VzcyJ9.3xlfxSMDjneeDdnXNPocn4QaCdeZ7-hNEdoxS47lYe8" id="ScreenerWidget" width="1200" height="600"></iframe>
+                  <!-- TradingView Widget BEGIN -->
+                  <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                    {
+                    "width": "1200",
+                    "height": "600",
+                    "defaultColumn": "moving_averages",
+                    "defaultScreen": "volume_leaders",
+                    "market": "india",
+                    "showToolbar": true,
+                    "colorTheme": "light",
+                    "locale": "en",
+                    "isTransparent": false
+                    }
+                    </script>
+                  </div>
+                  <!-- TradingView Widget END -->
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <p style="margin-bottom:2cm;"></p>
+              <h2 class="fw-bold">Top Gainer and Looser</h2>
+          </div>
+
+          <div class="row gx-5">
+            <div class="col-lg-6">
+              <div class="position-relative mb-5">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+                  {
+                  "colorTheme": "light",
+                  "dateRange": "1D",
+                  "exchange": "NASDAQ",
+                  "showChart": true,
+                  "locale": "en",
+                  "largeChartUrl": "",
+                  "isTransparent": false,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": true,
+                  "width": "1200",
+                  "height": "600",
+                  "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                  "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                  "gridLineColor": "rgba(0, 0, 0, 0)",
+                  "scaleFontColor": "rgba(106, 109, 120, 1)",
+                  "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                  "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                  "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                  "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                  "symbolActiveColor": "rgba(41, 98, 255, 0.12)"
+                }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+              </div>
+            </div>
           </div>
         </div>
+        
       </section>
       <section class="py-5 bg-light">
         <div class="container px-5 my-5">
           <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
-          <a class="btn btn-lg btn-primary" href="#%21">Contact us</a> </div>
+          <a class="btn btn-lg btn-primary" href="file:///home/swdseth/MegaSync/My_Website/GitHub/contact.html">Contact us</a> </div>
       </section>
     </main>
     <!-- Footer-->
