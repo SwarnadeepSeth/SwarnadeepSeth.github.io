@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Polymer Simulation - Lammps</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <title>Katex</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.0/styles/base16/synth-midnight-terminal-dark.min.css" >
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D. Student</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="index.html">Bio</a></li>
+				<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownResearch" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Research</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+					<li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+					<li><a class="dropdown-item" href="research-post_lammps.html">MD with LAMMPS</a></li>
+					<li><a class="dropdown-item" href="electrokinetics.html">Electro-Kinetic Transport</a></li>
+					<li><a class="dropdown-item" href="citation_app.html">Bibliography Generator</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Data Science</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDataScience">
+					<li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&A</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Machine Learning</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownML">
+                    <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Stock Market</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMarket">
+					<li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+					<li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+					<li><a class="dropdown-item" href="stock_scanner.html">EMA200 Screener</a></li>
+					<li><a class="dropdown-item" href="suptrend_scanner.html">SuperTrend_RS Screener</a></li>
+					<li><a class="dropdown-item" href="option_pl_calc.html">Option Strategy P&L</a></li>
+					<li><a class="dropdown-item" href="option_chain_PL.html">Option Chain P&L</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+				<li class="nav-item"><a class="nav-link" href="sql.html">SQL</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5">
+                        <div class="col-lg-11">
+                            <!-- Post content-->
+                            <article>
+                                <!-- Post header-->
+                                <header class="mb-4">
+                                    <!-- Post title-->
+                                    <h1 class="fw-bolder mb-1">Polymer Physics with LAMMPS</h1>
+                                    <!-- Post meta content-->
+                                    <div class="text-muted fst-italic mb-2">July 11, 2022</div>
+                                    <!-- Post categories-->
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Polymer Physics</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Molecular Dynamics Simulation</a>
+                                </header>
+                                <!-- Preview image figure-->
+                                <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
+
+
+                                <!-- Post content-->
+                                <section class="mb-5">
+                                    <p class="fs-5 mb-4">LAMMPS is open-source Simulation Package developed at Sandia National Laboratories for material designing.</p>
+                                    <p class="fs-5 mb-4"></p>LAMMPS stands for Large-scale Atomic/Molecular Massively Parallel Simulator.</p>
+                                </section>
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">How to install LAMMPS using a pre-built executable</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        Use the following commands in a Linux terminal: <br><br>
+                                        1. $ sudo add-apt-repository ppa:gladky-anton/lammps
+                                        <br>
+                                        2. $ sudo add-apt-repository ppa:openkim/latest
+                                        <br>
+                                        3. $ sudo apt-get update
+                                        <br>
+                                        4. $ sudo apt-get install lammps-stable
+                                    </p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: seagreen;">How to build LAMMPS with extra-packages using cmake</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        1. Download the recent stable release from the website as a tarball. The latest release is <a href=https://www.lammps.org/download.html>LAMMPS Stable Release-23rd June.</a>
+                                        <br>
+                                        2. Install Cmake ($ sudo apt install cmake) if you havn't already.
+                                        <br>
+                                        3. Extract the downloaded tar.gz file. ($ tar -xf lammps-stable.tar.gz)
+                                        <br>
+                                        4. create a directory called build. ($ mkdir build)
+                                        <br>
+                                        5. Go inside the build directory. ($ cd build)
+                                        <br>
+                                        6. Type $ cmake -C ../lammps-23Jun2022/cmake/presets/most.cmake -C ../lammps-23Jun2022/cmake
+                                        <br>
+                                        7. Optionally, install additional packages (Example: LATBOLTZ package) using  ($ cmake -D PKG_LATBOLTZ=ON .)
+                                        <br>
+                                        8. Finally, type "$ make install" which will generate an executable file named lmp. 
+                                    </p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Repulsive Lennard Jones Particle Simulation</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        <b>Create an input file:</b> You need to create a data file that contains the specifications of your particles.
+                                        The data file should include the following information: <br><br>
+                                        1. The number of particles <br>
+                                        2. The mass of each particle <br>
+                                        3. The initial positions and velocities of each particle
+                                    </p>
+
+<pre><code>
+# Specify simulation box size and shape
+units           lj
+dimension       3
+boundary        p p p
+atom_style      atomic
+
+# Specify the number of particles and their initial positions and velocities
+read_data       particles.data
+
+# Specify the potential energy function
+pair_style      lj/cut 2.5
+pair_coeff      * * 1.0 1.0 2.5
+
+# Specify the timestep and total simulation time
+timestep        0.005
+run             1000
+</code></pre> <br>
+<section class="mb-5">
+    <p class="fs-5 mb-5">
+        <b>Create a data file:</b> You need to create a data file that contains the specifications of your particles.
+        The data file should include the following information: <br><br>
+        1. The number of particles <br>
+        2. The mass of each particle <br>
+        3. The initial positions and velocities of each particle
+    </p>
+</section>
+
+<pre><code> 
+# Lennard-Jones particle data
+
+# Specify the number of particles
+1000 atoms
+
+# Specify the mass of each particle
+mass 1 1.0
+
+# Specify the initial positions and velocities of each particle
+x y z vx vy vz
+...
+</code></pre>
+<section class="mb-5">
+    <p class="fs-5 mb-5">
+        <b>Run the simulation:</b>
+        Once you have created the input and data files, you can run the simulation using the following command: <br>
+        <code>lammps < inputfile</code>
+    </p>
+</section>
+
+<p>=========================================================================================================================</p>
+<h1 class="fw-bolder mb-1">How to Simulate a Semi-Flexible Polymer in LAMMPS</h1> <br>
+<p class="fs-5 mb-4">In this blog post, I will walk you through the steps necessary to simulate a semi-flexible polymer in LAMMPS. 
+I will start by explaining the basic concepts of polymer simulation, and then I will provide a step-by-step guide to setting up and running a simulation. 
+Finally, I will discuss some of the results that you can expect to see from your simulation.</p>
+
+<p class="fs-3 mb-4" style="color:coral">Q. What is a semi-flexible polymer?</p>
+
+<p class="fs-5 mb-4">A semi-flexible polymer is a long chain of molecules that is able to bend and twist, but which also has some resistance to these
+     deformations. This resistance is due to the fact that the molecules in the polymer are connected to each other by chemical bonds. 
+     These bonds act like springs, and they resist being stretched or bent.</p>
+
+<p class="fs-3 mb-4" style="color:coral">Q. Why simulate semi-flexible polymers?</p>
+
+<p class="fs-5 mb-4">Semi-flexible polymers are important in a wide variety of applications, including the design of new materials, 
+    the study of biological systems, and the development of new drugs. For example, semi-flexible polymers are used in the manufacture
+    of everything from plastics to cosmetics. They are also found in many biological systems, such as single and double stranded DNA and proteins. </p>
+
+<p class="fs-3 mb-4" style="color:coral">Q. How to simulate semi-flexible polymers in LAMMPS?</p>
+
+<p class="fs-5 mb-4">To simulate a semi-flexible polymer in LAMMPS, <br>
+    1. You will need to create a system of particles that represent the individual molecules in the polymer. <br>
+    2. You will also need to specify the force field that will be used to describe the interactions between the particles. <br>
+    3. The force field will need to include terms that account for the bonded interactions between the molecules, as well as the 
+    non-bonded interactions between the molecules.</p>
+
+<p class="fs-3 mb-4" style="color:coral">Q. How to create a system of particles that represent the individual molecules in the polymer</p>
+
+<p class="fs-5 mb-4">To create a system of particles that represent the individual molecules in the polymer, 
+    you will need to specify the following information: <br>
+    1. The number of particles <br>
+    2. The mass of each particle <br>
+    3. The initial positions and velocities of each particle.<br>
+    I use a simple python script to generate the data file. The script is available on my github (<a href="https://github.com/SwarnadeepSeth/Lammps-Homopolymer-LangevinDynamics/blob/main/chain3d.py">link</a>).
+</p>
+<p style="color:rgba(23, 73, 240, 0.774)">------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p class="fs-3 mb-4">Define the variable list</p>
+<p class="fs-5 mb-4">
+    The first step is to define the variables that will be used in the simulation. 
+    The variables are: <br>
+    1. ParticleN: The number of particles in the system. <br>
+    2. temp: The temperature of the system. <br>
+    3. kappa: The spring constant of the bonds between the particles. <br>
+    4. gamma: The friction coefficient of the system. <br>
+    5. damp: The damping coefficient of the system. <br>
+</p>
+<pre><code>
+# Variable List
+variable ParticleN equal 64
+variable temp equal 1.0
+variable kappa equal 8.0
+variable gamma equal 0.7 
+variable damp equal 1.0/${gamma}
+dimension 3
+units lj
+atom_style	molecular
+#boundary p p p # periodic boundary
+boundary s s s # fixed boundary
+#boundary f f f # shrink-wrap boundary
+comm_modify cutoff 4
+
+#neighbor settings
+neighbor 1.0 bin
+neigh_modify every 1 delay 0 check yes
+</code></pre>
+
+<p class="fs-3 mb-4">Read the particles' data</p>
+<p class="fs-5 mb-4">
+    Next, read the data file (named as poly1_ParticleN) that contains the specifications of the particles. <br>
+    After reading the data file, you can specify the bounding box for the simulation. <br>
+</p>
+
+<pre><code>
+#=================================Load Initial Configuration=================================#
+read_data poly1_${ParticleN}.input
+#============================================================================================#
+
+#Box Boundary
+region box block -5000 5000 -5000 5000 -5000 5000
+
+#Particle Properties 
+mass * 1 # assign the mass of the monomer (for a homopolymer mass of the monomer is 1)) 
+group polymer3d type 1 # assign the group polymer3d to all the particles
+</code></pre>
+
+<p class="fs-3 mb-4">Assigning the initial velocity of the particles</p>
+<p class="fs-5 mb-4">
+    The initial velocity of the particles is assigned using the command <code>velocity</code>. <br>
+    The command <code>velocity</code> takes the following arguments: <br>
+    1. The group of particles to which the velocity will be assigned. <br>
+    2. The temperature of the system. <br>
+    3. Random number seed. <br>
+    4. The type of velocity distribution. 
+</p>
+<pre><code>
+#========================================Initial Velocity====================================#
+velocity all create ${temp} 1298371 dist gaussian
+#============================================================================================#
+</code></pre>
+
+<p class="fs-3 mb-4">Defining the interaction potential among the monomers</p>
+ 
+<p class="fs-5 mb-4">We use a short range repulsive Lennard-Jones (LJ) potential,
+\[U_{LJ}(r) = 4\epsilon \left[{\left(\frac{\sigma}{r}\right)}^{12}-{\left(\frac{\sigma} {r}\right)}^6\right]+\epsilon, \quad \textrm{for} \quad r\le 2^{1/6}\sigma\]
+\[= 0, \quad \textrm{otherwise}\]
+to model the excluded volume interaction between two beads separated at a distance r, where ϵ is the strength of the LJ potential. <br><br>
+The connectivity between two neighboring monomers is constructed using the finitely extensible nonlinear elastic (FENE) spring
+\[ U_{\mathrm{FENE}}(r_{ij})=-\frac{1}{2}k_FR_0^2\ln\left(1-r_{ij}^2/R_0^2\right). \]
+Here, \(r_{ij}=\left | \vec{r}_i - \vec{r}_j \right| \) is the distance between two consecutive monomer beads 
+i and \(j=i\pm1\) at \(\vec{r}_i\) and \(\vec{r}_j\), \(k_F\) is the spring constant and \(R_0\) is the maximum allowed separation 
+between two connected monomers. <br><br>
+An angle dependent three body interaction term is introduced between successive bonds which accounts for the chain stiffness \(\kappa\)
+\[U_{bend}(\theta_i) = \kappa\left(1-\cos \theta_i\right) \]
+and \(\theta_i\) is the angle between the bond vectors \(\vec{b}_{i-1} = \vec{r}_{i}-\vec{r}_{i-1}\) and 
+\(\vec{b}_{i} = \vec{r}_{i+1}-\vec{r}_{i}\), respectively.
+</p>
+<br>
+<pre><code>
+#===================================Potential Definition=====================================#
+#Weeks-Chandler-Anderson
+pair_style         lj/cut 1.12246204830937
+pair_coeff         * * 1.0 1.0 1.12246204830937
+pair_modify        shift yes
+
+#FENE type bond
+bond_style fene
+bond_coeff 1 30.0 1.5 1.0 1.0
+special_bonds fene
+
+#Cosine type angle
+#cosine shift angle: E = (U_min/2)*(1+cos(theta-theta_0))
+variable K equal 2.0*${kappa}
+angle_style cosine/shift
+angle_coeff * ${K} 180.0
+#=============================================================================================#
+</code></pre>
+
+<p class="fs-3 mb-4">Remove the overlap of the beads (if any)</p>
+<pre><code>
+#remove overlap between polymer beads
+minimize 1e-7 1e-7 1000 1000
+reset_timestep 0
+</code></pre>
+
+<p class="fs-3 mb-4">Langevin dynamics simulation </p>
+<p class="fs-5 mb-4">Once you have created your system and specified the force field, you can start the equilibration of the polymer. 
+    The simulation will proceed by solving the equations of motion for the particles. The equations of motion will take 
+    into account the forces acting on the particles, as well as the random forces that are due to the thermal motion of the molecules.
+    The equilibration steps will be discarded and often called as pre-production run.
+</p>
+
+<pre><code>
+#####################################################
+# Equilibration (Langevin dynamics at T)
+#=======================================Set Integrator========================================#
+fix integrator polymer3d nve gjf = yes
+fix dynamics   polymer3d langevin ${temp} ${temp} ${damp} 252352
+
+# specify timestep
+timestep	0.01
+
+# Thermodynamic Quantities Print 
+thermo_style custom step temp  ke pe  
+thermo_modify   norm yes flush yes
+thermo    1000000
+
+run 10000000 # Equilibriation Steps (will be discarded)
+#=============================================================================================#
+</code></pre>
+
+<p class="fs-3 mb-4">Post-equilibration simulation</p>
+<pre><code>
+# Reset the Integrator
+reset_timestep 0
+unfix integrator
+unfix dynamics
+
+#####################################################
+# Post Equilibration (Langevin dynamics at T)
+#=======================================Set Integrator========================================#
+fix integrator polymer3d nve gjf = yes
+fix dynamics   polymer3d langevin ${temp} ${temp} ${damp} 252352
+
+# specify timestep
+timestep	0.01
+</code></pre>
+
+<p class="fs-5 mb-4">The post-equilibration simulation will continue for a specified number of steps.
+     At each step, the positions and velocities of the particles will be updated. After the simulation has completed, 
+     you can analyze the results to obtain information about the properties of the polymer, such as its radius of gyration, 
+     its end-to-end distance, and its conformation.
+</p>
+
+
+<pre><code>
+################################################################################################
+#                          On the Fly Statistical Quantities Calculations                      #
+################################################################################################
+# Radius of Gyration Output
+compute 1 all gyration
+variable Rgsq equal c_1*c_1
+fix Rgave all ave/time 100 5 1000 c_1 v_Rgsq file Rg.dat 
+
+# Potential Energy Output
+compute 2 all pe
+variable pesq equal c_2*c_2
+fix Peave all ave/time 100 5 1000 c_2 v_pesq file PEavg.dat
+
+# End to End distance
+variable Rendsq equal (x[${ParticleN}]-x[1])^2+(y[${ParticleN}]-y[1])^2+(z[${ParticleN}]-z[1])^2
+fix Rendave all ave/time 100 5 1000 v_Rendsq file Rend.dat
+
+# Bond Length Calculation
+compute 3 all bond/local dist 
+compute Ave_BL all reduce ave c_3
+variable BL equal c_Ave_BL
+</code></pre>
+
+<p class="fs-3 mb-4">Output the thermodynamic quantities</p>
+<pre><code>
+# Thermodynamic Quantities Print 
+thermo_style custom step temp v_BL 
+thermo_modify   norm yes flush yes
+thermo    10000
+</code></pre>
+
+<p class="fs-3 mb-4">Output the trajectory</p>
+<pre><code>
+# Write Coordinates 
+#dump 1 all atom 100 Running_Config.lammpstrj # (Movie Making)
+dump 2 all dcd 5000 Running_Config.dcd 
+
+
+run 10000000 # Post-Equilibriation Steps 
+</code></pre>
+<br>
+
+<p class="fs-5 mb-4">In this blog post, I have provided a brief overview of how to simulate a semi-flexible polymer in LAMMPS. 
+    Hope that this blog post has been helpful, and I encourage you look at the full code following the <a href=https://github.com/SwarnadeepSeth/Lammps-Homopolymer-LangevinDynamics>github</a> link.</p>
+
+<p class="fs-3 mb-4">References</p>
+<p class="fs-6 mb-4">
+1. Thompson, A. P., Aktulga, H. M., Berger, R., Bolintineanu, D. S., Brown, W. M., Crozier, P. S., in ’t Veld, P. J., Kohlmeyer, A., Moore, S. G., Nguyen, T. D., Shan, R., Stevens, M. J., Tranchida, J., Trott, C., & Plimpton, S. J. (2022). <a href=https://doi.org/10.1016/j.cpc.2021.108171>LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales.</a> Computer Physics Communications, 271, 108171.<br>
+2. Seth, S., & Bhattacharya, A. (2022). <a href=https://doi.org/10.1063/5.0094221>How capture affects polymer translocation in a solitary nanopore.</a> The Journal of Chemical Physics, 156(24), 244902.
+</p>
+
+
+    
+                                </section>
+                            </article>
+
+                            <!-- Comments section-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2022</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </body>
+</html>
