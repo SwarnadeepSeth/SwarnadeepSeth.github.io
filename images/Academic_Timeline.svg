@@ -35,11 +35,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1212646"
-     inkscape:cx="628.56809"
-     inkscape:cy="128.84699"
+     inkscape:zoom="1.4191005"
+     inkscape:cx="324.42981"
+     inkscape:cy="63.379976"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g1200"
      showgrid="true"
      fit-margin-top="2"
      fit-margin-left="2"
@@ -64,7 +64,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -74,7 +74,8 @@
      id="layer1"
      transform="translate(-46.302712,-223.25675)">
     <g
-       id="g1200">
+       id="g1200"
+       transform="translate(-0.01559667,-0.25284164)">
       <path
          id="path4531"
          stroke-miterlimit="8"
@@ -232,36 +233,29 @@
          font-size="17"
          font-weight="400"
          font-style="italic"
-         style="font-style:italic;font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#993300;stroke-width:0.26458332">Eur</text>
-      <text
-         y="284.19128"
-         x="130.0251"
-         id="text4581"
-         font-size="17"
-         font-weight="400"
-         font-style="italic"
-         style="font-style:italic;font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#993300;stroke-width:0.26458332">. J. Phys.</text>
-      <text
-         y="284.19128"
-         x="144.96294"
-         id="text4583"
-         font-size="17"
-         font-weight="400"
-         style="font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#993300;stroke-width:0.26458332">, 2017</text>
-      <text
-         id="text4585"
-         font-size="17"
-         font-weight="400"
-         style="font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#212529;stroke-width:0.26458332"
-         x="157.15601"
-         y="284.19128">, 38 (1),</text>
-      <text
-         y="289.48294"
-         x="139.58768"
-         id="text4587"
-         font-size="17"
-         font-weight="400"
-         style="font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#212529;stroke-width:0.26458332">015104.</text>
+         style="font-style:italic;font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#993300;stroke-width:0.26458332" />
+      <g
+         id="g909"
+         transform="translate(-3.1750001)">
+        <text
+           style="font-style:italic;font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#993300;stroke-width:0.26458332"
+           font-style="italic"
+           font-weight="400"
+           font-size="17"
+           id="text4581"
+           x="130.0251"
+           y="284.19128">Eur. J. Phys., <tspan
+   id="tspan904"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Calibri, Calibri_MSFontService, sans-serif;-inkscape-font-specification:'Calibri, Calibri_MSFontService, sans-serif'">2017,</tspan>
+</text>
+        <text
+           style="font-weight:400;font-size:4.4979167px;font-family:Calibri, Calibri_MSFontService, sans-serif;fill:#212529;stroke-width:0.26458332"
+           font-weight="400"
+           font-size="17"
+           id="text4587"
+           x="132.7086"
+           y="289.48294">38 (1), 015104.</text>
+      </g>
       <path
          id="path4589"
          d="m 190.25167,260.77565 c 0,-1.53432 1.18454,-2.77813 2.64583,-2.77813 1.4613,0 2.64584,1.24381 2.64584,2.77813 0,1.53432 -1.18454,2.77812 -2.64584,2.77812 -1.46129,0 -2.64583,-1.2438 -2.64583,-2.77812 z"
@@ -333,7 +327,7 @@
         </g>
       </g>
       <g
-         transform="translate(6.879167)"
+         transform="translate(4.7625002)"
          id="g1099">
         <path
            style="fill:none;fill-rule:evenodd;stroke:#0033cc;stroke-width:0.4409731;stroke-miterlimit:8"
