@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Large Language Models and their applications on Intrinsically Disordered Proteins</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <title>Katex</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.0/styles/base16/synth-midnight-terminal-dark.min.css" >
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D. Student</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="index.html">Bio</a></li>
+				<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownResearch" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Research</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+					<li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+					<li><a class="dropdown-item" href="research-post_lammps.html">MD with LAMMPS</a></li>
+                    <li><a class="dropdown-item" href="research-post_LLM_IDP.html">IDPs with LLMs</a></li>
+					<li><a class="dropdown-item" href="electrokinetics.html">Electro-Kinetic Transport</a></li>
+					<li><a class="dropdown-item" href="citation_app.html">Bibliography Generator</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Data Science</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDataScience">
+					<li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&A</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Machine Learning</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownML">
+                    <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Stock Market</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMarket">
+					<li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+					<li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+					<li><a class="dropdown-item" href="stock_scanner.html">EMA200 Screener</a></li>
+					<li><a class="dropdown-item" href="suptrend_scanner.html">SuperTrend_RS Screener</a></li>
+					<li><a class="dropdown-item" href="option_pl_calc.html">Option Strategy P&L</a></li>
+					<li><a class="dropdown-item" href="option_chain_PL.html">Option Chain P&L</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+				<li class="nav-item"><a class="nav-link" href="sql.html">SQL</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5">
+                        <div class="col-lg-11">
+                            <!-- Post content-->
+                            <article>
+                                <!-- Post header-->
+                                <header class="mb-4">
+                                    <!-- Post title-->
+                                    <h1 class="fw-bolder mb-1">Using Large Language Models (LLMs) to Unravel the Mysteries of Intrinsically Disordered Proteins (IDPs)</h1>
+                                    <!-- Post meta content-->
+                                    <div class="text-muted fst-italic mb-2">May 02, 2023</div>
+                                    <!-- Post categories-->
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Intrinsically Disordered Proteins</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Large Language Models</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Molecular Dynamics Simulation</a>
+                                </header>
+                                <!-- Preview image figure-->
+                                <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
+
+
+                                <!-- Post content-->
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">A gentle introduction to Intrinsically Disordered Proteins (IDPs)</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        Intrinsically Disordered Proteins (IDPs) are a fascinating class of proteins that lack a well-defined three-dimensional structure under physiological conditions. 
+                                        Unlike traditional proteins that fold into stable structures, IDPs exhibit high flexibility and dynamic properties, allowing them to perform various essential biological functions. 
+                                        These proteins have attracted significant attention in recent years due to their unique structural and functional characteristics.
+                                    </p>
+                                    <p class="fs-4 mb-4" style="color:coral">Examples of Intrinsically Disordered Proteins:</p>
+                                    <p class="fs-5 mb-4">
+                                        1. <b>p53</b>: p53 is a well-known tumor suppressor protein involved in regulating cell cycle progression and preventing the formation of cancer.
+                                        It contains a disordered region known as the transactivation domain (TAD) that interacts with other proteins and DNA to control gene expression. <br>
+                                        2. <b>α-Synuclein</b>: α-Synuclein is a protein associated with Parkinson's disease. 
+                                        It exists in a disordered state and undergoes structural transitions to form aggregates, which are believed to play a role in the pathogenesis of the disease. <br>
+                                        3. <b>β-Amyloid</b>: Amyloid-β is a peptide that accumulates in the brains of individuals with Alzheimer's disease. In its monomeric form, it is intrinsically disordered.
+                                        However, it can undergo conformational changes and form aggregates, contributing to the development of amyloid plaques. <br>
+                                        4. <b>Prothymosin α</b>: ProTα is essential for cell proliferation and survival. It is involved in chromatin remodeling and proapoptotic activity.
+                                    </p>    
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: seagreen;">Compositions of IDPs</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        IDPs are composed of amino acids that differs in the amino acid compositions than the traditional proteins. 
+                                        It is believed there are abundance of proline (P), glycine (G), and glutamine (E) in the IDP sequences, which are known as disorder-promoting residues.
+                                        In addition, IDPs contain a high proportion of charged residues such as arginine (R), lysine (K), and glutamic acid (E).
+                                        These residues are thought to play an important role in the formation of disordered regions.
+                                    </p>
+                                    <p class="fs-4 mb-4" style="color:coral">What are the compositions of IDPs?</p>
+                                    <p class="fs-5 mb-4">
+                                        Mobidb-lite is a database of intrinsically disordered proteins that contains information about the sequences. 
+                                        We have downloaded the sequences of IDPs from the database of length ranging from 30 to 150 amino acids.
+                                        Now, let's take a look at the amino acid compositions of IDPs. <br>
+                                        <div style="text-align:left; margin-top:1cm; margin-bottom: 0.5cm;">
+                                            <img src="images/AA_propensity.svg"/> 
+                                        </div>
+                                    </p>
+                                    <p class="fs-5 mb-4">
+                                        Indeed we find the two heights occurring amino acids are arginine (R) and lysine (K) which are positively charged
+                                        followed by glycine (G) and serine (S).
+                                    </p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: green;">Large Language Models</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        Large language models are sophisticated computational systems designed to understand and generate human-like text. 
+                                        They leverage vast amounts of data to learn patterns, relationships, and structures within natural language. 
+                                        These models have revolutionized various fields, including natural language processing, text generation, and even human-computer interaction.<br><br>
+
+                                        One class of language models is known as N-gram models, which are widely used for language processing tasks. 
+                                        N-grams refer to contiguous sequences of N words or characters within a text. 
+                                        For example, in the sentence "<font color="green">The cat sat on the mat</font>", the 2-grams (or bigrams) would be "<font color="red">The cat</font>", "<font color="red">cat sat</font>", "<font color="red">sat on</font>", and so on.
+                                        An the same way the 3-grams (or trigrams) would be "<font color="red">The cat sat</font>", "<font color="red">cat sat on</font>", "<font color="red">sat on the</font>" and so on.<br><br>
+                                        
+                                        N-gram models capture the statistical relationships between these N-grams in a given corpus of text. 
+                                        By analyzing the frequencies of N-grams and their co-occurrences, these models can make predictions about the likelihood of certain word sequences or generate new text based on learned patterns.<br><br>
+
+                                        One of the key advantages of N-gram models is their simplicity and efficiency. They can be easily implemented and scaled to handle large datasets.
+                                        Additionally, N-gram models have been extensively used in applications such as machine translation, spell checking, speech recognition, and information retrieval.<br><br>
+
+                                        However, N-gram models have some limitations. They rely solely on local context and do not capture long-range dependencies or global semantics. 
+                                        For instance, a trigram model might predict the word "ate" after seeing the sequence "I have," but it may not consider that "ate" is unlikely in the context of a medical document.<br><br>
+
+                                        To address these limitations, more advanced language models, such as recurrent neural networks (RNNs) and transformer models, have been developed. 
+                                        These models can capture complex patterns and semantic relationships by incorporating contextual information from a wider context window.<br><br>
+
+                                        Despite the rise of more sophisticated models, N-gram models still find utility in certain scenarios, 
+                                        especially when dealing with resource-constrained environments or for specific language modeling tasks where local context is sufficient.
+                                    </p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: blue;">Can we apply LLM to generate synthetic IDPs?</h1> <br>
+                                    <p class="fs-5 mb-4">
+                                        Predicting IDP sequences can contribute to various fields, including drug discovery, protein engineering, and understanding disease mechanisms
+                                        while uncovering new therapeutic targets and designed molecules to modulate their functions.
+                                        Let's now dive into the fascinating process of generating IDP sequences using a large language model. 
+                                        For this demonstration, we will use a Python code snippet that leverages the trigram model and a dataset of known IDP sequences.
+                                    </p>
+
+<p class="fs-5 mb-2">
+    <b>Import the required libraries:</b>
+<pre><code>
+import random
+import pandas as pd
+from nltk import trigrams
+from collections import defaultdict
+</code></pre> 
+<p class="fs-5 mb-2">
+    <b>Create a placeholder for the model:</b> 
+</p>
+<pre><code> 
+model = defaultdict(lambda: defaultdict(lambda: 0))
+</code></pre>
+<p class="fs-5 mb-2">
+    <b>Read the downloaded sequence data from MobiDB:</b>
+</p>
+<pre><code>
+df = pd.read_csv('idp_mobidB.csv')
+df.columns = ['ID', 'Origin', 'Sequence']
+</code></pre>
+<p class="fs-5 mb-2">
+    <b>Build a trigram model by calculating the occurrence of an amino acid by precedence:</b>
+</p>
+<pre><code>
+for idp in df['Sequence']:
+    for w1, w2, w3 in trigrams(idp, pad_right=True, pad_left=True):
+        model[(w1, w2)][w3] += 1
+</code></pre>
+
+<p class="fs-5 mb-2">
+    <b>Select two random amino acids as a seeder sequence:</b>
+</p>
+<pre><code>
+AA_list = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L',
+            'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
+
+# Select two random amino acids
+a1 = random.choice(AA_list)
+a2 = random.choice(AA_list)
+
+#Seeder sequence
+seq = [a1, a2]
+</code></pre>
+
+<p class="fs-5 mb-2">
+    <b>Set the maximum number of amino acids needed in the generated IDP sequence:</b>
+</p>
+<pre><code>
+length_input = int(input('Enter the length of the IDP to be generated: '))
+max_length = length_input - 2
+</code></pre>
+<p>=========================================================================================================================</p>
+
+<p class="fs-5 mb-2">
+    <b>Generate the sequence based on the trigram model:</b>
+</p>
+<pre><code>
+for _ in range(max_length):
+    a1, a2 = seq[-2], seq[-1]    
+
+    # Check if there are possible next amino acids in the model
+    if len(model[(a1, a2)]) > 0:
+        # Sort the dictionary by descending order of frequency
+        sorted_sequences = sorted(model[(a1, a2)].items(), key=lambda x: x[1], reverse=True)
+        list_len = len(sorted_sequences)
+
+        # Select a random index from the top 4 most frequent amino acids
+        if list_len == 1:
+            r = 0
+        elif list_len == 2:
+            r = random.randint(0, 1)
+        elif list_len == 3:
+            r = random.randint(0, 2)
+        else:
+            r = random.randint(0, 3)
+
+        # Detect the None type
+        if sorted_sequences[r][0] == None:
+            # Choose a random amino acid
+            seq.append(random.choice(AA_list))
+        else:
+            # Select the amino acid with that index
+            seq.append(sorted_sequences[r][0])
+
+    else:
+        break
+</code></pre>
+
+<p class="fs-5 mb-2">
+    <b>Print the generated IDP sequence:</b>
+</p>
+<pre><code>
+predicted_idp = ''.join(seq)
+print(len(predicted_idp), predicted_idp)
+</code></pre>
+
+<p class="fs-5 mb-6">
+    By running the code, one can specify the desired length of the IDP sequence to be generated. 
+    The model will utilize the trigram model and the dataset of known IDP sequences to generate a novel sequence that exhibits characteristics
+    similar to real IDPs. The resulting sequence can be further analyzed and explored in the context of IDP research.
+</p>
+<br>
+<p class="fs-5 mb-2">
+    <b class="fs-4" style="color: purple;">A few generated IDP sequences from the trigram model:</b>
+</p>
+<pre><code>
+NDEPKKKAEEGDKAAKGKSKLVAPRRKGRPSPGGEGESKLQAGRKGKSSEEG
+EEAAEEDDVGPGPGGSSSQQPAPPKPEEEAEEGEGASKLEAGGGRPPKG
+LGTARRKGRPKRTSSGGRKRGGRGAGGRRRKVVPKRPRPRGGGRRGAGDEDKP
+WMASASGGGSKETQRKGKAKTKRPPSASGESISQQQVVQPLASKNGDGGSGEKQPPPPPPPSPGGSSGGSLEEADAAEEGARKGGRRKVKDESASSQQVRRKRKRKGGESKEEGDAPPPPPP
+</code></pre>
+<br><br>
+<section class="mb-5">
+    <h1 class="fw-light mb-1" style="color: blue;">How realistic are the trigram synthetic IDPs?</h1> <br>
+    <p class="fs-5 mb-6">
+        The immediate question that arises is how to evaluate the generated sequences and whether they are similar to real IDPs.
+        One can use the previous figure (distributions of the amino acids in the IDPs) as a reference and compare the generated sequences with the real IDPs.
+        We generated 1000 sequences of length between 30 to 150.
+        Let's see how the generated sequences compare with the real IDPs.
+    </p>
+</section>
+
+<div style="text-align:left; margin-top:1cm; margin-bottom: 0.5cm;">
+    <img src="images/trigram.svg"/> 
+</div>
+
+<p class="fs-5 mb-6">
+    We can see that the propensity of glycine (G) is overestimated in the generated sequences than arginine (R) and lysine (K) that
+    are prevalent in the real IDPs. But, the distribution weights are not too far off from the real IDPs. This gives us confidence that 
+    the trigram model is the right direction to generate synthetic IDPs. However, the order of the amino acids propensity needs to be
+    accurate in oder to generate more realistic but synthetic IDPs. A few remedies can be applied to improve the model and discussed below.
+</p>
+
+<section class="mb-5">
+    <h1 class="fw-light mb-1" style="color: blue;">What to do next?</h1> <br>
+    <p class="fs-5 mb-6">
+        The trigram model is a simple model that can be used to generate synthetic IDPs. 
+        However, the model is not perfect and can be improved. 
+        One can use the trigram model as a starting point and build a more complex model that can generate more realistic IDPs.
+        The model can be improved by using a more complex n-gram model, such as a 4-gram or 5-gram model.
+        The another avenue to try is to implement a recurrent neural network model that can comprehend the long-ranged effects/influences.
+        One can also use a more complex dataset of IDPs, such as the IDP-IM dataset, which contains more than 100,000 IDPs.
+    </p>
+</section>  
+
+<em><b>Disclaimer:</b> The Python code provided in this article is for demonstration purposes only and should be used responsibly 
+    and within legal and ethical boundaries. The figures should not be copied/reproduced without author's consent.</em>
+    
+                                </section>
+                            </article>
+
+                            <!-- Comments section-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2023</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </body>
+</html>
