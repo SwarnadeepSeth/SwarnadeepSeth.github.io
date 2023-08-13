@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Physics Inspired Neural Network</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <meta charset="UTF-8">
+        <title>Katex</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+        <!-- Table Style -->
+        <style>
+            table, td, th {
+                border-bottom: 1px solid black;
+                padding: 5px;
+                text-align: center;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                display: block;
+                max-width: fit-content;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            table.center {
+                margin-left: auto; 
+                margin-right: auto;
+            }
+            thead th {
+                color: rgb(3, 77, 252);
+                background-color: bisque;
+            }
+            td:first-child, th:first-child {
+                border-right: 1px solid black;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
+            tr:hover {background-color: rgb(232, 190, 175);}
+        </style>
+    </head>
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D. Student</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="index.html">Bio</a></li>
+				<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownResearch" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Research</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+					<li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+					<li><a class="dropdown-item" href="research-post_lammps.html">MD with LAMMPS</a></li>
+                    <li><a class="dropdown-item" href="research-post_LLM_IDP.html">IDPs with LLMs</a></li>
+					<li><a class="dropdown-item" href="electrokinetics.html">Electro-Kinetic Transport</a></li>
+					<li><a class="dropdown-item" href="citation_app.html">Bibliography Generator</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Data Science</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDataScience">
+					<li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&A</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Machine Learning</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownML">
+                    <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+					<li><a class="dropdown-item" href="pendulum_PINN.html">Physics Inspired Neural Network:<br>Pendulum Problem (ODE)</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Stock Market</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMarket">
+					<li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+					<li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+					<li><a class="dropdown-item" href="FII_DII.html">FII/DII Activities</a></li>
+					<li><a class="dropdown-item" href="breakout_stocks.html">Breakout Stocks (NSE)</a></li>
+					<li><a class="dropdown-item" href="stock_scanner.html">EMA200 Screener</a></li>
+					<li><a class="dropdown-item" href="harsi_scanner.html">HA RSI Screener</a></li>
+					<li><a class="dropdown-item" href="sqz_mom_scanner.html">Momentum Screener</a></li>
+					<li><a class="dropdown-item" href="suptrend_scanner.html">SuperTrend_RS Screener</a></li>
+					<li><a class="dropdown-item" href="option_pl_calc.html">Option Strategy P&L</a></li>
+					<li><a class="dropdown-item" href="option_chain_PL.html">Option Chain P&L</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+				<li class="nav-item"><a class="nav-link" href="sql.html">SQL</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5 my-5">
+                        <div class="col-lg-12">
+                            <!-- Post content-->
+                            <article>
+                                <!-- Post header-->
+                                <header class="mb-4">
+                                    <!-- Post title-->
+                                    <h1 class="fw-bolder mb-1">Pendulum's trajectory prediction using Physics Informed Neural Network (PINN)</h1>
+                                    <!-- Post meta content-->
+                                    <div class="text-muted fst-italic mb-2">Mar 23, 2023</div>
+                                    <!-- Post categories-->
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Simple Pendulum</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Ordinary Differential Equation</a>
+                                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Neural Network Prediction</a>
+                                </header>
+                                <!-- Preview image figure-->
+                                <!-- <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
+
+
+                                <!-- Post content-->
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Simple Pendulum Problem:</h1>
+                                    <hr size="10">
+                                    <p">A simple pendulum consists of a mass (called the pendulum bob) attached to a string or rod of fixed length. When the pendulum is displaced from its equilibrium position and released, it undergoes periodic motion.</p>
+                                    <div style="justify-content: center; display: flex; align-items: center;">
+                                        <object data="gif/simple_pendulum.gif" type="image/svg+xml" width="800" height="500"></object>
+                                    </div>
+                                    <h3>Equations of Motion (ODE)</h3>
+                                    <p>The motion of a simple pendulum can be described by the following second-order ordinary differential equation (ODE):</p>
+                                    <p class="fs-5 mb-4">\[\frac{{d^2\theta}}{{dt^2}} + \frac{g}{L} \sin(\theta) = 0\]</p>
+                                    <p>Where:</p>
+                                    <ul>
+                                        <li><strong>\(\theta\)</strong> is the angular displacement of the pendulum from the vertical (radians)</li>
+                                        <li><strong>\(t\)</strong> is time (seconds)</li>
+                                        <li><strong>\(g\)</strong> is the acceleration due to gravity (m/s²)</li>
+                                        <li><strong>\(L\)</strong> is the length of the pendulum (meters)</li>
+                                    </ul>
+                                
+                                </section>
+
+                                <section class="mb-5">
+                                    <h3>Exact Solution</h3>
+                                    <p>The exact solution to the pendulum's equation of motion can be derived using the Jacobi elliptic function:</p>
+                                    <p>For a more detailed analysis of the non-linear pendulum and its complete solution, you can refer to the following medium article:</p>
+                                    <p><a href="https://medium.com/physicsfromscratch/a-complete-solution-to-the-non-linear-pendulum-9afda0b64926" target="_blank" rel="noopener noreferrer">A Complete Solution to the Non-Linear Pendulum</a></p>
+                                </section>
+                                
+                                <section class="mb-5">
+                                    <h3>Small Angle Approximation Solution</h3>
+                                    <p>For small angular displacements (\( \theta \ll 10^{0} \)), the pendulum's motion can be approximated using the small angle approximation:</p>
+                                    <p class="fs-5 mb-4">\[\sin(\theta) \approx \theta\]</p>
+                                    <p>Substituting this approximation into the pendulum's equation of motion yields the following second-order ordinary differential equation (ODE):</p>
+                                    <p class="fs-5 mb-4">\[\frac{{d^2\theta}}{{dt^2}} + \frac{g}{L} \theta = 0\]</p>
+                                    <p>Which has the following exact solution:</p>
+                                    <p class="fs-5 mb-4">\[ \theta(t) \approx \theta_0 \cdot \cos\left(\sqrt{\frac{g}{L}} \cdot t\right) \]</p>
+                                    <p>Where <strong>\( \theta_0 \)</strong> is the initial angular displacement.</p>
+                                    <p> Until and unless we solve the ODE numerically, it is very complicated to obtain the exact solution.
+                                        This brings us to the use of Physics Informed Neural Networks to solve the ODE numerically which solves the following challenges:
+                                    </p>
+                                    <ul>
+                                        <li>It is very difficult to obtain the analytical solution of every problem and need to numerically solves the equation.</li>
+                                        <li>Solving complicated ODEs is computationally expensive. Specially when modeling a real experimental system where many external factors and dissipative terms are involved.</li>
+                                        <li>For any change in the initial condition, we need to re-do the ODE solution.</li>
+                                    </ul>
+                                    <p> The PINN overcomes these problems. A few good training data from experiment would be sufficient to train the neural network
+                                        and then we can predict the solution for any initial condition. Also, the PINN is very fast in predicting the solution.
+                                        Now, let's see how we can use PINN to solve the ODE of the simple pendulum.
+                                    </p>
+                                </section>
+                                
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">Physics-Informed Neural Networks:</h1>
+                                    <hr size="10">
+                                    <p>Physics-Informed Neural Networks (PINNs) are a class of machine learning techniques that combine neural networks with the physical laws governing a system. They incorporate domain-specific knowledge into learning, making them useful for solving partial differential equations (PDEs) and physics-based problems. PINNs use neural networks to approximate the underlying physics while fitting available data.</p>
+
+                                    <h3 style="color: royalblue;">Some Applications of PINNs</h3>
+                                    <p><strong>1. Fluid Dynamics:</strong> PINNs are applied in fluid dynamics simulations to predict fluid flow patterns, turbulence, and other complex phenomena described by the Navier-Stokes equations.</p>
+                                    <p><strong>2. Heat Transfer:</strong> PINNs model heat conduction, radiation, and convection in materials, aiding in designing efficient cooling systems and predicting temperature distributions.</p>
+                                    <p><strong>3. Structural Mechanics:</strong> PINNs simulate stress, strain, deformation, and failure of structures under mechanical loads, contributing to safe and robust design.</p>
+                                    <p><strong>4. Quantum Mechanics:</strong> In quantum chemistry, PINNs solve Schrödinger's equation to predict molecular properties, electronic structures, and chemical reactions.</p>
+                                    <p><strong>5. Medical Imaging:</strong> PINNs can be used for medical image reconstruction, resolution enhancement, and denoising by incorporating physics-based constraints.</p>
+
+                                    <br>
+                                    <h3 style="color: royalblue;"> How to proceed?</h3>
+                                    <ol>
+                                        <li><strong>Problem Formulation:</strong> Define the physical problem and governing equations (ODEs/PDEs) with boundary and initial conditions.</li>
+                                        <li><strong>Data Collection:</strong> Gather data points from experiments or simulations for neural network training.</li>
+                                        <li><strong>Network Architecture:</strong> Design a neural network to approximate the solution.</li>
+                                        <li><strong>Loss Function:</strong> Create a loss function that combines data fitting and physics constraints.</li>
+                                        <li><strong>Training:</strong> Train the network using backpropagation and optimization techniques.</li>
+                                        <li><strong>Physics-Informed Training:</strong> Include terms enforcing physics equations during training.</li>
+                                        <li><strong>Validation and Testing:</strong> Evaluate the trained PINN on validation data.</li>
+                                        <li><strong>Deployment:</strong> Utilize the trained PINN for predictions, simulations, and optimizations.</li>
+                                    </ol>
+
+                                    <p>Physics-Informed Neural Networks bridge the gap between data-driven machine learning and domain-specific physical insights, offering versatile tools for various scientific and engineering applications.</p>
+                                </section>
+
+                                <section class="mb-5">
+                                    <h1 class="fw-light mb-1" style="color: brown;">How does the general solution look?</h1>
+                                    <hr size="10">
+                                    <p>Let's plot the exact solution and the small angle approximation for a pendulum with the following parameters:</p>
+                                    <ul>
+                                        <li><strong>\(g = 9.81 \, m/s^2\)</strong></li>
+                                        <li><strong>\(L = 0.025 \, m\)</strong></li>
+                                        <li><strong>\(\theta_0 = \frac{\pi}{4} \, rad\)</strong></li>
+                                    </ul>
+                                    <div style="justify-content: center; display: flex; align-items: center;">
+                                        <object data="images/pendulum_solution.svg" type="image/svg+xml" width="700" height="400"></object>
+                                    </div>
+                                    <p>We can see, the small angle approximation is only valid for small angular displacements. For larger displacements, the exact solution and the small angle approximation diverge.</p>
+                                    
+
+                                    <p class="fs-5 mb-4">
+                                        Code Snippet to plot the solutions:<br>
+<pre>
+<code>
+    import numpy as np
+    from PIL import Image
+    import torch
+    import torch.nn as nn
+    from scipy.integrate import odeint
+    import matplotlib.pyplot as plt
+    
+    # Parameters
+    L = 0.025  # Length of pendulum
+    g = 9.81  # Acceleration due to gravity
+    w = np.sqrt(g/L)
+    k = w**2
+    
+    end_time = 1
+    
+    # ===================================================================================================== #
+    # ODE function for a simple pendulum exact solution
+    def simple_pendulum_eqn(state, t, L, g):
+        theta, theta_dot = state
+        theta_ddot = -k*np.sin(theta)
+        return [theta_dot, theta_ddot]
+    
+    # Initial state [theta, theta_dot]
+    initial_state = [np.pi/4, 0]
+    
+    # Small Angle Approximation Analytical Solution
+    def pendulum_solution(w, x):
+        return initial_state[0]*np.cos(w*x)
+    
+    # ===================================================================================================== #
+    # Create a one-dimensional time array
+    t = np.linspace(0, end_time, 500)
+    x = torch.tensor(t, dtype=torch.float32).view(-1, 1)
+    
+    # Numerical solution of the simple pendulum ODEs
+    states = odeint(simple_pendulum_eqn, initial_state, t, args=(L, g))
+    y = torch.tensor(states[:, 0], dtype=torch.float32).view(-1, 1)
+    print(x.shape, y.shape)
+    
+    x_data = x[0:200:20]
+    y_data = y[0:200:20]
+    print(x_data.shape, y_data.shape)
+    
+    # View the analytical solution
+    View_Analytical_Solution = True
+    if View_Analytical_Solution:
+        fig = plt.figure(figsize=(10, 5))
+        plt.plot(x, y, label='Exact solution', color='red')
+        plt.plot(x, pendulum_solution(w, x), label='Small angle approximation', color='blue')
+        plt.xlabel('t', fontsize=25)
+        plt.ylabel(r'$\theta(t)$', fontsize=25)
+        plt.tick_params(labelsize=16)
+        plt.legend(frameon=False, fontsize=16)
+    
+        # annotate the initial condition in text
+        plt.text(0.05, 0.9, r'$\theta(0) = \frac{\pi}{4}$', fontsize=20, transform=plt.gca().transAxes)
+    
+        plt.tight_layout()
+        plt.savefig('solution.svg', bbox_inches='tight', pad_inches=0.1)
+        plt.show()
+</code>
+</pre>
+</p> 
+                                    <section class="mb-5">
+                                        <h1 class="fw-light mb-1" style="color: brown;">How does a regular neural network perform?</h1>
+                                        <hr size="10">
+                                        <p>In artificial neural network, the loss function minimizes the difference between the predicted and the actual values. 
+                                            For a simple pendulum, we could use a loss function that minimizes the difference between the predicted and the actual positions of the pendulum at different time steps.
+                                            The loss function would encourage the neural network to learn parameters that lead to accurate predictions.
+                                        </p>
+                                        <p> However, without the knowledge of the underlying physics principal, ANN, tries to fit the data with a polynomial function. 
+                                            Below, we show the results of a regular neural network with 3 hidden layers and 32 neurons in each layer.
+                                            The training data are orange dots sampled in equal intervals from the exact solution.
+                                        </p>
+                                    </section>
+                                    
+                                    <div style="justify-content: center; display: flex; align-items: center;">
+                                        <object data="images/pendulum_ANN.svg" type="image/svg+xml" width="295" height="380"></object>
+                                        <object data="gif/pendulum_nn.gif" type="image/svg+xml" width="9500" height="380"></object>
+                                    </div>
+                                    <section class="mb-5">
+                                        <h1 class="fw-light mb-1" style="color: brown;">Physics-Informed Neural Networks:</h1>
+                                        <hr size="10">
+                                        <p>
+                                            For a physics-inspired neural network modeling a simple pendulum, we could use a loss function that minimizes the difference between the predicted behavior of the pendulum and the actual physics equations governing its motion. 
+                                            This might involve minimizing the mean squared error between predicted and actual positions, velocities, or energies of the pendulum at different time steps.
+                                            The loss function would encourage the neural network to learn parameters that lead to physically accurate predictions.
+                                        </p>
+                                        
+                                        <p>
+                                            The loss function for a PINN is a combination of a data-fitting term and a physics term. 
+                                            The data-fitting term is the mean squared error between the predicted and actual values of the system. 
+                                            The physics term is the mean squared error between the predicted and actual values of the governing physics equations.
+                                        </p>
+
+                                        <div class="content">
+                                            <h2>Loss Function Description</h2>
+                                            <p>In Physics-Informed Neural Networks (PINNs), the loss function is a crucial component that guides the network's training process. For a simple pendulum problem, the loss function typically consists of two main components:</p>
+                                            <ol>
+                                                <li><strong>Data Fitting Term:</strong> This term measures the discrepancy between the predicted values by the neural network and the actual observed data. It is typically calculated using a measure such as mean squared error (MSE).</li>
+                                                <p class="fs-5 mb-4"> \[ \text{Data Loss function:} \hspace{0.2cm} \frac{1}{N} \sum_{i=1}^{N} \left( \theta_{NN} (t_i) - \theta_{true} (t_i) \right)^2; \hspace{0.3cm} i \in \text{[training data]} \]</p>
+                                                <li><strong>Physics-Informed Term:</strong> This term encodes the underlying physics of the pendulum system. It incorporates the equations of motion for the pendulum and ensures that the neural network adheres to the fundamental laws governing the pendulum's behavior.
+                                                    The physics-informed term is calculated by taking the second derivative of the predicted position of the pendulum with respect to time and comparing it to the second derivative of the actual position of the pendulum with respect to time.
+                                                    The physics-informed term is calculated at a set of points in the prediction range.
+                                                </li>
+                                                <p class="fs-5 mb-4"> \[ \text{Physics Loss function:} \hspace{0.2cm} \frac{1}{M} \sum_{j}^{M} \left( \left[\frac{d^2}{dt^2} + \frac{g}{L} \sin \right] \theta_{NN}(t_j) \right)^2; \hspace{0.3cm} j \in \text{[prediction range]}\]</p>
+                                            </ol>
+                                            <p> The Physics loss term ensures that the prediction is consistent with the underlying physical process.</p>
+                                        </div>
+                                        
+                                        <p>
+                                            The PINN is trained by minimizing the loss function using gradient descent. 
+                                            The gradient of the loss function with respect to the parameters of the neural network is computed using automatic differentiation.
+                                        </p>
+                                        <p class="fs-5">\[ \text{Minimize Loss function} = \text{Initial Loss function} - \text{Learning Rate} \times \nabla \text{Loss function} \]</p>
+                                        <p>where, Loss function = Data Loss function + Physics Loss function</p>
+                                       
+
+                                    </section>
+                                    <div style="justify-content: center; display: flex; align-items: center;">
+                                        <object data="images/pendulum_PINN.svg" type="image/svg+xml" width="1000" height="400"></object>
+                                    </div>
+                                    <br>
+                                    <p style="align-items: center; justify-content: center; display: flex;">Fig: Visualization of the PINN architecture and the two types of loss functions.</p>
+
+                                    <section class="mb-5">
+                                        <h1 class="fw-light mb-1" style="color: brown;">PINN output:</h1>
+                                        <hr size="10">
+                                        <p>
+                                            The results of the PINN are shown below. 
+                                            The training data are orange dots sampled in equal intervals from the exact solution. This can represent the data collected from an experiment. 
+                                            The PINN is able to accurately predict the position of the pendulum at a longer time interval with very high accuracy compared to the regular neural network.
+                                        </p>
+                                    </section>
+                                    <div style="justify-content: center; display: flex; align-items: center;">
+                                        <object data="gif/pendulum_pinn.gif" type="image/svg+xml" width="1000" height="400"></object>
+                                    </div>
+                                    <p class="fs-5 mb-4">
+                                        The final code Snippet to implement the NN and the PINN and the Visualization:<br>
+<pre>
+<code>
+    # ===================================================================================================== #
+    class FCN(nn.Module):
+        "Defines a connected network"
+        
+        def __init__(self, N_INPUT, N_OUTPUT, N_HIDDEN, N_LAYERS):
+            super().__init__()
+            activation = nn.Tanh
+            self.fcs = nn.Sequential(*[
+                            nn.Linear(N_INPUT, N_HIDDEN),
+                            activation()])
+            self.fch = nn.Sequential(*[
+                            nn.Sequential(*[
+                                nn.Linear(N_HIDDEN, N_HIDDEN),
+                                activation()]) for _ in range(N_LAYERS-1)])
+            self.fce = nn.Linear(N_HIDDEN, N_OUTPUT)
+            
+        def forward(self, x):
+            x = self.fcs(x)
+            x = self.fch(x)
+            x = self.fce(x)
+            return x
+        
+    # ===================================================================================================== #
+    def save_gif_PIL(outfile, files, fps=5, loop=0):
+        "Helper function for saving GIFs"
+        imgs = [Image.open(file) for file in files]
+        imgs[0].save(fp=outfile, format='GIF', append_images=imgs[1:], save_all=True, duration=int(1000/fps), loop=loop)
+
+    def plot_result(x,y,x_data,y_data,yh,xp=None):
+        "Pretty plot training results"
+        plt.figure(figsize=(8,4))
+        plt.plot(x,y, color="tab:green", linewidth=2, alpha=0.8, label="Exact solution")
+        plt.plot(x,pendulum_solution(w, x), color="tab:grey", ls='--', linewidth=2, alpha=0.5, label="Small angle approximation")
+        plt.plot(x,yh, color="tab:blue", linewidth=4, alpha=0.8, label="Neural network prediction")
+        plt.scatter(x_data, y_data, s=60, color="tab:orange", alpha=0.4, label='Training data')
+        l = plt.legend(loc=(1.01,0.34), frameon=False, fontsize="large")
+        plt.setp(l.get_texts(), color="k")
+        plt.xlim(-0.05, end_time+0.05)
+        plt.ylim(-1.1, 1.1)
+        plt.text(1.065,0.7,"Training step: %i"%(i+1),fontsize="xx-large",color="k")
+        plt.axis("off")
+
+    # ===================================================================================================== #
+    # train standard neural network to fit training data
+    torch.manual_seed(123)
+    model = FCN(1,1,32,3)
+    optimizer = torch.optim.Adam(model.parameters(),lr=1e-3)
+
+    files = []
+    for i in range(1000):
+        optimizer.zero_grad()
+        yh = model(x_data)
+        loss = torch.mean((yh-y_data)**2)# use mean squared error
+        loss.backward()
+        optimizer.step()
+        
+        # plot the result as training progresses
+        if (i+1) % 10 == 0: 
+            
+            yh = model(x).detach()
+            
+            plot_result(x, y, x_data, y_data, yh)
+            
+            file = "plots/nn_%.8i.png"%(i+1)
+            plt.savefig(file, bbox_inches='tight', pad_inches=0.1, dpi=100, facecolor="white")
+            files.append(file)
+        
+            if (i+1) % 500 == 0: plt.show()
+            else: plt.close("all")
+                
+    save_gif_PIL("nn.gif", files, fps=20, loop=0)
+
+
+    # ===================================================================================================== #
+    x_physics = torch.linspace(0,end_time,30).view(-1,1).requires_grad_(True)# sample locations over the problem domain
+
+    model = FCN(1,1,32,3)
+    optimizer = torch.optim.Adam(model.parameters(),lr=1e-4)
+    files = []
+    for i in range(20000):
+        optimizer.zero_grad()
+        
+        # compute the "data loss"
+        yh = model(x_data)
+        loss1 = torch.mean((yh-y_data)**2)# use mean squared error
+        
+        # compute the "physics loss"
+        yhp = model(x_physics)
+        dx  = torch.autograd.grad(yhp, x_physics, torch.ones_like(yhp), create_graph=True)[0]# computes dy/dx
+        dx2 = torch.autograd.grad(dx,  x_physics, torch.ones_like(dx),  create_graph=True)[0]# computes d^2y/dx^2
+        physics = dx2 + k*torch.sin(yhp)
+        loss2 = (1e-4)*torch.mean(physics**2)
+        
+        # backpropagate joint loss
+        loss = loss1 + loss2# add two loss terms together
+        loss.backward()
+        optimizer.step()
+        
+        # plot the result as training progresses
+        if (i+1) % 150 == 0: 
+            
+            yh = model(x).detach()
+            xp = x_physics.detach()
+            
+            plot_result(x,y,x_data,y_data,yh,xp)
+            
+            file = "plots/pinn_%.8i.png"%(i+1)
+            plt.savefig(file, bbox_inches='tight', pad_inches=0.1, dpi=100, facecolor="white")
+            files.append(file)
+
+            if (i+1) % 6000 == 0: plt.show()
+            else: plt.close("all")
+                
+    save_gif_PIL("pinn.gif", files, fps=20, loop=0)
+</code>
+</pre>
+
+<hr size="10">
+<p> References for further exploration: </p>
+<ul>
+<li> <a href="https://benmoseley.blog/my-research/so-what-is-a-physics-informed-neural-network/" target="_blank">Ben Moseley's blog</a> </li>
+</ul>  
+                                </section>
+
+                            </article>
+
+                            <!-- Comments section-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2023</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </body>
+</html>
