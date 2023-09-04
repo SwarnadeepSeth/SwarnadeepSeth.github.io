@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Sector Stocks NSE</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+
+		<style>
+			/* Reset some default styles for better consistency */
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: Tahoma, sans-serif;
+			}
+
+			/* Style the outer box of the table */
+			.table-container {
+				margin: 20px auto;
+				width: 80%;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				padding: 10px;
+				background-color: #fff;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Style the table header */
+			.table-container table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.table-container th {
+				background-color: #FFE4B5; /* Light Orange background */
+				text-align: center;
+				font-size: 16px;
+				padding: 10px;
+			}
+
+			/* Style the table rows */
+			.table-container td, .table-container th {
+				border: 1px solid #ccc;
+				padding: 10px;
+			}
+
+			/* Center align text in table cells */
+			.table-container td {
+				text-align: center;
+			}
+		</style>
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container px-5">
+		<a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D. Student</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="bio.html">Bio</a></li>
+				<li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownResearch" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Research</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+					<li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+					<li><a class="dropdown-item" href="research-post_lammps.html">MD with LAMMPS</a></li>
+                    <li><a class="dropdown-item" href="research-post_LLM_IDP.html">IDPs with LLMs</a></li>
+					<li><a class="dropdown-item" href="electrokinetics.html">Electro-Kinetic Transport</a></li>
+					<li><a class="dropdown-item" href="citation_app.html">Bibliography Generator</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Data Science</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDataScience">
+					<li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&A</a></li>
+					</ul>
+				</li>
+                <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Machine Learning</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownML">
+                    <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+					<li><a class="dropdown-item" href="pendulum_PINN.html">Physics Inspired Neural Network:<br>Pendulum Problem (ODE)</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
+					id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false">Stock Market</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMarket">
+					<li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+					<li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+					<li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+					<li><a class="dropdown-item" href="sector_list_IND.html">NSE Sector List</a></li>
+					<li><a class="dropdown-item" href="FII_DII.html">FII/DII Activities</a></li>
+					<li><a class="dropdown-item" href="breakout_stocks.html">Breakout Stocks (NSE)</a></li>
+					<li><a class="dropdown-item" href="stock_scanner.html">EMA200 Screener</a></li>
+					<li><a class="dropdown-item" href="harsi_scanner.html">HA RSI Screener</a></li>
+					<li><a class="dropdown-item" href="sqz_mom_scanner.html">Momentum Screener</a></li>
+					<li><a class="dropdown-item" href="suptrend_scanner.html">SuperTrend_RS Screener</a></li>
+					<li><a class="dropdown-item" href="option_pl_calc.html">Option Strategy P&L</a></li>
+					<li><a class="dropdown-item" href="option_chain_PL.html">Option Chain P&L</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+				<li class="nav-item"><a class="nav-link" href="sql.html">SQL</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Page Content-->
+        </main>
+		<h2 style="text-align: center;margin-top: 1.5rem; margin-bottom: 0.5rem;">Sector wise NSE Stock List</h2>
+        <!-- =========================================================================================================================================================== -->
+		<div class="table-container">
+			<table>
+				<tr class="header-row">
+                    <th>Sectors</th>
+                    <th>Company</th>
+                    <th>Product</th>
+                    <th>Market Cap</th>
+                </tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Agricultural</td>
+					<td>TATA Cons. Prod</td>
+					<td>Tea/Coffee</td>
+					<td>78423</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Patanjali Foods</td>
+					<td>Vegetable Oils &amp; Products</td>
+					<td>45148</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Bikaji Foods</td>
+					<td>Food Processing</td>
+					<td>12177</td>
+				</tr>
+				<tr>
+					<td>Alcohol</td>
+					<td>United Spirits</td>
+					<td>Breweries &amp; Distilleries</td>
+					<td>73641</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>United Brewerie</td>
+					<td>Breweries &amp; Distilleries</td>
+					<td>40889</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Radico Khaitan</td>
+					<td>Breweries &amp; Distilleries</td>
+					<td>16814</td>
+				</tr>
+				<tr>
+					<td>Auto</td>
+					<td>Maruti Suzuki</td>
+					<td>Automobile - Passenger Cars</td>
+					<td>312086</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Tata Motors</td>
+					<td>Automobile - LCVS/ HVCS</td>
+					<td>203032</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>M&amp;M</td>
+					<td>Automobile - Auto &amp; Truck Manufacturers</td>
+					<td>197964</td>
+				</tr>
+				<tr>
+					<td>Aviation</td>
+					<td>Hindustan Aeron</td>
+					<td>Aerospace &amp; Defence</td>
+					<td>131807</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Bharat Elec</td>
+					<td>Aerospace &amp; Defence</td>
+					<td>100765</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Interglobe Avi</td>
+					<td>Airlines</td>
+					<td>94091</td>
+				</tr>
+				<tr>
+					<td>Bank</td>
+					<td>HDFC Bank</td>
+					<td>Bank - Private</td>
+					<td>1192639</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>ICICI Bank</td>
+					<td>Bank - Private</td>
+					<td>678146</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>SBI</td>
+					<td>Bank - Public</td>
+					<td>508301</td>
+				</tr>
+				<tr>
+					<td>Capital Goods</td>
+					<td>Siemens</td>
+					<td>Electric Equipment</td>
+					<td>138426</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Havells India</td>
+					<td>Electric Equipment</td>
+					<td>86340</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>CG Power</td>
+					<td>Electric Equipment</td>
+					<td>64748</td>
+				</tr>
+				<tr>
+					<td>Chemicals</td>
+					<td>Asian Paints</td>
+					<td>Paints</td>
+					<td>312655</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Pidilite Ind</td>
+					<td>Diversified chemicals</td>
+					<td>127025</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Berger Paints</td>
+					<td>Paints</td>
+					<td>69928</td>
+				</tr>
+				<tr>
+					<td>Construction</td>
+					<td>UltraTechCement</td>
+					<td>Cement</td>
+					<td>238524</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Shree Cements</td>
+					<td>Cement</td>
+					<td>87097</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Ambuja Cements</td>
+					<td>Cement</td>
+					<td>86157</td>
+				</tr>
+				<tr>
+					<td>Consumer Durables</td>
+					<td>Honeywell Autom</td>
+					<td>Electronic Goods</td>
+					<td>34833</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Dixon Technolog</td>
+					<td>Electronic Goods</td>
+					<td>30121</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Voltas</td>
+					<td>Air Conditioners</td>
+					<td>28789</td>
+				</tr>
+				<tr>
+					<td>Containers &amp; Packaging</td>
+					<td>AGI Greenpac</td>
+					<td>Containers &amp; Packaging</td>
+					<td>4737</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Uflex</td>
+					<td>Packaging Materials-Containers &amp; Packaging</td>
+					<td>3413</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Jindal PolyFilm</td>
+					<td>Packaging - Films</td>
+					<td>2983</td>
+				</tr>
+				<tr>
+					<td>Jewellery</td>
+					<td>Titan Company</td>
+					<td>Diamond &amp; Jewellery</td>
+					<td>276705</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Kalyan Jeweller</td>
+					<td>Diamond &amp; Jewellery</td>
+					<td>25288</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Rajesh Exports</td>
+					<td>Diamond &amp; Jewellery</td>
+					<td>14764</td>
+				</tr>
+				<tr>
+					<td>Diversified</td>
+					<td>ITC</td>
+					<td>Diversified</td>
+					<td>550000</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Grasim</td>
+					<td>Diversified</td>
+					<td>119278</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>SRF</td>
+					<td>Diversified</td>
+					<td>70669</td>
+				</tr>
+				<tr>
+					<td>Electricals</td>
+					<td>Polycab</td>
+					<td>Cables</td>
+					<td>78113</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>KEI Industries</td>
+					<td>Cables</td>
+					<td>24184</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Finolex Cables</td>
+					<td>Cables</td>
+					<td>16722</td>
+				</tr>
+				<tr>
+					<td>ETF</td>
+					<td>Bharat 22 ETF</td>
+					<td>ETF</td>
+					<td>28857</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>CPSE ETF</td>
+					<td>ETF</td>
+					<td>8494</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>MO M50 ETF</td>
+					<td>ETF</td>
+					<td>594</td>
+				</tr>
+				<tr>
+					<td>Finance</td>
+					<td>Bajaj Finance</td>
+					<td>Finance - NBFC</td>
+					<td>443569</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Bajaj Finserv</td>
+					<td>Finance - Investment</td>
+					<td>241232</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Jio Financial</td>
+					<td>Finance - Others</td>
+					<td>155751</td>
+				</tr>
+				<tr>
+					<td>FMCG</td>
+					<td>HUL</td>
+					<td>Household &amp; Personal Products</td>
+					<td>588526</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Nestle</td>
+					<td>Consumer Food</td>
+					<td>211300</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Varun Beverages</td>
+					<td>Beverages</td>
+					<td>118280</td>
+				</tr>
+				<tr>
+					<td>Footware</td>
+					<td>Metro Brands</td>
+					<td>Footwear</td>
+					<td>28620</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Relaxo Footwear</td>
+					<td>Footwear</td>
+					<td>23009</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Campus Active</td>
+					<td>Footwear</td>
+					<td>9267</td>
+				</tr>
+				<tr>
+					<td>Healthcare</td>
+					<td>Sun Pharma</td>
+					<td>Pharmaceuticals &amp; Drugs</td>
+					<td>266086</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Cipla</td>
+					<td>Pharmaceuticals &amp; Drugs</td>
+					<td>100542</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Divis Labs</td>
+					<td>Pharmaceuticals &amp; Drugs</td>
+					<td>95285</td>
+				</tr>
+				<tr>
+					<td>Hospitality</td>
+					<td>Indian Hotels</td>
+					<td>&quot;Hotel, Resort &amp; Restaurants&quot;</td>
+					<td>60260</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>EIH</td>
+					<td>&quot;Hotel, Resort &amp; Restaurants&quot;</td>
+					<td>17026</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Westlife Food</td>
+					<td>&quot;Hotel, Resort &amp; Restaurants&quot;</td>
+					<td>15060</td>
+				</tr>
+				<tr>
+					<td>Gas</td>
+					<td>GAIL</td>
+					<td>Gas Distribution</td>
+					<td>79789</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>IGL</td>
+					<td>Gas Distribution</td>
+					<td>32694</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Gujarat Gas</td>
+					<td>Gas Distribution</td>
+					<td>31528</td>
+				</tr>
+				<tr>
+					<td>Infrastructure</td>
+					<td>Larsen</td>
+					<td>Engineering &amp; Construction</td>
+					<td>379800</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Adani Ports</td>
+					<td>Transport Infrastructure</td>
+					<td>172703</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>GMR Airports</td>
+					<td>Transport Infrastructure</td>
+					<td>37996</td>
+				</tr>
+				<tr>
+					<td>Insurance</td>
+					<td>LIC India</td>
+					<td>Life &amp; Health Insurance</td>
+					<td>408437</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>HDFC Life</td>
+					<td>Life &amp; Health Insurance</td>
+					<td>137888</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>SBI Life Insura</td>
+					<td>Life &amp; Health Insurance</td>
+					<td>132192</td>
+				</tr>
+				<tr>
+					<td>Logistics</td>
+					<td>Container Corp</td>
+					<td>Ground Freight &amp; Logistics Services</td>
+					<td>41859</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Delhivery</td>
+					<td>Courier Services</td>
+					<td>32122</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Blue Dart</td>
+					<td>Courier Services</td>
+					<td>14906</td>
+				</tr>
+				<tr>
+					<td>Manufacturing</td>
+					<td>Grindwell Norto</td>
+					<td>Abrasives</td>
+					<td>24924</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>TITAGARH</td>
+					<td>Railways Wagons</td>
+					<td>10362</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Texmaco Rail</td>
+					<td>Railways Wagons</td>
+					<td>4772</td>
+				</tr>
+				<tr>
+					<td>Media</td>
+					<td>Zee Entertain</td>
+					<td>TV Broadcasting &amp; Software Production</td>
+					<td>25218</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Sun TV Network</td>
+					<td>TV Broadcasting &amp; Software Production</td>
+					<td>24465</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>PVR INOX</td>
+					<td>&quot;Film Production, Distribution &amp; Entertainment&quot;</td>
+					<td>17429</td>
+				</tr>
+				<tr>
+					<td>Metal &amp; Mining</td>
+					<td>JSW Steel</td>
+					<td>Iron &amp; Steel</td>
+					<td>197201</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Tata Steel</td>
+					<td>Iron &amp; Steel</td>
+					<td>155275</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Coal India</td>
+					<td>Coal</td>
+					<td>145995</td>
+				</tr>
+				<tr>
+					<td>Misc</td>
+					<td>Adani Green Ene</td>
+					<td>Renewables</td>
+					<td>150341</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Info Edge</td>
+					<td>Misc. Commercial Services</td>
+					<td>56484</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>CRISIL</td>
+					<td>Ratings</td>
+					<td>28724</td>
+				</tr>
+				<tr>
+					<td>Oil &amp; Gas</td>
+					<td>Reliance</td>
+					<td>Oil Exploration and Production</td>
+					<td>1632366</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>ONGC</td>
+					<td>Oil Exploration and Production</td>
+					<td>228647</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>IOC</td>
+					<td>Refineries</td>
+					<td>125750</td>
+				</tr>
+				<tr>
+					<td>Paper</td>
+					<td>JK Paper</td>
+					<td>Paper &amp; Forest Products</td>
+					<td>6229</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>West Coast Pap</td>
+					<td>Paper &amp; Forest Products</td>
+					<td>4116</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Seshasayee Pape</td>
+					<td>Paper &amp; Forest Products</td>
+					<td>2024</td>
+				</tr>
+				<tr>
+					<td>Plastic Products</td>
+					<td>Supreme Ind</td>
+					<td>Plastics - Moulded Articles and Furnitures</td>
+					<td>55838</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Astral Ltd</td>
+					<td>Plastics - Tubes/Pipes/Hoses &amp; Fittings</td>
+					<td>51336</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Finolex Ind</td>
+					<td>Plastics - Tubes/Pipes/Hoses &amp; Fittings</td>
+					<td>15391</td>
+				</tr>
+				<tr>
+					<td>Power</td>
+					<td>NTPC</td>
+					<td>Power Generation/Distribution</td>
+					<td>223702</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Power Grid Corp</td>
+					<td>Power Generation/Distribution</td>
+					<td>175921</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Adani Energy</td>
+					<td>Power Generation/Distribution</td>
+					<td>92017</td>
+				</tr>
+				<tr>
+					<td>Real Estate</td>
+					<td>DLF</td>
+					<td>Construction - Residential &amp; Commercial Complexes</td>
+					<td>124570</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Macrotech Dev</td>
+					<td>Construction - Residential &amp; Commercial Complexes</td>
+					<td>65647</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Godrej Prop</td>
+					<td>Construction - Residential &amp; Commercial Complexes</td>
+					<td>45698</td>
+				</tr>
+				<tr>
+					<td>Retail</td>
+					<td>Avenue Supermar</td>
+					<td>Retailing</td>
+					<td>244744</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Trent</td>
+					<td>Retailing</td>
+					<td>73341</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Vedant Fashions</td>
+					<td>Retailing</td>
+					<td>30552</td>
+				</tr>
+				<tr>
+					<td>IT</td>
+					<td>TCS</td>
+					<td>IT Services &amp; Consulting</td>
+					<td>1236467</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Infosys</td>
+					<td>IT Services &amp; Consulting</td>
+					<td>599249</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>HCL Tech</td>
+					<td>IT Services &amp; Consulting</td>
+					<td>321786</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Wipro</td>
+					<td>IT Services &amp; Consulting</td>
+					<td>217385</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>LTIMindtree</td>
+					<td>IT Services &amp; Consulting</td>
+					<td>156929</td>
+				</tr>
+				<tr>
+					<td>Telecom</td>
+					<td>Bharti Airtel</td>
+					<td>Telecommunication - Service Provider</td>
+					<td>492788</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Tata Comm</td>
+					<td>Telecommunications Services</td>
+					<td>52793</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>INDUS TOWERS</td>
+					<td>Telecommunication - Equipment</td>
+					<td>48967</td>
+				</tr>
+				<tr>
+					<td>Textile</td>
+					<td>Page Industries</td>
+					<td>Textiles &amp; Apparel</td>
+					<td>44417</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>KPR Mill</td>
+					<td>Textiles &amp; Apparel</td>
+					<td>26033</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Trident</td>
+					<td>Textiles &amp; Apparel</td>
+					<td>20180</td>
+				</tr>
+				<tr>
+					<td>Trading</td>
+					<td>Sundram</td>
+					<td>Trading</td>
+					<td>26775</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Redington</td>
+					<td>Trading</td>
+					<td>12210</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>MMTC Ltd</td>
+					<td>Trading</td>
+					<td>6563</td>
+				</tr>
+			</table>
+		</div>
+        <!-- =========================================================================================================================================================== -->
+
+        <!-- Footer-->
+        <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2022</div></div>
+                    <div class="col-auto">
+                        <a class="link-light small" href="#!">Privacy</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="#!">Terms</a>
+                        <span class="text-white mx-1">&middot;</span>
+                        <a class="link-light small" href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
