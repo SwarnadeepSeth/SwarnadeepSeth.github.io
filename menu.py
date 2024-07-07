@@ -1,8 +1,11 @@
 ### Python code to place menubar in the respective html files by reading the menu.html file ###
 
 filename_list=["index.html", "bio.html", "contact.html", "market-overview.html", "market-valuation_Example.html", 
-"market-valuation_IND.html", "market-valuation_US.html", "sector_list_IND.html", "market_trend.html", "stock_range.html", "FII_DII.html", "breakout_stocks.html", "stock_scanner.html", "harsi_scanner.html", "sqz_mom_scanner.html", "suptrend_scanner.html", "option_pl_calc.html", "option_chain_PL.html", "portfolio_optimization.html", "datascience_QA.html", "publications.html", "research-home.html", 
-"research-post_lammps.html", "research-post_LLM_IDP.html", "electrokinetics.html", "ewald.html", "citation_app.html", "ml_overview.html", "diabetes_ML.html", "pendulum_PINN.html", "one_liners.html", "sql.html"]
+"market-valuation_IND.html", "market-valuation_US.html", "sector_list_IND.html", "market_trend.html", "stock_range.html", 
+"FII_DII.html", "breakout_stocks.html", "stock_scanner.html", "harsi_scanner.html", "sqz_mom_scanner.html", "suptrend_scanner.html", 
+"bollinger_band.html", "option_pl_calc.html", "option_chain_PL.html", "portfolio_optimization.html", "datascience_QA.html", "publications.html", 
+"research-home.html", "research-post_lammps.html", "research-post_LLM_IDP.html", "electrokinetics.html", "ewald.html", 
+"citation_app.html", "ml_overview.html", "diabetes_ML.html", "pendulum_PINN.html", "one_liners.html", "sql.html"]
 
 for filename in filename_list:
 
