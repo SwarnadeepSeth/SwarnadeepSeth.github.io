@@ -9,9 +9,8 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
-
-      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet">
     <style>
@@ -142,9 +141,9 @@
                   </div>
               </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"> <img
-
-                class="img-fluid rounded-3 my-5" src="images/myface.jpg"> </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"> 
+              <img class="img-fluid rounded-3 my-5" src="images/myface.jpg"> 
+            </div>
           </div>
         </div>
       </header>
@@ -201,18 +200,69 @@
           </div>
         </div>
       </section>
-      <!-- Reserach preview section-->
-      <section class="py-5" id="research">
-        <div class="container px-5 my-5">
-          <div class="row gx-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6">
-              <div class="text-center">
-                <h2 class="fw-bolder">From my research</h2>
-                <p class="lead fw-normal text-muted mb-5">Bio-polymer Capture
-                  and Translocation through Single and Double Nanopores.</p>
+      <!-- Research highlights section-->
+      <div class="text-center">
+        <h2 class="fw-bolder">Current Research Highlights</h2>
+      </div>  
+      <div style="padding: 6px;"></div>
+      <hr style="border-top: 3px solid black;">
+      <!-- Project1-->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-md-3 text-center">
+                <img class="img-fluid rounded-1 my-2" src="images/tGFPn.png" style="max-width: 100%;">
+            </div>
+            <div class="col-md-8">
+                <div class="my-5 text-center text-md-start">
+                    <h5 class="card-title" style="color: #c70a0a; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold;">Computational Oligomer Design for Enhancing Fluorescent Properties of Truncated GFP Protein</h5>
+                    <p class="card-text" style="color: black;">
+                        High-throughput computational design of functional oligomers aiming to enhances the fluorescence of truncated Green 
+                        Fluorescent Protein (tGFP), a critical marker for various cell types. This project envisions to revolutionize
+                        bioimaging and cellular biology research by providing more stable and brighter fluorescent markers.
+                    </p>
+                    <ul style="color: black;">
+                        <li>Employing AutoDock Vina & rDock for initial docked oligomer structures.</li>
+                        <li>Utilizing high-throughput implicit water molecular dynamics (MD) simulations.</li>
+                        <li>Integrating Particle Swarm Optimization (PSO) to sample vast design space and Genetic Algorithm (GA) to evolutionarily guide the best binding structure.</li>
+                        <li>Validating the results with explicit water MD simulation and experimental results.</li>
+                    </ul>
+                    <p class="card-text"><small class="text-muted">Collaboration with Dr. Adrian Figg's group @ Virginia Tech and GlycoMIP user projects.</small></p>
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr style="border-top: 3px solid black;">
+      <!-- Project2-->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-md-3 text-center">
+                <img class="img-fluid rounded-1 my-2" src="images/CsgA.png" style="max-width: 100%;">
+            </div>
+            <div class="col-md-8">
+                <div class="my-5 text-center text-md-start">
+                  <h5 class="card-title" style="color: #0b519c; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold;">Comparing and Enhancing the Mechanical Stability of Bacterial Fibrils</h5>
+                  <p class="card-text" style="color: black;">
+                      We study the structural and mechanical stability of bacterial fibril proteins to understand and enhance their properties. This research is crucial for developing durable bio-based materials.
+                  </p>
+                  <ul style="color: black;">
+                      <li>Conducting steered molecular dynamics simulations (SMD) on bacterial fibril proteins.</li>
+                      <li>Analyzing stress-strain curves to compare mechanical stability across species.</li>
+                      <li>Designing a coarse-grained model to study larger proteins and proposing glycosylation techniques to enhance stability.</li>
+                  </ul>
+                  <p class="card-text"><small class="text-muted">Collaboration with Dr. Anna Duraj's group @ Virginia Tech and GlycoMIP user projects.</small></p>
               </div>
             </div>
-          </div>
+        </div>
+      </div>
+      <hr style="border-top: 3px solid black;">
+      <div style="padding: 8px;"></div>
+      <!-- Research preview section-->
+      <div class="text-center">
+        <h2 class="fw-bolder">From my research</h2>
+        <p class="lead fw-normal text-muted mb-5">Bio-polymer Capture and Translocation through Single and Double Nanopores.</p>
+      </div>
+      <section class="py-5" id="research" style="margin-top: -100px;">
+        <div class="container px-5 my-5">
           <div class="row gx-5">
             <div class="col-lg-4 mb-5">
               <div class="card h-100 shadow border-0"> 
