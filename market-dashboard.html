@@ -5,44 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Valuations</title>
+        <title>Market Structure</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <style>
-            .iframe-container_FII{
-                position: relative;
-                width: 100%;
-                padding-bottom: 36.25%; /* Adjust this value to set the aspect ratio (16:9, 4:3, etc.) */
-                height: 0;
-            }
-
-            .iframe-container_FII iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-            
-            .iframe-container {
-                position: relative;
-                width: 100%;
-                padding-bottom: 56.25%; /* Adjust this value to set the aspect ratio (16:9, 4:3, etc.) */
-                height: 0;
-            }
-    
-            .iframe-container iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-        </style>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
@@ -113,33 +82,23 @@
 	</div>
 </nav>
 <!-- Page Content-->
-            <section class="py-5">
-                <div class="container px-5 my-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="text-center mb-5">
-                                <h1>List of Breakout Stocks in Volume NSE Today</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iframe-container_FII">
-                        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTqBb7HQoYkWIB_rt_aNa16OgWMjyx4khWpB1NtVUTuMvyXJ1mEx3iHB9b4o5466WTSWAizovcOl18J/pubhtml?gid=1618710761&amp;single=true&amp;widget=true&amp;chrome=false"></iframe>
-                    </div>
-                    <br><br>
-                    <div class="text-center mb-5">
-                        <h1>The list of Breakout Stocks in Momentum Today</h1>
-                    </div>
-                    <div class="iframe-container">
-                        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQrKyKM14B3vcfurmcq-g6Tpd3MnIkS_aQv8jE-jXSUs7P4Qih8Mvt_sR5ea2EohWqaR-lTLUYkI8Qg/pubhtml?gid=2099629605&amp;single=true&amp;widget=true&amp;chrome=false"></iframe>
-                    </div>
-                </div>
-            </section>
-        </main>
+        </main> 
+
+		<iframe
+      		src="https://stock-mkt-dashboard.streamlit.app/?someparam=value&embedded=true"
+      		frameborder="0"
+      		marginheight="0"
+      		marginwidth="0"
+     		width="100%"
+      		height="100%"
+      		scrolling="auto">
+    	</iframe>
+
         <!-- Footer-->
         <footer class="bg-dark py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2023</div></div>
+                    <div class="col-auto"><div class="small m-0 text-white">Forked from: https://github.com/hieuimba/stock-mkt-dashboard/tree/main</div></div>
                     <div class="col-auto">
                         <a class="link-light small" href="#!">Privacy</a>
                         <span class="text-white mx-1">&middot;</span>
