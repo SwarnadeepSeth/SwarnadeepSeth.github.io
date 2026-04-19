@@ -29,6 +29,240 @@
         height: 100%;
         object-fit: contain;
       }
+      @media (max-width: 1199px) {
+          .header-image-col {
+              display: none !important;
+          }
+          .header-icons-mobile {
+              display: flex !important;
+          }
+          .header-icons-desktop {
+              display: none !important;
+          }
+          .header-grid {
+              grid-template-columns: 1fr !important;  /* single column on mobile */
+          }
+      }
+      @media (min-width: 1200px) {
+          .header-icons-mobile {
+              display: none !important;
+          }
+      }
+      /* ===== MODAL OVERLAY ===== */
+      .research-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(5, 10, 20, 0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        overflow-y: auto;
+        animation: fadeInOverlay 0.35s ease;
+      }
+      .research-modal-overlay.active {
+        display: block;
+      }
+      @keyframes fadeInOverlay {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      
+      /* ===== MODAL CONTAINER ===== */
+      .research-modal {
+        min-height: 100vh;
+        padding: 3rem 1.5rem 5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      /* ===== CLOSE BUTTON ===== */
+      .research-modal-close {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.5rem;
+        z-index: 10001;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: #fff;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        font-size: 1.3rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, transform 0.2s;
+        line-height: 1;
+      }
+      .research-modal-close:hover {
+        background: rgba(77, 171, 247, 0.25);
+        transform: rotate(90deg);
+      }
+      
+      /* ===== HEADER ===== */
+      .research-modal-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        animation: slideDown 0.45s ease both;
+      }
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-24px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .research-modal-header h2 {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.6rem;
+      }
+      .research-modal-header p {
+        color: rgba(255,255,255,0.45);
+        font-size: 0.95rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .research-modal-header .accent-line {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #4dabf7, #169e09);
+        margin: 1rem auto 0;
+        border-radius: 2px;
+      }
+      
+      /* ===== CARDS GRID ===== */
+      .research-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 1200px;
+      }
+      
+      /* ===== INDIVIDUAL CARD ===== */
+      .r-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.09);
+        border-radius: 16px;
+        padding: 1.75rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+        animation: cardFadeUp 0.5s ease both;
+      }
+      .r-card:nth-child(1)  { animation-delay: 0.05s; }
+      .r-card:nth-child(2)  { animation-delay: 0.10s; }
+      .r-card:nth-child(3)  { animation-delay: 0.15s; }
+      .r-card:nth-child(4)  { animation-delay: 0.20s; }
+      .r-card:nth-child(5)  { animation-delay: 0.25s; }
+      .r-card:nth-child(6)  { animation-delay: 0.30s; }
+      .r-card:nth-child(7)  { animation-delay: 0.35s; }
+      
+      @keyframes cardFadeUp {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .r-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: var(--card-accent, linear-gradient(90deg, #4dabf7, #74c0fc));
+        border-radius: 16px 16px 0 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .r-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(77,171,247,0.3);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(77,171,247,0.1);
+      }
+      .r-card:hover::before {
+        opacity: 1;
+      }
+      
+      /* Card accent colors per card */
+      .r-card:nth-child(1) { --card-accent: linear-gradient(90deg, #4dabf7, #228be6); }
+      .r-card:nth-child(2) { --card-accent: linear-gradient(90deg, #169e09, #40c057); }
+      .r-card:nth-child(3) { --card-accent: linear-gradient(90deg, #f59f00, #fd7e14); }
+      .r-card:nth-child(4) { --card-accent: linear-gradient(90deg, #e64980, #cc5de8); }
+      .r-card:nth-child(5) { --card-accent: linear-gradient(90deg, #20c997, #12b886); }
+      .r-card:nth-child(6) { --card-accent: linear-gradient(90deg, #a855f7, #6366f1); }
+      .r-card:nth-child(7) { --card-accent: linear-gradient(90deg, #f97316, #ef4444); }
+      
+      /* Card emoji icon */
+      .r-card-icon {
+        font-size: 2rem;
+        margin-bottom: 0.9rem;
+        display: block;
+        line-height: 1;
+      }
+      
+      /* Card title */
+      .r-card-title {
+        font-family: 'Georgia', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.75rem;
+        line-height: 1.35;
+      }
+      
+      /* Card body text */
+      .r-card-body {
+        font-size: 0.875rem;
+        color: rgba(255,255,255,0.58);
+        line-height: 1.7;
+        margin-bottom: 0.75rem;
+      }
+      
+      /* Card bullet list */
+      .r-card-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0 0;
+      }
+      .r-card-list li {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.5);
+        padding: 0.28rem 0 0.28rem 1.1rem;
+        position: relative;
+        line-height: 1.5;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .r-card-list li:last-child {
+        border-bottom: none;
+      }
+      .r-card-list li::before {
+        content: '›';
+        position: absolute;
+        left: 0;
+        color: #4dabf7;
+        font-weight: bold;
+      }
+      
+      /* Vision card spans full width */
+      .r-card.full-width {
+        grid-column: 1 / -1;
+      }
+      .r-card.full-width .r-card-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0 1.5rem;
+      }
+      
+      @media (max-width: 600px) {
+        .research-cards-grid {
+          grid-template-columns: 1fr;
+        }
+        .r-card.full-width .r-card-list {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>    
   </head>
   <body class="d-flex flex-column h-100">
@@ -68,8 +302,6 @@
                     <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
 					<li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
 					<li><a class="dropdown-item" href="pendulum_PINN.html">Physics Inspired Neural Network:<br>Pendulum Problem (ODE)</a></li>
-					<li><a class="dropdown-item" href="pinn_overview.html">PINN: Overview &amp; Kepler Orbit</a></li>
-					<li><a class="dropdown-item active" href="kepler_PINN.html">Kepler Orbit: PINN &amp; HNN</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
@@ -106,52 +338,196 @@
 <!-- Page Content-->
       <header class="bg-dark py-5">
         <div class="container px-5">
-          <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-lg-8 col-xl-7 col-xxl-6">
-              <div class="my-5 text-center text-xl-start">
-                <h1 class="display-5 fw-bolder text-white mb-2">My Works</h1>
-                <p class="lead fw-normal text-white-50 mb-4">I am a Postdoctoral Associate 
-                  in Chemical Engineering department at Virginia Tech. I obtained my Ph.D. 
-                  from University of Central Florida, focusing on Nanopore Translocation 
-                  physics. My research spans the realms of AI-driven bio-material design and 
-                  molecular dynamics simulations, with a particular emphasis on glyco- and 
-                  bio-materials, as well as the study of DNA transport through nanopores.</p>
-                <p class="lead fw-normal text-white-50 mb-4">My research focuses
-                  on the dynamics of a dsDNA decorated with protein tags under
-                  the influence of a spatially-varying electric field applied
-                  alternatively across the nanopores to capture and multi-scan
-                  the DNA. We develop coarse-grained modelling of the dsDNA in
-                  the Brownian dynamics simulation framework that provides
-                  detailed conformational and time-dependent current blockade
-                  information that helps to design a cost-effective and
-                  enzyme-free sequencing device.</p>
-                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                  <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#research">Recent Research</a> 
-                  <a class="btn btn-outline-light btn-lg px-4" href="#features">Learn More</a> </div>
-                  <br><br>
-                  <div class="icon-link">
-                    <a href="https://scholar.google.com/citations?user=ZyU2mcoAAAAJ&hl=en&oi=ao" target="_blank">
-                      <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><img src="./images/google_scholar_icon.svg"/></div>
-                    </a>
-                  </div>
-                  <div class="icon-link">
-                    <a href="https://www.linkedin.com/in/swarnadeepseth/" target="_blank">
+          <div class="header-grid" style="display:grid; grid-template-columns: 7fr 5fr; gap: 2rem; align-items:start;">
+
+            <!-- Text column -->
+            <div class="text-center text-xl-start">
+              <h1 class="display-5 fw-bolder text-white mb-2">My Works</h1>
+              <p class="lead fw-normal text-white-50 mb-4" style="max-width: 1000px; text-align: justify;">
+                I am a Postdoctoral Associate in Chemical Engineering at 
+                <b>Virginia Tech</b>, with a Ph.D. in Physics from 
+                <b>University of Central Florida</b>. 
+                My work lies at the intersection of 
+                <span style="color:#4dabf7;"><b>AI, molecular simulation, and biomolecular engineering</b></span>, 
+                where I develop intelligent systems to accelerate discovery in drug design, protein engineering, and advanced biomaterials. 
+                I specialize in combining 
+                <span style="color:#4dabf7;"><b>large-scale molecular dynamics simulations with machine learning and generative AI</b></span> 
+                to solve complex, multi-scale problems in biology and chemistry.
+              </p>
+              <p class="lead fw-normal text-white-50 mb-4" style="max-width: 1000px; text-align: justify;">
+                My research focuses on building 
+                <span style="color:#4dabf7;"><b>agentic AI frameworks for end-to-end scientific workflows</b></span>, 
+                enabling autonomous setup, execution, and debugging of molecular simulations. I develop 
+                <span style="color:#4dabf7;"><b>AI-driven data pipelines</b></span> that transform scientific literature into 
+                machine-learning-ready datasets (
+                <a href="https://glycodata.org/" target="_blank" style="color:#169e09; text-decoration: underline;"><b>GlycoData</b></a>), 
+                and design 
+                <span style="color:#4dabf7;"><b>high-throughput drug discovery platforms</b></span> capable of screening millions of compounds. 
+                My work also includes 
+                <span style="color:#4dabf7;"><b>transferable coarse-grained modeling</b></span> and 
+                <span style="color:#4dabf7;"><b>enhanced sampling techniques</b></span> for accelerated simulations of proteins, polymers, and hybrid biomaterials, 
+                alongside 
+                <span style="color:#4dabf7;"><b>generative AI systems</b></span> for novel oligomer and protein design—bridging physics-based modeling with next-generation AI-driven discovery.
+              </p>
+              <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#research">Recent Research</a>
+                <a class="btn btn-outline-light btn-lg px-4" href="#" onclick="openResearchModal(); return false;">Learn More</a>
+              </div>
+
+              <!-- Icons: mobile only (below buttons) -->
+              <div class="header-icons-mobile" style="margin-top:1.5rem;">
+                <div class="icon-link">
+                  <a href="https://scholar.google.com/citations?user=ZyU2mcoAAAAJ&hl=en&oi=ao" target="_blank">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><img src="./images/google_scholar_icon.svg"/></div>
+                  </a>
+                </div>
+                <div class="icon-link">
+                  <a href="https://www.linkedin.com/in/swarnadeepseth/" target="_blank">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-linkedin"></i></div>
-                    </a>
-                  </div>
-                  <div class="icon-link">
-                    <a href="https://github.com/SwarnadeepSeth/" target="_blank">
+                  </a>
+                </div>
+                <div class="icon-link">
+                  <a href="https://github.com/SwarnadeepSeth/" target="_blank">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-github"></i></div>
-                    </a>
-                  </div>
+                  </a>
+                </div>
               </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"> 
-              <img class="img-fluid rounded-3 my-5" src="images/myface.jpg"> 
+            <!-- END Text column -->
+
+            <!-- Image + Icons column: desktop only -->
+            <div class="header-image-col" style="display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:4.0rem;">
+              <img class="img-fluid rounded-3" src="images/myface.jpg">
+              <div class="header-icons-desktop" style="margin-top:1.5rem;">
+                <div class="icon-link">
+                  <a href="https://scholar.google.com/citations?user=ZyU2mcoAAAAJ&hl=en&oi=ao" target="_blank">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><img src="./images/google_scholar_icon.svg"/></div>
+                  </a>
+                </div>
+                <div class="icon-link">
+                  <a href="https://www.linkedin.com/in/swarnadeepseth/" target="_blank">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-linkedin"></i></div>
+                  </a>
+                </div>
+                <div class="icon-link">
+                  <a href="https://github.com/SwarnadeepSeth/" target="_blank">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-github"></i></div>
+                  </a>
+                </div>
+              </div>
             </div>
+            <!-- END Image + Icons column -->
+
           </div>
         </div>
       </header>
+
+      <div class="research-modal-overlay" id="researchModal">
+        <div class="research-modal">
+      
+          <button class="research-modal-close" onclick="closeResearchModal()" aria-label="Close">✕</button>
+      
+          <div class="research-modal-header">
+            <p>Areas of Expertise</p>
+            <h2>Research Overview</h2>
+            <div class="accent-line"></div>
+          </div>
+      
+          <div class="research-cards-grid">
+      
+            <!-- Card 1 -->
+            <div class="r-card">
+              <span class="r-card-icon">🤖</span>
+              <div class="r-card-title">Agentic AI for End-to-End Scientific Workflows</div>
+              <div class="r-card-body">Multi-agent AI systems that autonomously handle the full lifecycle of molecular simulations: 
+                from model construction and force-field parameterization to execution, debugging, and validation. Integrates LLMs 
+                with physics-based reasoning and chemistry aware for self-correcting, scalable simulation pipelines.</div>
+              <ul class="r-card-list">
+                <li>Agentic AI driven CG model development for polar solvents</li>
+                <li>EvoAI: Evolutionary AI agents for material design</li>
+              </ul>
+            </div>
+      
+            <!-- Card 2 -->
+            <div class="r-card">
+              <span class="r-card-icon">🧬</span>
+              <div class="r-card-title">AI-Powered Scientific Data Infrastructure (GlycoData)</div>
+              <div class="r-card-body">AI agents for automated literature mining and data curation, powering <a href="https://glycodata.org/" target="_blank" style="color:#40c057; text-decoration:underline;">GlycoData.org</a>. 
+                Extracts structured, ML-ready datasets from scientific papers, including text, tables, and figures, enabling large-scale, FAIR-compliant data pipelines for material discovery.</div>
+              <ul class="r-card-list">
+                <li>Curated ML ready datasets with 11 carbohydrate properties (10000+ datapoints) </li>
+                <li>GlycoBot: An AI chatbot for answering question about carbohydrates, trined on GlycoData</li>
+              </ul>
+              </div>
+      
+            <!-- Card 3 -->
+            <div class="r-card">
+              <span class="r-card-icon">⚗️</span>
+              <div class="r-card-title">Advanced Molecular Dynamics & Enhanced Sampling</div>
+              <div class="r-card-body">Equilibrium and non-equilibrium MD simulations of proteins, polymers, and hybrid biomaterials 
+                using state-of-the-art techniques to uncover rare events, binding pathways, and conformational landscapes at microsecond timescales.</div>
+              <ul class="r-card-list">
+                <li>Metadynamics & free energy calculations</li>
+                <li>Accelerated sampling methods</li>
+                <li>Microsecond-scale conformational analysis</li>
+              </ul>
+            </div>
+      
+            <!-- Card 4 -->
+            <div class="r-card">
+              <span class="r-card-icon">💊</span>
+              <div class="r-card-title">AI-Driven Drug Discovery at Scale</div>
+              <div class="r-card-body">End-to-end high-throughput virtual screening (HTVS) platform evaluating millions of compounds 
+                against viral protein targets with high predictive accuracy.</div>
+              <ul class="r-card-list">
+                <li>Multi-engine docking: AutoDock Vina, PLANTS, LeDock, rDock</li>
+                <li>MM/GBSA binding energy refinement</li>
+                <li>MD validation with knockout algorithms</li>
+              </ul>
+            </div>
+      
+            <!-- Card 5 -->
+            <div class="r-card">
+              <span class="r-card-icon">🧪</span>
+              <div class="r-card-title">Transferable Coarse-Grained (CG) Modeling</div>
+              <div class="r-card-body">Next-generation CG force field with 1000+ cross-interaction parameters, optimized 
+                via hybrid AI/physics approaches. Enables transferable, constraint-free simulations of proteins and biomaterials while 
+                preserving structural fidelity.</div>
+              <ul class="r-card-list">
+                <li>Advanced optimizer with dimensionality reduction for force field parameterization</li>
+                <li>Capable of modeling of heterogeneous proteins with alpha-helices, beta-sheets, and coils</li>
+              </ul>
+            </div>
+      
+            <!-- Card 6 -->
+            <div class="r-card">
+              <span class="r-card-icon">🧠</span>
+              <div class="r-card-title">ML + Generative AI for Molecular Design</div>
+              <div class="r-card-body">Machine learning and LLM-based systems for closed-loop molecular design combining deep learning, 
+                generative models, and simulation feedback.</div>
+              <ul class="r-card-list">
+                <li>Novel oligomer & protein discovery</li>
+                <li>Property prediction & optimization</li>
+                <li>Agentic exploration of chemical space</li>
+              </ul>
+            </div>
+      
+            <!-- Card 7 — full width vision card -->
+            <div class="r-card full-width">
+              <span class="r-card-icon">🚀</span>
+              <div class="r-card-title">Research Vision</div>
+              <div class="r-card-body">Building autonomous scientific discovery systems that unify AI reasoning, simulation, and experimental data.</div>
+              <ul class="r-card-list">
+                <li>Drug discovery</li>
+                <li>Biomaterials engineering</li>
+                <li>Protein & polymer design</li>
+              </ul>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+
       <!-- Features section-->
       <section class="py-5" id="features">
         <div class="container px-5 my-5">
@@ -400,5 +776,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+      function openResearchModal() {
+        const modal = document.getElementById('researchModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeResearchModal() {
+        const modal = document.getElementById('researchModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      // Close on overlay click (outside modal content)
+      document.getElementById('researchModal').addEventListener('click', function(e) {
+        if (e.target === this) closeResearchModal();
+      });
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeResearchModal();
+      });
+    </script>
   </body>
 </html>
