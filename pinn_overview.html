@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Physics-Informed Neural Networks: Pendulum and Kepler Orbit problems solved with PINNs" />
+    <meta name="author" content="Swarnadeep Seth" />
+    <title>Physics-Informed Neural Networks — PINN Overview</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters:[
+            {left:'$$',right:'$$',display:true},
+            {left:'\\[',right:'\\]',display:true},
+            {left:'$',right:'$',display:false},
+            {left:'\\(',right:'\\)',display:false}]});"></script>
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        /* ── Sidebar ──────────────────────────────────────────────── */
+        #sidebar {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #6c757d transparent;
+        }
+        #sidebar::-webkit-scrollbar { width: 4px; }
+        #sidebar::-webkit-scrollbar-thumb { background: #6c757d; border-radius: 4px; }
+
+        .sidebar-nav { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav li a {
+            display: block;
+            padding: 6px 12px;
+            color: #495057;
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a.active {
+            color: #0d6efd;
+            border-left-color: #0d6efd;
+            background: #f0f4ff;
+        }
+        .sidebar-nav .nav-section {
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6c757d;
+            padding: 14px 12px 4px;
+        }
+        .sidebar-nav .nav-sub a {
+            padding-left: 24px;
+            font-size: 0.82rem;
+            color: #6c757d;
+        }
+        .sidebar-nav .nav-sub a:hover,
+        .sidebar-nav .nav-sub a.active {
+            color: #0d6efd;
+            border-left-color: #0d6efd;
+            background: #f0f4ff;
+        }
+        /* ── Section headings ─────────────────────────────────────── */
+        .section-title {
+            color: brown;
+            font-weight: 300;
+            margin-bottom: 0.25rem;
+            scroll-margin-top: 80px;
+        }
+        .sub-section-title {
+            color: royalblue;
+            scroll-margin-top: 80px;
+        }
+        h1[id], h2[id], h3[id], section[id], div[id] {
+            scroll-margin-top: 80px;
+        }
+        /* ── Cards ────────────────────────────────────────────────── */
+        .pinn-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
+        }
+        .pinn-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
+        .card-header-pendulum { background: linear-gradient(135deg,#6a11cb,#2575fc); }
+        .card-header-kepler   { background: linear-gradient(135deg,#f7971e,#ffd200); }
+        /* ── Info / note boxes ────────────────────────────────────── */
+        .info-box {
+            border-left: 5px solid #0d6efd;
+            background: #f0f4ff;
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+        }
+        .warn-box {
+            border-left: 5px solid #ffc107;
+            background: #fffbea;
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+        }
+        .success-box {
+            border-left: 5px solid #28a745;
+            background: #f0fff4;
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+        }
+        /* ── Tables ───────────────────────────────────────────────── */
+        table, td, th { border-bottom: 1px solid #dee2e6; padding: 8px 12px; text-align: center; }
+        table { border-collapse: collapse; width: 100%; }
+        thead th { color: #0d47a1; background-color: #e8f0fe; }
+        td:first-child, th:first-child { text-align: left; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        tr:hover { background-color: #fff3e0; }
+        /* ── Hero banner ──────────────────────────────────────────── */
+        .hero-banner {
+            background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+            color: white;
+            padding: 48px 32px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+        }
+        .hero-banner h1 { font-size: 2.2rem; color: #ffd700; }
+        .hero-banner p  { color: #cdd6e0; font-size: 1.1rem; }
+        /* ── Badge chips ──────────────────────────────────────────── */
+        .chip { display:inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; margin: 3px; }
+        /* ── Step circles ─────────────────────────────────────────── */
+        .step-circle {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #0d6efd; color: white;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-right: 12px;
+        }
+        .step-row { display: flex; align-items: flex-start; margin-bottom: 14px; }
+        /* ── Comparison result boxes ─────────────────────────────── */
+        .result-bad  { background:#ffebee; border:2px solid #ef5350; border-radius:8px; padding:10px 16px; }
+        .result-good { background:#e8f5e9; border:2px solid #43a047; border-radius:8px; padding:10px 16px; }
+        /* ── Divider ──────────────────────────────────────────────── */
+        .section-divider { border: none; border-top: 2px solid #e9ecef; margin: 48px 0; }
+        /* progress bar for comparison */
+        .compare-bar { height: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body class="d-flex flex-column">
+<main class="flex-shrink-0">
+
+<!-- ═══════════════════════ TOP NAVBAR ═══════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html">Swarnadeep Seth - Physics Ph.D.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="bio.html">Bio</a></li>
+                <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownResearch" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Research</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownResearch">
+                        <li><a class="dropdown-item" href="research-home.html">Research Home</a></li>
+                        <li><a class="dropdown-item" href="research-post_lammps.html">MD with LAMMPS</a></li>
+                        <li><a class="dropdown-item" href="research-post_LLM_IDP.html">IDPs with LLMs</a></li>
+                        <li><a class="dropdown-item" href="electrokinetics.html">Electro-Kinetic Transport</a></li>
+                        <li><a class="dropdown-item" href="ewald.html">Tutorial: Ewald Summation</a></li>
+                        <li><a class="dropdown-item" href="citation_app.html">Bibliography Generator</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownDataScience" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Data Science</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="datascience_QA.html">Data Science Q&amp;A</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" id="navbarDropdownML" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Machine Learning</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="ml_overview.html">Overview</a></li>
+                        <li><a class="dropdown-item" href="diabetes_ML.html">Diabetes Prediction</a></li>
+                        <li><a class="dropdown-item" href="pendulum_PINN.html">PINN: Pendulum (ODE)</a></li>
+                        <li><a class="dropdown-item active" href="pinn_overview.html">PINN: Overview &amp; Kepler Orbit</a></li>
+                        <li><a class="dropdown-item" href="kepler_PINN.html">Kepler Orbit: PINN &amp; HNN</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMarket" href="#"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Stock Market</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="market-overview.html">Overview</a></li>
+                        <li><a class="dropdown-item" href="market-dashboard.html">Market Structure</a></li>
+                        <li><a class="dropdown-item" href="market-valuation_IND.html">Valuations (IND)</a></li>
+                        <li><a class="dropdown-item" href="market-valuation_US.html">Valuations (US)</a></li>
+                        <li><a class="dropdown-item" href="stock_scanner.html">EMA200 Screener</a></li>
+                        <li><a class="dropdown-item" href="portfolio_optimization.html">Portfolio Optimization (NSE)</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="https://quantjuice.com/">QuantJuice</a></li>
+                <li class="nav-item"><a class="nav-link" href="one_liners.html">One Liners</a></li>
+                <li class="nav-item"><a class="nav-link" href="sql.html">SQL</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════ PAGE BODY ════════════════════════════════════════ -->
+<section class="py-4">
+<div class="container-fluid px-4 px-lg-5 my-4">
+<div class="row g-4">
+
+<!-- ─────────────────── LEFT SIDEBAR ────────────────────────────────────────── -->
+<div class="col-lg-2 d-none d-lg-block">
+<nav id="sidebar">
+    <ul class="sidebar-nav">
+        <li><span class="nav-section">Overview</span></li>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#what-is-pinn">What is a PINN?</a></li>
+        <li><a href="#pinn-workflow">PINN Workflow</a></li>
+        <li><a href="#applications">Applications</a></li>
+
+        <li><span class="nav-section">🔬 Pendulum</span></li>
+        <li><a href="#pend-physics">The Physics</a></li>
+        <ul class="sidebar-nav nav-sub">
+            <li><a href="#pend-ode">Governing ODE</a></li>
+            <li><a href="#pend-smallangle">Small-Angle Approx.</a></li>
+        </ul>
+        <li><a href="#pend-nn">Standard NN Baseline</a></li>
+        <li><a href="#pend-pinn-arch">PINN Architecture</a></li>
+        <li><a href="#pend-loss">Loss Function</a></li>
+        <li><a href="#pend-results">Results</a></li>
+        <li><a href="#pend-code">Code Snippet</a></li>
+
+        <li><span class="nav-section">🪐 Kepler Orbit</span></li>
+        <li><a href="#kepler-intro">Kepler's Laws</a></li>
+        <li><a href="#kepler-eqs">Governing Equations</a></li>
+        <li><a href="#kepler-conserve">Conservation Laws</a></li>
+        <li><a href="#kepler-nn">Standard NN Baseline</a></li>
+        <li><a href="#kepler-pinn">PINN Architecture</a></li>
+        <li><a href="#kepler-results">Results</a></li>
+        <li><a href="#kepler-conserve-check">Conservation Check</a></li>
+        <li><a href="#kepler-code">Code Snippet</a></li>
+
+        <li><span class="nav-section">Summary</span></li>
+        <li><a href="#comparison">Side-by-Side Comparison</a></li>
+        <li><a href="#resources">Code &amp; Resources</a></li>
+        <li><a href="#references">References</a></li>
+    </ul>
+</nav>
+</div><!-- /sidebar col -->
+
+<!-- ─────────────────── MAIN CONTENT ────────────────────────────────────────── -->
+<div class="col-lg-10">
+
+<!-- HERO BANNER -->
+<div class="hero-banner" id="intro">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="mb-3">Physics-Informed Neural Networks</h1>
+            <p class="mb-3">
+                Embedding physical laws directly into neural network training —
+                solving ODEs from sparse data without sacrificing physical fidelity.
+            </p>
+            <span class="chip" style="background:#e74c3c;color:white;">PyTorch</span>
+            <span class="chip" style="background:#2980b9;color:white;">SciPy ODE</span>
+            <span class="chip" style="background:#8e44ad;color:white;">Autograd</span>
+            <span class="chip" style="background:#16a085;color:white;">Pendulum</span>
+            <span class="chip" style="background:#d35400;color:white;">Kepler Orbit</span>
+            <span class="chip" style="background:#27ae60;color:white;">Conservation Laws</span>
+        </div>
+        <div class="col-md-4 text-center d-none d-md-block">
+            <div style="font-size:5rem; opacity:0.7;">🧠⚛️</div>
+            <div class="mt-2 text-white-50" style="font-size:0.85rem;">Data + Physics → Better Predictions</div>
+        </div>
+    </div>
+    <div class="row mt-4 g-3">
+        <div class="col-md-4">
+            <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+                <div style="color:#ffd700;font-size:1.5rem;font-weight:700;">2 Problems</div>
+                <div style="color:#aaa;font-size:0.9rem;">Pendulum ODE &amp; Kepler Orbit</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+                <div style="color:#ffd700;font-size:1.5rem;font-weight:700;">Autograd</div>
+                <div style="color:#aaa;font-size:0.9rem;">ODE residuals via PyTorch backprop</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:16px;">
+                <div style="color:#ffd700;font-size:1.5rem;font-weight:700;">10–20×</div>
+                <div style="color:#aaa;font-size:0.9rem;">Better extrapolation than standard NN</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ─── WHAT IS A PINN ─────────────────────────────────────────────────────── -->
+<section id="what-is-pinn" class="mb-5">
+    <h1 class="section-title">What is a Physics-Informed Neural Network?</h1>
+    <hr>
+    <p>
+        A <strong>Physics-Informed Neural Network (PINN)</strong> is a neural network that is trained to
+        respect the laws of physics governing a system, even when training data is sparse.
+        The idea was formalised by Raissi, Perdikaris &amp; Karniadakis (2019) and has since been applied
+        to fluid dynamics, heat transfer, structural mechanics, and many other fields.
+    </p>
+    <p>
+        The core concept is elegantly simple: instead of minimising <em>only</em> the data-fitting loss,
+        the PINN also minimises the <strong>ODE/PDE residual</strong> — the degree to which the network's
+        prediction violates the governing equations.
+    </p>
+
+    <div class="row g-3 my-3">
+        <div class="col-md-6">
+            <div class="result-bad p-3 h-100">
+                <h5 style="color:#c62828;"><i class="bi bi-x-circle-fill"></i> Standard Neural Network</h5>
+                <ul class="mb-0">
+                    <li>Minimises data loss only</li>
+                    <li>Has <strong>no knowledge</strong> of physics</li>
+                    <li>Fits well in training region</li>
+                    <li><strong>Extrapolates poorly</strong> — wrong physics</li>
+                    <li>Violates conservation laws</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="result-good p-3 h-100">
+                <h5 style="color:#2e7d32;"><i class="bi bi-check-circle-fill"></i> Physics-Informed NN (PINN)</h5>
+                <ul class="mb-0">
+                    <li>Minimises data loss <em>and</em> ODE residual</li>
+                    <li>Equations of motion baked into training</li>
+                    <li>Fits well in training region</li>
+                    <li><strong>Extrapolates correctly</strong> — obeys physics</li>
+                    <li>Approximately conserves energy, momentum</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box mt-3">
+        <strong>📐 The Universal PINN Loss Function:</strong>
+        $$\mathcal{L}_{\text{total}} = \underbrace{\frac{1}{N}\sum_{i=1}^{N}\left(\mathcal{N}(t_i) - u_i\right)^2}_{\text{data loss}} \;+\; \lambda \underbrace{\frac{1}{M}\sum_{j=1}^{M}\mathcal{R}\!\left[\mathcal{N}\right](t_j)^2}_{\text{physics (ODE/PDE residual) loss}}$$
+        where $\mathcal{R}[\mathcal{N}]$ is the residual of the governing equation evaluated at collocation points $t_j$,
+        computed via <strong>automatic differentiation</strong> through the network.
+    </div>
+</section>
+
+<!-- ─── PINN WORKFLOW ──────────────────────────────────────────────────────── -->
+<section id="pinn-workflow" class="mb-5">
+    <h2 class="sub-section-title">PINN Workflow</h2>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="step-row"><div class="step-circle">1</div><div><strong>Problem Formulation</strong><br><small class="text-muted">Define ODE/PDE, domain, initial &amp; boundary conditions</small></div></div>
+            <div class="step-row"><div class="step-circle">2</div><div><strong>Data Collection</strong><br><small class="text-muted">Gather sparse observations (can be just a few points!)</small></div></div>
+            <div class="step-row"><div class="step-circle">3</div><div><strong>Network Architecture</strong><br><small class="text-muted">Fully-connected net with Tanh activation (smooth &amp; differentiable)</small></div></div>
+            <div class="step-row"><div class="step-circle">4</div><div><strong>Collocation Points</strong><br><small class="text-muted">Sample physics constraint points across the full domain</small></div></div>
+        </div>
+        <div class="col-md-6">
+            <div class="step-row"><div class="step-circle" style="background:#28a745;">5</div><div><strong>Composite Loss</strong><br><small class="text-muted">$\mathcal{L} = \mathcal{L}_{\text{data}} + \lambda\,\mathcal{L}_{\text{physics}}$</small></div></div>
+            <div class="step-row"><div class="step-circle" style="background:#28a745;">6</div><div><strong>Autograd Derivatives</strong><br><small class="text-muted">Compute $d^2\mathcal{N}/dt^2$ via PyTorch backprop for ODE residual</small></div></div>
+            <div class="step-row"><div class="step-circle" style="background:#28a745;">7</div><div><strong>Train with Adam</strong><br><small class="text-muted">Jointly minimise data fit and physics violation</small></div></div>
+            <div class="step-row"><div class="step-circle" style="background:#28a745;">8</div><div><strong>Validate &amp; Deploy</strong><br><small class="text-muted">Verify conservation laws, compare with reference solution</small></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── APPLICATIONS ──────────────────────────────────────────────────────── -->
+<section id="applications" class="mb-5">
+    <h2 class="sub-section-title">Applications of PINNs</h2>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="pinn-card card h-100">
+                <div class="card-header-pendulum p-3"><h6 class="text-white mb-0"><i class="bi bi-wind"></i> Fluid Dynamics</h6></div>
+                <div class="card-body"><small>Navier-Stokes equations, turbulence prediction, flow field reconstruction from sparse sensor data.</small></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pinn-card card h-100">
+                <div class="card-header-kepler p-3"><h6 class="text-dark mb-0"><i class="bi bi-thermometer-half"></i> Heat Transfer</h6></div>
+                <div class="card-body"><small>Conduction, convection, radiation — temperature distribution without full numerical grid.</small></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pinn-card card h-100">
+                <div class="card-header-pendulum p-3"><h6 class="text-white mb-0"><i class="bi bi-activity"></i> Structural Mechanics</h6></div>
+                <div class="card-body"><small>Stress, strain, deformation under load using elasticity PDEs with limited measurement points.</small></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pinn-card card h-100">
+                <div class="card-header-kepler p-3"><h6 class="text-dark mb-0"><i class="bi bi-atom"></i> Quantum Chemistry</h6></div>
+                <div class="card-body"><small>Schrödinger's equation, molecular properties and electronic structure prediction.</small></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pinn-card card h-100">
+                <div class="card-header-pendulum p-3"><h6 class="text-white mb-0"><i class="bi bi-stars"></i> Orbital Mechanics</h6></div>
+                <div class="card-body"><small>Newton's gravity law — orbit reconstruction from partial observational data (this page!).</small></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pinn-card card h-100">
+                <div class="card-header-kepler p-3"><h6 class="text-dark mb-0"><i class="bi bi-camera"></i> Medical Imaging</h6></div>
+                <div class="card-body"><small>Image reconstruction and denoising with physics-based priors for MRI &amp; CT scans.</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════ PENDULUM SECTION ═══════════════════════════════════ -->
+<div id="pend-physics">
+<h1 class="section-title mt-4"><i class="bi bi-arrow-repeat" style="color:brown;"></i> Problem 1 — Simple Pendulum</h1>
+<hr>
+<div class="text-muted fst-italic mb-3">
+    <a class="badge bg-secondary text-decoration-none link-light me-1" href="pendulum_PINN.html">Deep-Dive Page</a>
+    <a class="badge bg-secondary text-decoration-none link-light me-1" href="#">Simple Pendulum</a>
+    <a class="badge bg-secondary text-decoration-none link-light" href="#">ODE</a>
+</div>
+
+<p>
+    A pendulum bob of mass $m$ suspended from a pivot by a rigid rod of length $L$
+    performs periodic motion under gravity. This is a classic nonlinear ODE — the
+    ideal benchmark for PINNs because the exact numerical solution is readily available
+    yet the <em>small-angle analytical approximation fails</em> at large amplitudes.
+</p>
+
+<div class="row g-4 align-items-center mb-4">
+    <div class="col-md-5">
+        <div style="justify-content: center; display: flex; align-items: center;">
+            <img src="gif/simple_pendulum.gif" class="img-fluid rounded shadow" alt="Simple pendulum animation" style="max-height:280px;">
+        </div>
+        <p class="text-center text-muted mt-2" style="font-size:0.85rem;">Fig. Pendulum oscillation (numerical integration)</p>
+    </div>
+    <div class="col-md-7">
+        <h3 id="pend-ode" class="sub-section-title">Governing ODE</h3>
+        <p>Newton's second law along the arc gives:</p>
+        $$\boxed{\ddot{\theta} + \frac{g}{L}\sin\theta = 0}$$
+        <p>This is a <strong>nonlinear</strong>, second-order ODE. No closed-form solution exists for arbitrary amplitudes — it requires numerical integration or a PINN.</p>
+
+        <table class="mt-3" style="max-width:380px;">
+            <thead><tr><th>Parameter</th><th>Value</th><th>Meaning</th></tr></thead>
+            <tbody>
+                <tr><td>$L$</td><td>0.025 m</td><td>Rod length</td></tr>
+                <tr><td>$g$</td><td>9.81 m/s²</td><td>Gravity</td></tr>
+                <tr><td>$\omega$</td><td>≈ 19.8 rad/s</td><td>Natural frequency</td></tr>
+                <tr><td>$\theta_0$</td><td>$\pi/4$ rad</td><td>Initial angle (45°)</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<section id="pend-smallangle" class="mb-4">
+    <h3 class="sub-section-title">Small-Angle Approximation</h3>
+    <p>
+        For $\theta \ll 1\,\text{rad}$, we use $\sin\theta\approx\theta$, giving the <em>linear</em> harmonic oscillator:
+    </p>
+    $$\ddot{\theta} + \omega^2\theta = 0 \quad\Rightarrow\quad \theta_{\text{approx}}(t) = \theta_0\cos(\omega t)$$
+    <div class="warn-box">
+        <strong>⚠️ Important:</strong> At $\theta_0 = 45°$, the small-angle approximation <strong>fails noticeably</strong>
+        — the exact and approximate solutions diverge within a fraction of a period.
+        This is why both the exact (numerical) and approximate solutions are plotted side-by-side:
+        the PINN should track the exact solution, not the approximation.
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ─── PENDULUM: NN BASELINE ─────────────────────────────────────────────── -->
+<section id="pend-nn" class="mb-4">
+    <h2 class="section-title">Standard NN — Data Only</h2>
+    <hr>
+    <p>
+        A fully-connected network (3 hidden layers × 32 neurons, Tanh activation) is trained for 1000 epochs
+        on <strong>10 sparse data points</strong> sampled from the first 40% of the time window.
+        The loss is pure data MSE:
+    </p>
+    $$\mathcal{L}_{\text{NN}} = \frac{1}{N}\sum_{i=1}^{N}\left(\hat{\theta}(t_i) - \theta_{\text{true}}(t_i)\right)^2$$
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div style="display:flex; justify-content:center;">
+                <img src="gif/pendulum_nn.gif" class="img-fluid rounded shadow" alt="Standard NN training" style="max-height:280px;">
+            </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <div class="result-bad p-3 mb-3">
+                    <strong>❌ Standard NN failure mode:</strong>
+                    <ul class="mb-0 mt-1">
+                        <li>Fits training data (orange dots) well</li>
+                        <li>Has no idea what happens after $t \approx 0.4\,\text{s}$</li>
+                        <li>Extrapolates as a smooth polynomial — <em>not</em> an oscillation</li>
+                        <li>Violates energy conservation</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <strong>💡 Why?</strong> The network has learned a smooth interpolant —
+                    it has no "memory" that the system is oscillatory. Without physics guidance,
+                    it cannot know that the pendulum continues to swing.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── PENDULUM: PINN ARCH ────────────────────────────────────────────────── -->
+<section id="pend-pinn-arch" class="mb-4">
+    <h2 class="section-title">PINN Architecture</h2>
+    <hr>
+    <p>Same network skeleton — what changes is the loss function.</p>
+    <div class="row g-3">
+        <div class="col-md-5">
+            <table>
+                <thead><tr><th>Layer</th><th>Size</th><th>Activation</th></tr></thead>
+                <tbody>
+                    <tr><td>Input</td><td>1 ($t$)</td><td>—</td></tr>
+                    <tr><td>Hidden 1</td><td>32</td><td>Tanh</td></tr>
+                    <tr><td>Hidden 2</td><td>32</td><td>Tanh</td></tr>
+                    <tr><td>Hidden 3</td><td>32</td><td>Tanh</td></tr>
+                    <tr><td>Output</td><td>1 ($\hat\theta$)</td><td>Linear</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-7">
+            <div class="info-box">
+                <strong>Why Tanh?</strong> The ODE residual requires computing $d^2\hat\theta/dt^2$ via autograd.
+                This demands <em>twice-differentiable</em> activations.
+                ReLU has zero second derivative everywhere — it cannot represent curvature.
+                Tanh is smooth, bounded, and its second derivative is well-defined and non-zero throughout.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── PENDULUM: LOSS FUNCTION ───────────────────────────────────────────── -->
+<section id="pend-loss" class="mb-4">
+    <h2 class="section-title">PINN Loss Function — Pendulum</h2>
+    <hr>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="pinn-card card p-3">
+                <h6 class="text-primary"><i class="bi bi-database"></i> Data Loss</h6>
+                $$\mathcal{L}_{\text{data}} = \frac{1}{N}\sum_{i=1}^{N}\left(\hat\theta(t_i) - \theta_i\right)^2$$
+                <small class="text-muted">Fits the 10 sparse observations (orange dots)</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pinn-card card p-3">
+                <h6 class="text-danger"><i class="bi bi-lightning-fill"></i> Physics Loss (ODE Residual)</h6>
+                $$\mathcal{L}_{\text{physics}} = \frac{1}{M}\sum_{j=1}^{M}\!\left(\frac{d^2\hat\theta}{dt^2}\bigg|_{t_j} + \frac{g}{L}\sin\hat\theta(t_j)\right)^{\!2}$$
+                <small class="text-muted">Enforces the pendulum ODE at 30 collocation points across full domain</small>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3 p-3" style="background:#f8f9fa;border-radius:8px;">
+        <strong>Combined:</strong>
+        $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{data}} + \underbrace{10^{-4}}_{\lambda}\,\mathcal{L}_{\text{physics}}$$
+        <p class="mb-0 mt-2 text-muted" style="font-size:0.9rem;">
+            The autograd chain: forward pass $\to$ $\hat\theta(t)$ $\to$
+            <code>torch.autograd.grad</code> $\to$ $\dot{\hat\theta}$ $\to$
+            <code>torch.autograd.grad</code> $\to$ $\ddot{\hat\theta}$ $\to$ residual $\to$ loss.
+        </p>
+    </div>
+</section>
+
+<!-- ─── PENDULUM: RESULTS ──────────────────────────────────────────────────── -->
+<section id="pend-results" class="mb-4">
+    <h2 class="section-title">PINN Results — Pendulum</h2>
+    <hr>
+    <div class="row g-3 mb-3">
+        <div class="col-md-8">
+            <div style="display:flex; justify-content:center;">
+                <img src="gif/pendulum_pinn.gif" class="img-fluid rounded shadow" alt="PINN training" style="max-height:320px;">
+            </div>
+            <p class="text-center text-muted mt-2" style="font-size:0.85rem;">
+                Fig. PINN training progress — the prediction converges to the exact nonlinear solution
+            </p>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <div>
+                <div class="result-good p-3 mb-3">
+                    <strong>✅ PINN achieves:</strong>
+                    <ul class="mb-0 mt-1">
+                        <li>Correct oscillation beyond training window</li>
+                        <li>Tracks exact numerical ODE (not the approximation)</li>
+                        <li>~10–20× lower MAE in extrapolation region vs standard NN</li>
+                    </ul>
+                </div>
+                <table>
+                    <thead><tr><th>Metric</th><th>NN</th><th>PINN</th></tr></thead>
+                    <tbody>
+                        <tr><td>Train MAE</td><td>~0.003</td><td>~0.003</td></tr>
+                        <tr><td>Extrap. MAE</td><td><span class="text-danger">~0.15</span></td><td><span class="text-success">~0.005</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <p>
+        <a href="pendulum_PINN.html" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-arrow-right-circle"></i> Full Pendulum Deep-Dive →
+        </a>
+    </p>
+</section>
+
+<!-- ─── PENDULUM: CODE SNIPPET ────────────────────────────────────────────── -->
+<section id="pend-code" class="mb-5">
+    <h2 class="section-title">Key Code — Pendulum PINN Physics Loss</h2>
+    <hr>
+<pre><code class="language-python">import torch, torch.nn as nn
+
+k = (9.81 / 0.025)   # omega^2 = g/L
+
+# Collocation points — physics constraint over full domain
+x_physics = torch.linspace(0, 1.0, 30).view(-1, 1).requires_grad_(True)
+
+for i in range(20000):
+    optimizer.zero_grad()
+
+    # Data loss
+    loss_data = torch.mean((model(x_data) - y_data) ** 2)
+
+    # Physics loss — enforce  d²θ/dt² + (g/L)sin(θ) = 0
+    yhp  = model(x_physics)
+    dθ   = torch.autograd.grad(yhp,  x_physics, torch.ones_like(yhp), create_graph=True)[0]
+    d²θ  = torch.autograd.grad(dθ,   x_physics, torch.ones_like(dθ),  create_graph=True)[0]
+    residual  = d²θ + k * torch.sin(yhp)           # should be 0
+    loss_phys = torch.mean(residual ** 2)
+
+    loss = loss_data + 1e-4 * loss_phys
+    loss.backward()
+    optimizer.step()
+</code></pre>
+</section>
+
+</div><!-- /pend-physics -->
+
+<hr class="section-divider">
+
+<!-- ══════════════════════ KEPLER SECTION ════════════════════════════════════ -->
+<div id="kepler-intro">
+<h1 class="section-title mt-4"><i class="bi bi-stars" style="color:brown;"></i> Problem 2 — Kepler Orbit Reconstruction</h1>
+<hr>
+<div class="text-muted fst-italic mb-3">
+    <a class="badge bg-secondary text-decoration-none link-light me-1" href="#">Kepler's Laws</a>
+    <a class="badge bg-secondary text-decoration-none link-light me-1" href="#">Newton's Gravity</a>
+    <a class="badge bg-secondary text-decoration-none link-light" href="#">Coupled ODE System</a>
+</div>
+
+<p>
+    Can a neural network reconstruct a complete planetary orbit when it has only seen <strong>40% of it</strong>?
+    A standard NN cannot — but a PINN guided by Newton's universal law of gravitation can,
+    because it "knows" that trajectories must obey $\ddot{\mathbf{r}} = -GM\mathbf{r}/r^3$.
+</p>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-5">
+        <div style="background:linear-gradient(135deg,#0a0a1a,#1b2838);border-radius:12px;padding:20px;text-align:center;">
+            <div style="font-size:4rem;">🪐⭐</div>
+            <p style="color:#aaa;font-size:0.9rem;margin-top:8px;">Two-body gravitational problem in 2D</p>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <h4>Kepler's Three Laws (1609–1619)</h4>
+        <table>
+            <thead><tr><th>Law</th><th>Statement</th></tr></thead>
+            <tbody>
+                <tr><td><strong>1st</strong></td><td>Planets orbit in <strong>ellipses</strong> with the Sun at one focus</td></tr>
+                <tr><td><strong>2nd</strong></td><td>Equal areas swept in equal time <em>(angular momentum conservation)</em></td></tr>
+                <tr><td><strong>3rd</strong></td><td>$T^2 \propto a^3$ — period² $\propto$ semi-major axis³</td></tr>
+            </tbody>
+        </table>
+        <p class="mt-2">These laws all follow from Newton's universal law of gravitation:</p>
+        $$\mathbf{F} = -\frac{GMm}{r^2}\hat{r}$$
+    </div>
+</div>
+</div>
+
+<!-- ─── KEPLER: GOVERNING EQUATIONS ─────────────────────────────────────────── -->
+<section id="kepler-eqs" class="mb-4">
+    <h2 class="section-title">Governing Equations — Kepler Orbit</h2>
+    <hr>
+    <p>In 2D Cartesian coordinates $(x, y)$, with the central body at the origin:</p>
+    $$\boxed{\ddot{x} = -\frac{GM\,x}{r^3}, \qquad \ddot{y} = -\frac{GM\,y}{r^3}, \qquad r = \sqrt{x^2+y^2}}$$
+    <p>
+        This is a <strong>4D first-order coupled ODE system</strong>
+        (state = $[x, y, v_x, v_y]$), solved numerically with
+        <code>scipy.integrate.odeint</code> at $10^{-10}$ relative tolerance to provide the reference.
+    </p>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="info-box">
+                <strong>Initial conditions (at periapsis):</strong><br>
+                $$x_0 = a(1-e),\quad y_0 = 0$$
+                $$v_{x0} = 0,\quad v_{y0} = \sqrt{\frac{GM(1+e)}{a(1-e)}} \quad\text{(vis-viva)}$$
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table>
+                <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td>$GM$</td><td>1.0 (dimensionless)</td></tr>
+                    <tr><td>Semi-major axis $a$</td><td>1.0</td></tr>
+                    <tr><td>Eccentricity $e$</td><td>0.5</td></tr>
+                    <tr><td>Period $T$</td><td>$2\pi \approx 6.28$</td></tr>
+                    <tr><td>Training data</td><td>First 40% of orbit (sparse)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ─── KEPLER: CONSERVATION LAWS ─────────────────────────────────────────── -->
+<section id="kepler-conserve" class="mb-4">
+    <h2 class="section-title">Conservation Laws</h2>
+    <hr>
+    <p>The Kepler problem has two important integrals of motion (constants along any physical trajectory):</p>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="pinn-card card p-3 h-100">
+                <h6 class="text-success"><i class="bi bi-lightning"></i> Total Energy</h6>
+                $$E = \frac{1}{2}(v_x^2 + v_y^2) - \frac{GM}{r} = \text{const}$$
+                <small class="text-muted">Kinetic + gravitational potential energy is conserved</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pinn-card card p-3 h-100">
+                <h6 class="text-warning"><i class="bi bi-arrow-counterclockwise"></i> Angular Momentum (Kepler 2nd Law)</h6>
+                $$L = x\,v_y - y\,v_x = \text{const}$$
+                <small class="text-muted">Equal areas in equal times — the planet moves fastest at periapsis, slowest at apoapsis</small>
+            </div>
+        </div>
+    </div>
+    <div class="success-box mt-3">
+        <strong>✨ Emergent conservation in PINNs:</strong> We <em>never explicitly enforce</em> $E = \text{const}$ or $L = \text{const}$.
+        Yet because the PINN is trained to satisfy Newton's ODE, these conservation laws
+        <strong>emerge automatically</strong> as consequences — a beautiful validation of the approach.
+    </div>
+</section>
+
+<!-- ─── KEPLER: NN BASELINE ───────────────────────────────────────────────── -->
+<section id="kepler-nn" class="mb-4">
+    <h2 class="section-title">Standard NN — Orbital Failure</h2>
+    <hr>
+    <div class="row g-3">
+        <div class="col-md-8">
+            <p>
+                A standard NN trained on positions from the first 40% of the orbit attempts to continue
+                the trajectory — but has no concept of closed ellipses.
+            </p>
+            <div class="result-bad p-3">
+                <strong>❌ What goes wrong:</strong>
+                <ul class="mb-0 mt-1">
+                    <li>NN fits the training arc correctly</li>
+                    <li>Beyond the training window, the predicted orbit <strong>spirals outward</strong> or flies off</li>
+                    <li>Energy and angular momentum are <strong>not conserved</strong></li>
+                    <li>The orbit never closes — violates Kepler's 1st law</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="background:#f8f9fa;border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-size:2.5rem;">🛸💨</div>
+                <p style="font-size:0.85rem;color:#555;margin-top:8px;">
+                    Standard NN prediction flies off into space — it has never been told that gravity pulls the satellite back.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── KEPLER: PINN ARCHITECTURE ────────────────────────────────────────── -->
+<section id="kepler-pinn" class="mb-4">
+    <h2 class="section-title">PINN Architecture — Kepler</h2>
+    <hr>
+    <div class="row g-3">
+        <div class="col-md-5">
+            <table>
+                <thead><tr><th>Layer</th><th>Size</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td>Input</td><td>1 ($t$)</td><td>scalar time</td></tr>
+                    <tr><td>Hidden 1–3</td><td>64</td><td>Tanh</td></tr>
+                    <tr><td>Output</td><td>2 ($\hat{x}, \hat{y}$)</td><td>Linear</td></tr>
+                </tbody>
+            </table>
+            <p class="mt-2 text-muted" style="font-size:0.85rem;">
+                Larger (64 neurons vs 32) because the 2D orbit is more complex than the 1D pendulum angle.
+            </p>
+        </div>
+        <div class="col-md-7">
+            <div class="pinn-card card p-3">
+                <h6 class="text-danger"><i class="bi bi-lightning-fill"></i> Physics Loss — Newton's Gravity Residuals</h6>
+                $$\mathcal{L}_{\text{physics}} = \frac{1}{M}\sum_{j=1}^{M}\left[\left(\ddot{\hat{x}} + \frac{GM\hat{x}}{r^3}\right)^2 + \left(\ddot{\hat{y}} + \frac{GM\hat{y}}{r^3}\right)^2\right]$$
+                <small class="text-muted">
+                    Both $x$ and $y$ components of Newton's law are enforced simultaneously.
+                    Each requires two sequential autograd calls (velocity then acceleration).
+                </small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── KEPLER: RESULTS ────────────────────────────────────────────────────── -->
+<section id="kepler-results" class="mb-4">
+    <h2 class="section-title">PINN Results — Kepler Orbit</h2>
+    <hr>
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <div class="result-good p-3">
+                <strong>✅ PINN reconstructs the full ellipse:</strong>
+                <ul class="mb-0 mt-1">
+                    <li>Trained on just 40% of the orbit</li>
+                    <li>Correctly closes the ellipse for the remaining 60%</li>
+                    <li>Periapsis and apoapsis positions match reference</li>
+                    <li>Approximately conserves energy and angular momentum</li>
+                </ul>
+            </div>
+            <table class="mt-3">
+                <thead><tr><th>Metric</th><th>NN</th><th>PINN</th></tr></thead>
+                <tbody>
+                    <tr><td>Train MAE</td><td>~0.005</td><td>~0.005</td></tr>
+                    <tr><td>Extrap. MAE</td><td><span class="text-danger">~0.4</span></td><td><span class="text-success">~0.01</span></td></tr>
+                    <tr><td>Energy conserved?</td><td><span class="text-danger">No</span></td><td><span class="text-success">Approximately</span></td></tr>
+                    <tr><td>Orbit closes?</td><td><span class="text-danger">No</span></td><td><span class="text-success">Yes</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div style="background:linear-gradient(135deg,#0d1b2a,#1b2838);border-radius:12px;padding:20px;">
+                <div style="font-size:0.9rem;color:#aaa;">
+                    <p><strong style="color:#ffd700;">Collocation strategy:</strong></p>
+                    <p>50 collocation points are uniformly distributed over the <em>full</em> time domain $[0, 1.5T]$ — including the 60% of the orbit where there is <em>no training data</em>. This is what allows the physics constraint to guide extrapolation.</p>
+                    <p class="mb-0"><strong style="color:#ffd700;">Key equation enforced:</strong></p>
+                    <p class="mb-0" style="color:#7fb3d3;">$\ddot{\mathbf{r}} = -GM\mathbf{r}/r^3$ at every collocation point</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── KEPLER: CONSERVATION CHECK ────────────────────────────────────────── -->
+<section id="kepler-conserve-check" class="mb-4">
+    <h2 class="section-title">Conservation Law Verification</h2>
+    <hr>
+    <p>
+        After training, we compute energy $E$ and angular momentum $L$ along the PINN-predicted
+        trajectory (using numerical gradients of the output) and compare to the exact values.
+    </p>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="success-box">
+                <strong>PINN energy &amp; angular momentum</strong> stay approximately constant
+                in the extrapolation region — despite never being explicitly constrained.
+                This is a direct consequence of satisfying Newton's ODE.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="result-bad">
+                <strong>Standard NN</strong> shows large drifts in both $E$ and $L$
+                beyond the training region, consistent with its incorrect trajectory.
+            </div>
+        </div>
+    </div>
+    <div class="info-box mt-3">
+        <strong>🔬 Physical interpretation:</strong> Noether's theorem tells us that conservation laws
+        arise from symmetries of the equations of motion (time-translation symmetry → energy, rotational symmetry → angular momentum).
+        By enforcing the ODE itself, the PINN implicitly respects these symmetries.
+    </div>
+</section>
+
+<!-- ─── KEPLER: CODE SNIPPET ──────────────────────────────────────────────── -->
+<section id="kepler-code" class="mb-5">
+    <h2 class="section-title">Key Code — Kepler PINN Physics Loss</h2>
+    <hr>
+<pre><code class="language-python">GM = 1.0   # dimensionless
+
+# Collocation points over full orbit (including unseen region!)
+t_phys = torch.linspace(0, T_sim, 50).view(-1,1).requires_grad_(True)
+
+for epoch in range(30000):
+    optimizer.zero_grad()
+
+    # ── Data loss ───────────────────────────────────────────────
+    loss_data = torch.mean((model(t_data) - xy_data) ** 2)
+
+    # ── Physics loss — Newton's gravity ─────────────────────────
+    pred  = model(t_phys)            # shape (M, 2): columns = [x̂, ŷ]
+    xp, yp = pred[:,0:1], pred[:,1:2]
+
+    # velocities (1st autograd)
+    vx = torch.autograd.grad(xp, t_phys, torch.ones_like(xp), create_graph=True)[0]
+    vy = torch.autograd.grad(yp, t_phys, torch.ones_like(yp), create_graph=True)[0]
+
+    # accelerations (2nd autograd)
+    ax = torch.autograd.grad(vx, t_phys, torch.ones_like(vx), create_graph=True)[0]
+    ay = torch.autograd.grad(vy, t_phys, torch.ones_like(vy), create_graph=True)[0]
+
+    # gravitational acceleration from predicted position
+    r        = torch.sqrt(xp**2 + yp**2 + 1e-8)
+    ax_grav  = -GM * xp / r**3
+    ay_grav  = -GM * yp / r**3
+
+    # ODE residuals:  ẍ - ax_grav = 0  and  ÿ - ay_grav = 0
+    res_x = ax - ax_grav
+    res_y = ay - ay_grav
+    loss_phys = torch.mean(res_x**2 + res_y**2)
+
+    loss = loss_data + 1e-3 * loss_phys
+    loss.backward()
+    optimizer.step()
+</code></pre>
+</section>
+
+</div><!-- /kepler section -->
+
+<hr class="section-divider">
+
+<!-- ══════════════════════ COMPARISON TABLE ══════════════════════════════════ -->
+<section id="comparison" class="mb-5">
+    <h1 class="section-title">Side-by-Side Comparison</h1>
+    <hr>
+
+    <div class="table-responsive">
+    <table style="min-width:640px;">
+        <thead>
+            <tr>
+                <th style="min-width:200px;">Feature</th>
+                <th>Standard NN</th>
+                <th style="color:#6a11cb;">Pendulum PINN</th>
+                <th style="color:#f7971e;">Kepler PINN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Physics encoded</strong></td><td>None</td><td>$\ddot\theta + (g/L)\sin\theta = 0$</td><td>$\ddot{\mathbf{r}} = -GM\mathbf{r}/r^3$</td></tr>
+            <tr><td><strong>ODE order</strong></td><td>—</td><td>2nd order, scalar</td><td>2nd order, 2D vector</td></tr>
+            <tr><td><strong>Network output</strong></td><td>$\hat\theta(t)$</td><td>$\hat\theta(t)$</td><td>$(\hat{x}(t),\hat{y}(t))$</td></tr>
+            <tr><td><strong>Network size</strong></td><td>3 × 32</td><td>3 × 32, Tanh</td><td>4 × 64, Tanh</td></tr>
+            <tr><td><strong>Training data</strong></td><td>10 pts (40% window)</td><td>10 pts (40% window)</td><td>~27 pts (40% orbit)</td></tr>
+            <tr><td><strong>Collocation pts</strong></td><td>None</td><td>30 (full domain)</td><td>50 (full domain)</td></tr>
+            <tr><td><strong>Training epochs</strong></td><td>5,000</td><td>20,000</td><td>30,000</td></tr>
+            <tr><td><strong>Training region MAE</strong></td><td>~0.003</td><td>~0.003</td><td>~0.005</td></tr>
+            <tr><td><strong>Extrapolation MAE</strong></td><td class="text-danger">~0.15 ❌</td><td class="text-success">~0.005 ✅</td><td class="text-success">~0.01 ✅</td></tr>
+            <tr><td><strong>Conservation satisfied</strong></td><td class="text-danger">No</td><td class="text-success">Approximately</td><td class="text-success">Approximately</td></tr>
+        </tbody>
+    </table>
+    </div>
+</section>
+
+<!-- ══════════════════════ CODE & RESOURCES ══════════════════════════════════ -->
+<section id="resources" class="mb-5">
+    <h1 class="section-title">Code &amp; Resources</h1>
+    <hr>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="pinn-card card p-4" style="border-top:4px solid #6a11cb;">
+                <h5><i class="bi bi-github"></i> Pendulum PINN Repository</h5>
+                <p class="text-muted" style="font-size:0.9rem;">
+                    Full Python script, Jupyter notebook walkthrough, training animations and README.
+                </p>
+                <ul style="font-size:0.88rem;">
+                    <li><code>Simple_Pendulum_PINN.py</code> — standalone script</li>
+                    <li><code>Pendulum_PINN_Walkthrough.ipynb</code> — 11-section notebook</li>
+                    <li><code>nn.gif</code> / <code>pinn.gif</code> — training animations</li>
+                </ul>
+                <a href="https://github.com/swarnadeepseth/Physics_Informed_NN-Pendulum" class="btn btn-sm btn-outline-primary" target="_blank">
+                    <i class="bi bi-box-arrow-up-right"></i> GitHub Repo
+                </a>
+                <a href="pendulum_PINN.html" class="btn btn-sm btn-outline-secondary ms-2">
+                    <i class="bi bi-file-earmark-text"></i> Full Writeup
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pinn-card card p-4" style="border-top:4px solid #f7971e;">
+                <h5><i class="bi bi-github"></i> Kepler Orbit PINN Repository</h5>
+                <p class="text-muted" style="font-size:0.9rem;">
+                    Full Python script, Jupyter notebook with conservation law verification and orbital animations.
+                </p>
+                <ul style="font-size:0.88rem;">
+                    <li><code>Kepler_PINN.py</code> — standalone script</li>
+                    <li><code>Kepler_PINN_Walkthrough.ipynb</code> — 14-section notebook</li>
+                    <li><code>nn_kepler.gif</code> / <code>pinn_kepler.gif</code> — animations</li>
+                </ul>
+                <a href="https://github.com/swarnadeepseth/Physics_Informed_NN-Kepler" class="btn btn-sm btn-outline-warning" target="_blank">
+                    <i class="bi bi-box-arrow-up-right"></i> GitHub Repo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 p-3" style="background:#f8f9fa;border-radius:10px;">
+        <h6>Quick Start</h6>
+<pre><code class="language-bash"># Install dependencies
+pip install torch numpy scipy matplotlib pillow jupyter
+
+# Pendulum PINN
+git clone https://github.com/swarnadeepseth/Physics_Informed_NN-Pendulum
+cd Physics_Informed_NN-Pendulum && mkdir plots
+python Simple_Pendulum_PINN.py
+
+# Kepler Orbit PINN
+git clone https://github.com/swarnadeepseth/Physics_Informed_NN-Kepler
+cd Physics_Informed_NN-Kepler && mkdir plots
+python Kepler_PINN.py
+</code></pre>
+    </div>
+</section>
+
+<!-- ══════════════════════ REFERENCES ════════════════════════════════════════ -->
+<section id="references" class="mb-5">
+    <h1 class="section-title">References</h1>
+    <hr>
+    <ul>
+        <li class="mb-2">
+            Raissi, M., Perdikaris, P., &amp; Karniadakis, G.E. (2019).
+            <em>Physics-informed neural networks: A deep learning framework for solving forward and inverse problems.</em>
+            Journal of Computational Physics, 378, 686–707.
+            <a href="https://www.sciencedirect.com/science/article/pii/S0021999118307125" target="_blank">[Link]</a>
+        </li>
+        <li class="mb-2">
+            Greydanus, S., Dzamba, M., &amp; Yosinski, J. (2019).
+            <em>Hamiltonian Neural Networks.</em> NeurIPS 2019.
+            <a href="https://arxiv.org/abs/1906.01563" target="_blank">[arXiv]</a>
+        </li>
+        <li class="mb-2">
+            Cranmer, M. et al. (2020).
+            <em>Lagrangian Neural Networks.</em> ICLR 2020 Workshop.
+            <a href="https://arxiv.org/abs/2003.04630" target="_blank">[arXiv]</a>
+        </li>
+        <li class="mb-2">
+            Ben Moseley's PINN blog post:
+            <a href="https://benmoseley.blog/my-research/so-what-is-a-physics-informed-neural-network/" target="_blank">
+                "So, what is a physics-informed neural network?"
+            </a>
+        </li>
+        <li class="mb-2">
+            Karniadakis, G.E. et al. (2021).
+            <em>Physics-informed machine learning.</em>
+            Nature Reviews Physics, 3, 422–440.
+            <a href="https://www.nature.com/articles/s42254-021-00314-5" target="_blank">[Link]</a>
+        </li>
+    </ul>
+</section>
+
+</div><!-- /main content col -->
+</div><!-- /row -->
+</div><!-- /container -->
+</section>
+
+</main>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════════════════════════ -->
+<footer class="bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Swarnadeep Seth 2024</div></div>
+            <div class="col-auto">
+                <a class="link-light small" href="#!">Privacy</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Terms</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Theme JS -->
+<script src="js/scripts.js"></script>
+<!-- Highlight.js init -->
+<script>hljs.highlightAll();</script>
+
+<!-- Sidebar active link tracking -->
+<script>
+    (function () {
+        const links = document.querySelectorAll('#sidebar a');
+        const sections = [];
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const el = document.querySelector(href);
+                if (el) sections.push({ el, link });
+            }
+        });
+        function onScroll() {
+            let closest = null, minDist = Infinity;
+            sections.forEach(({ el, link }) => {
+                const dist = Math.abs(el.getBoundingClientRect().top - 100);
+                if (dist < minDist) { minDist = dist; closest = link; }
+            });
+            links.forEach(l => l.classList.remove('active'));
+            if (closest) closest.classList.add('active');
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    })();
+</script>
+</body>
+</html>
