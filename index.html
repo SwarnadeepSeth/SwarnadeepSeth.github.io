@@ -255,6 +255,47 @@
         gap: 0 1.5rem;
       }
       
+      .research-venue-logo {
+        width: 72px;
+        height: 42px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      .cgagentx-intro {
+        max-width: 50rem;
+        margin: 0 auto clamp(1.5rem, 4vw, 3rem);
+        padding-top: clamp(1.5rem, 4vw, 3.5rem);
+        text-align: center;
+      }
+
+      .cgagentx-title {
+        margin-bottom: 1.25rem;
+        color: #17151a;
+        font-size: clamp(2rem, 5.2vw, 4.25rem);
+        font-weight: 750;
+        line-height: 1.06;
+        letter-spacing: -.045em;
+        text-wrap: balance;
+      }
+
+      .cgagentx-name {
+        display: block;
+        margin-bottom: .8rem;
+        color: #701035;
+        font-size: clamp(1rem, 1.8vw, 1.3rem);
+        line-height: 1.3;
+        letter-spacing: .01em;
+      }
+
+      .cgagentx-lead {
+        max-width: 42rem;
+        margin: 0 auto;
+        color: #51515a;
+        font-size: clamp(1rem, 1.6vw, 1.25rem);
+        line-height: 1.6;
+      }
+
       @media (max-width: 600px) {
         .research-cards-grid {
           grid-template-columns: 1fr;
@@ -553,7 +594,27 @@
       <div class="text-center">
         <h2 class="fw-bolder">Current Research Highlights</h2>
       </div>  
-      <div style="padding: 6px;"></div>
+      <section class="container px-3 px-md-5 pb-4" id="cgagentx-highlight" aria-labelledby="cgagentx-heading">
+        <header class="cgagentx-intro">
+          <h3 class="cgagentx-title" id="cgagentx-heading">
+            <span class="cgagentx-name">CGAgentX</span>
+            From molecular structure to a coarse-grained model
+          </h3>
+          <p class="cgagentx-lead">One master agent coordinates six specialists to build a coarse-grained model from an atomistic structure, test candidate parameters with molecular dynamics, and refine the force field after each round.</p>
+        </header>
+        <figure class="mb-3">
+          <video class="d-block w-100 h-auto" width="1620" height="720"
+                 autoplay loop muted playsinline poster="images/cgagentx-dmso-workflow.png"
+                 aria-label="CGAgentX animation showing bead mapping and force-field optimization for DMSO">
+            <source src="videos/cgagentx-dmso-workflow.mp4" type="video/mp4">
+          </video>
+          <figcaption class="figure-caption mt-2">DMSO agentic AI optimization</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Polar solvents (DMSO and DMA)</strong> &mdash; Lennard-Jones (LJ) plus electrostatics.</li>
+          <li><strong>Ti<sub>3</sub>C<sub>2</sub> MXenes (&ndash;F/&ndash;OH)</strong> &mdash; Tersoff many-body force field.</li>
+        </ul>
+      </section>
       <hr style="border-top: 3px solid black;">
       <!-- Project1-->
       <div class="container px-5">
@@ -581,65 +642,119 @@
         </div>
       </div>
       <hr style="border-top: 3px solid black;">
-      <!-- Project2-->
-      <div class="container px-5">
-        <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-md-3 text-center">
-                <img class="img-fluid rounded-1 my-2" src="images/CsgA.png" style="max-width: 100%;">
-            </div>
-            <div class="col-md-8">
-                <div class="my-5 text-center text-md-start">
-                  <h5 class="card-title" style="color: #0b519c; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold;">Comparing and Enhancing the Mechanical Stability of Bacterial Fibrils</h5>
-                  <p class="card-text" style="color: black;">
-                      We study the structural and mechanical stability of bacterial fibril proteins to understand and enhance their properties. This research is crucial for developing durable bio-based materials.
-                  </p>
-                  <ul style="color: black;">
-                      <li>Conducting steered molecular dynamics simulations (SMD) on bacterial fibril proteins.</li>
-                      <li>Analyzing stress-strain curves to compare mechanical stability across species.</li>
-                      <li>Designing a coarse-grained model to study larger proteins and proposing glycosylation techniques to enhance stability.</li>
+      <section class="py-5" id="research" aria-labelledby="research-heading">
+        <div class="container px-5">
+          <div class="text-center mb-4">
+            <h2 class="fw-bolder" id="research-heading">Recent Research</h2>
+            <p class="lead fw-normal text-muted">Agentic AI, materials discovery, and molecular dynamics simulations.</p>
+          </div>
+          <div class="row g-4 row-cols-1 row-cols-lg-3">
+            <div class="col">
+              <div class="card h-100 shadow border-0">
+                <img class="card-img-top" src="images/CGAgentX_TOC.svg" width="1774" height="887"
+                     style="height: auto;" alt="CGAgentX workflow and coarse-grained molecular models" loading="lazy">
+                <div class="card-body p-4">
+                  <h3 class="h5 card-title fw-bold">CGAgentX: Agentic AI Framework to Develop Transferable Coarse-Grained Models</h3>
+                  <ul class="mb-0">
+                    <li>An autonomous, end-to-end agentic AI framework was developed for molecular model development.</li>
+                    <li>Months of work were reduced to days through hypothesis-driven force-field optimization and automated error diagnosis.</li>
+                    <li>DMSO, DMA, and Tersoff force fields for 2D materials were developed, reproducing targeted experimental properties within 5% error.</li>
                   </ul>
-                  <p class="card-text"><small class="text-muted">Collaboration with Dr. Anna Duraj's group @ Virginia Tech and GlycoMIP user projects.</small></p>
+                  <a class="stretched-link" href="https://doi.org/10.64898/2026.04.17.719081" aria-label="Read the CGAgentX preprint"></a>
+                </div>
+                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                  <div class="d-flex align-items-center">
+                    <img class="research-venue-logo me-3" src="images/journals/biorxiv.svg" alt="" loading="lazy">
+                    <div class="small">
+                      <div class="fw-bold">Swarnadeep Seth &amp; Sanket A. Deshmukh</div>
+                      <div class="text-muted">bioRxiv (preprint) &middot; April 18, 2026</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="col">
+              <div class="card h-100 shadow border-0">
+                <img class="card-img-top" src="images/polyacrylate-gfp-binding.jpg" width="403" height="264"
+                     style="height: 200px; object-fit: contain;" alt="Diagram of random hetero-oligomers binding to a green fluorescent protein and enhancing fluorescence" loading="lazy">
+                <div class="card-body p-4">
+                  <h3 class="h5 card-title fw-bold">Tuning Polyacrylate Composition to Recognize and Modulate Fluorescent Proteins</h3>
+                  <ul class="mb-0">
+                    <li>Mapped GFP–oligomer binding landscapes using well-tempered metadynamics.</li>
+                    <li>Identified six deep binding minima for stronger binders, compared with two to three localized wells for weaker binders.</li>
+                    <li>Achieved nanomolar GFP binding and over 100% fluorescence enhancement with random-sequence polyacrylates.</li>
+                  </ul>
+                  <a class="stretched-link" href="https://doi.org/10.1002/anie.202520032" aria-label="Read the polyacrylate study"></a>
+                </div>
+                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                  <div class="d-flex align-items-center">
+                    <img class="research-venue-logo me-3" src="images/journals/angewandte-chemie.svg" alt="Angewandte Chemie International Edition" loading="lazy">
+                    <div class="small">
+                      <div class="fw-bold">D. C. Gomez, <b>S. Seth</b>, R. Mondal, S. J. Koehler, J. G. Baker, C. Plate, I. C. Anderson, M. R. Smith, J. Gloriod, M. Gunter, V. V. Welborn, S. A. Deshmukh &amp; C. A. Figg</div>
+                      <div class="text-muted"><i>Angewandte Chemie International Edition</i> &middot; 2026</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 shadow border-0">
+                <video class="card-img-top" width="1280" height="720" style="height: auto;"
+                       autoplay loop muted playsinline aria-label="Engineered living materials research video">
+                  <source src="videos/engineered-living-materials.mp4" type="video/mp4">
+                </video>
+                <div class="card-body p-4">
+                  <h3 class="h5 card-title fw-bold">De Novo Autogenic Engineered Living Functional Materials</h3>
+                  <ul class="mb-0">
+                    <li>Evaluated β-solenoid protein stability using AlphaFold2 and all-atom molecular dynamics simulations.</li>
+                    <li>Identified stabilizing hydrogen bonds and electrostatic interactions through molecular analysis.</li>
+                    <li>Engineered living materials with threefold higher storage modulus and fivefold longer cell survival under UV-C exposure.</li>
+                  </ul>
+                  <a class="stretched-link" href="https://doi.org/10.1002/adma.74312" aria-label="Read De Novo Autogenic Engineered Living Functional Materials"></a>
+                </div>
+                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                  <div class="d-flex align-items-center">
+                    <img class="research-venue-logo me-3" src="images/journals/advanced-materials.svg" alt="Advanced Materials" loading="lazy">
+                    <div class="small">
+                      <div class="fw-bold">H. M. Hammad, S. Seth, E. C. Jackson, N. Burns, H. Wang, H. Priode, R. B. Moore, S. A. Deshmukh, A. Manjula-Basavanna &amp; A. M. Duraj-Thatte</div>
+                      <div class="text-muted"><i>Advanced Materials</i> &middot; 2026, 38 (52), e74312</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <hr style="border-top: 3px solid black;">
-      <div style="padding: 8px;"></div>
-      <!-- Research preview section-->
-      <div class="text-center">
-        <h2 class="fw-bolder">From my research</h2>
-        <p class="lead fw-normal text-muted mb-5">Bio-polymer Capture and Translocation through Single and Double Nanopores.</p>
-      </div>
-      <section class="py-5" id="research" style="margin-top: -100px;">
+      </section>
+      <section class="pb-5" aria-labelledby="nanopore-research-heading">
         <div class="container px-5 my-5">
+          <h2 class="fw-bolder text-center mb-4" id="nanopore-research-heading">Earlier Research on Nanopores</h2>
           <div class="row gx-5">
             <div class="col-lg-4 mb-5">
               <div class="card h-100 shadow border-0"> 
-             <img class="card-img-top"
-                src="images/capture_grey.png" alt="...">
+             <img class="card-img-top" style="height: 220px; object-fit: contain; background: white;"
+                src="images/capture_toc.png" alt="Polymer capture and translocation snapshots">
                 <div class="card-body p-4">
                   <div class="badge bg-primary bg-gradient rounded-pill mb-2">Article</div>
                   <a class="text-decoration-none link-dark stretched-link" href="https://doi.org/10.1063/5.0094221" target="_blank">
                     <h5 class="card-title mb-3">Capture to Translocation - The Journey of a Polymer</h5>
                   </a>
-                  <p class="card-text mb-0">
                   <ul>
   					<li>Polymer capture time distribution depends on the initial release locations.</li>
   					<li>Capture follows the Poisson process.</li>
   					<li>Even in the nano-pore limit, a fully flexible chain has a finite probability of hairpin-loop capture.</li>
-  					<li>However, we show that the single file capture can be enhanced</li>
+                    <li>Single-file capture can be enhanced in two ways
   					<ul>
   						<li> By artificially stiffening the polymer.</li>
   						<li> By adding a charge tag at one of the end terminus.</li>
   					</ul>
+                    </li>
 				  </ul>
-                 </p>
                 </div>
                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                   <div class="d-flex align-items-end justify-content-between">
-                    <div class="d-flex align-items-center"> <img class="rounded-circle me-3"
-
-                        src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
+                    <div class="d-flex align-items-center">
+                      <img class="research-venue-logo me-3" src="images/journals/aip-publishing.png" alt="AIP Publishing" loading="lazy">
                       <div class="small">
                         <div class="fw-bold">Swarnadeep Seth &amp; Aniket
                           Bhattacharya</div>
@@ -651,28 +766,25 @@
               </div>
             </div>
             <div class="col-lg-4 mb-5">
-              <div class="card h-100 shadow border-0"> <img class="card-img-top"
+              <div class="card h-100 shadow border-0"> <img class="card-img-top" style="height: 220px; object-fit: contain; background: white;"
 
-                  src="images/cnp_grey.png" alt="...">
+                  src="images/cnp_toc.png" alt="DNA barcode scanning through a cylindrical nanopore">
                 <div class="card-body p-4">
                   <div class="badge bg-primary bg-gradient rounded-pill mb-2">Article</div>
                   <a class="text-decoration-none link-dark stretched-link" href="https://doi.org/10.1039/d1ra00349f" target="_blank">
                     <h5 class="card-title mb-3">Barcodes using a Cylindrical Nanopore</h5>
                   </a>
-                  <p class="card-text mb-0">
                   <ul>
   					<li>Eight protein tags are attached to a 16.6 &micro;m long &lambda;-phage ds-DNA.</li>
   					<li>Altering the bias force, we scan the DNA multiple times through the cylindrical nanopore.</li>
   					<li>We observe that heavier protein tags make the DNA velocity non-uniform that leads to inaccurate barcodes.</li>
   					<li>We introduce a novel interpolation scheme by incorporating both the tag and scan velocities that rectifies the barcodes.</li>
-  					<ul>
-                  </p>
+                  </ul>
                 </div>
                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                   <div class="d-flex align-items-end justify-content-between">
-                    <div class="d-flex align-items-center"> <img class="rounded-circle me-3"
-
-                        src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
+                    <div class="d-flex align-items-center">
+                      <img class="research-venue-logo me-3" src="images/journals/rsc-advances.webp" alt="" loading="lazy">
                       <div class="small">
                         <div class="fw-bold">Swarnadeep Seth &amp; Aniket
                           Bhattacharya</div>
@@ -684,27 +796,24 @@
               </div>
             </div>
             <div class="col-lg-4 mb-5">
-              <div class="card h-100 shadow border-0"> <img class="card-img-top"
+              <div class="card h-100 shadow border-0"> <img class="card-img-top" style="height: 220px; object-fit: contain; background: white;"
 
-                  src="images/chg_grey.png" alt="...">
+                  src="images/chg_toc.png" alt="Charged protein tags passing through a double nanopore">
                 <div class="card-body p-4">
                   <div class="badge bg-primary bg-gradient rounded-pill mb-2">Article</div>
                   <a class="text-decoration-none link-dark stretched-link" href="https://doi.org/10.1038/s41598-022-14609-9" target="_blank">
                     <h5 class="card-title mb-3"> Discriminating Protein Tags using a Double Nanopore device </h5>
                   </a>
-                  <p class="card-text mb-0">
                   <ul>
   					<li>Using the BD simulation we identify that the charge interaction of the tags with the electric field leads to an asymmetric dwell time distribution.</li>
   					<li>The average dwell time and the degree of asymmetries due to opposing and favoring local fields follow power laws as a function of the charge as well as the length of the protein tags.</li>
   					<li>Lastly, we compare the P<sup>'</sup>eclet number and shows a close agreement with the experiment.</li>
-  					<ul>
-                  </p>
+                  </ul>
                 </div>
                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                   <div class="d-flex align-items-end justify-content-between">
-                    <div class="d-flex align-items-center"> <img class="rounded-circle me-3"
-
-                        src="https://dummyimage.com/40x40/ced4da/6c757d" alt="...">
+                    <div class="d-flex align-items-center">
+                      <img class="research-venue-logo me-3" src="images/journals/scientific-reports.png" alt="" loading="lazy">
                       <div class="small">
                         <div class="fw-bold">Swarnadeep Seth, Art Rand, Walter Reisner, William Dunbar, Robert Sladek, &amp; Aniket Bhattacharya</div>
                         <div class="text-muted">Scientific Reports - July 03, 2022</div>
@@ -721,7 +830,7 @@
         My Academic Timeline
       </p>
       <div style="text-align:center; margin-top:1cm; margin-bottom: 2.5cm;">
-        <img src="images/Academic_Timeline.svg"/> 
+        <img src="images/Academic_Timeline.svg" alt="Swarnadeep Seth's academic timeline" style="max-width: 100%; height: auto;"/>
     </div>
     </main>
     <!-- Footer-->
