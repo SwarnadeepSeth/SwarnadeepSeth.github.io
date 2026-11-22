@@ -35,6 +35,14 @@
           }
           .header-icons-mobile {
               display: flex !important;
+              justify-content: center;
+              gap: 25px;
+          }
+          .header-icons-mobile .icon-link {
+              width: auto;
+              height: auto;
+              margin: 0;
+              padding: 0;
           }
           .header-icons-desktop {
               display: none !important;
@@ -265,8 +273,38 @@
       .cgagentx-intro {
         max-width: 50rem;
         margin: 0 auto clamp(1.5rem, 4vw, 3rem);
-        padding-top: clamp(1.5rem, 4vw, 3.5rem);
+        padding-top: clamp(3rem, 7vw, 6rem);
         text-align: center;
+      }
+
+      .highlight-kicker {
+        display: block;
+        margin-bottom: 1rem;
+        color: #701035;
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+      }
+
+      .research-highlight { padding-bottom: clamp(3rem, 6vw, 5rem) !important; }
+      .research-highlight + .research-highlight { border-top: 1px solid #e7e5e7; }
+      .highlight-caption { text-align: center; color: #77717a; font-size: .875rem; letter-spacing: .02em; }
+      .highlight-topics {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .75rem;
+        padding: 0;
+        margin: 2rem auto 0;
+        list-style: none;
+      }
+      .highlight-topics li {
+        padding: .75rem 1.1rem;
+        border-radius: .75rem;
+        background: #f7f5f6;
+        color: #50464c;
+        font-size: .9rem;
       }
 
       .cgagentx-title {
@@ -283,7 +321,7 @@
         display: block;
         margin-bottom: .8rem;
         color: #701035;
-        font-size: clamp(1rem, 1.8vw, 1.3rem);
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
         line-height: 1.3;
         letter-spacing: .01em;
       }
@@ -538,7 +576,7 @@
       </div>
 
       <!-- Features section-->
-      <section class="py-5" id="features">
+      <section class="py-5" id="features" hidden>
         <div class="container px-5 my-5">
           <div class="row gx-5">
             <div class="col-lg-4 mb-5 mb-lg-0">
@@ -591,16 +629,24 @@
         </div>
       </section>
       <!-- Research highlights section-->
-      <div class="text-center">
-        <h2 class="fw-bolder">Current Research Highlights</h2>
-      </div>  
-      <section class="container px-3 px-md-5 pb-4" id="cgagentx-highlight" aria-labelledby="cgagentx-heading">
+      <section class="container px-3 px-md-5 pb-4 research-highlight" aria-labelledby="cg-protein-heading">
+        <header class="cgagentx-intro">
+          <span class="highlight-kicker">Molecular simulation</span>
+          <h3 class="cgagentx-title" id="cg-protein-heading">Restraint-free coarse-grained protein models</h3>
+          <p class="cgagentx-lead">Coarse-grained protein models that retain secondary structure without structural restraints.</p>
+        </header>
+        <video class="d-block w-100 h-auto" width="1920" height="1080" autoplay loop muted playsinline
+               aria-label="Animation of a restraint-free coarse-grained protein model and its motion">
+          <source src="videos/cg-protein-motion.mp4" type="video/mp4">
+        </video>
+      </section>
+      <section class="container px-3 px-md-5 pb-4 research-highlight" id="cgagentx-highlight" aria-labelledby="cgagentx-heading">
         <header class="cgagentx-intro">
           <h3 class="cgagentx-title" id="cgagentx-heading">
             <span class="cgagentx-name">CGAgentX</span>
             From molecular structure to a coarse-grained model
           </h3>
-          <p class="cgagentx-lead">One master agent coordinates six specialists to build a coarse-grained model from an atomistic structure, test candidate parameters with molecular dynamics, and refine the force field after each round.</p>
+          <p class="cgagentx-lead">A master agent coordinates six specialists to build coarse-grained models from atomistic structures and iteratively optimize force fields through hypothesis generation.</p>
         </header>
         <figure class="mb-3">
           <video class="d-block w-100 h-auto" width="1620" height="720"
@@ -608,40 +654,13 @@
                  aria-label="CGAgentX animation showing bead mapping and force-field optimization for DMSO">
             <source src="videos/cgagentx-dmso-workflow.mp4" type="video/mp4">
           </video>
-          <figcaption class="figure-caption mt-2">DMSO agentic AI optimization</figcaption>
+          <figcaption class="figure-caption mt-2 highlight-caption">DMSO agentic AI optimization</figcaption>
         </figure>
-        <ul>
+        <ul class="highlight-topics">
           <li><strong>Polar solvents (DMSO and DMA)</strong> &mdash; Lennard-Jones (LJ) plus electrostatics.</li>
           <li><strong>Ti<sub>3</sub>C<sub>2</sub> MXenes (&ndash;F/&ndash;OH)</strong> &mdash; Tersoff many-body force field.</li>
         </ul>
       </section>
-      <hr style="border-top: 3px solid black;">
-      <!-- Project1-->
-      <div class="container px-5">
-        <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-md-3 text-center">
-                <img class="img-fluid rounded-1 my-2" src="images/tGFPn.png" style="max-width: 100%;">
-            </div>
-            <div class="col-md-8">
-                <div class="my-5 text-center text-md-start">
-                    <h5 class="card-title" style="color: #c70a0a; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold;">Computational Oligomer Design for Enhancing Fluorescent Properties of Truncated GFP Protein</h5>
-                    <p class="card-text" style="color: black;">
-                        High-throughput computational design of functional oligomers aiming to enhances the fluorescence of truncated Green 
-                        Fluorescent Protein (tGFP), a critical marker for various cell types. This project envisions to revolutionize
-                        bioimaging and cellular biology research by providing more stable and brighter fluorescent markers.
-                    </p>
-                    <ul style="color: black;">
-                        <li>Employing AutoDock Vina & rDock for initial docked oligomer structures.</li>
-                        <li>Utilizing high-throughput implicit water molecular dynamics (MD) simulations.</li>
-                        <li>Integrating Particle Swarm Optimization (PSO) to sample vast design space and Genetic Algorithm (GA) to evolutionarily guide the best binding structure.</li>
-                        <li>Validating the results with explicit water MD simulation and experimental results.</li>
-                    </ul>
-                    <p class="card-text"><small class="text-muted">Collaboration with Dr. Adrian Figg's group @ Virginia Tech and GlycoMIP user projects.</small></p>
-                </div>
-            </div>
-        </div>
-      </div>
-      <hr style="border-top: 3px solid black;">
       <section class="py-5" id="research" aria-labelledby="research-heading">
         <div class="container px-5">
           <div class="text-center mb-4">
